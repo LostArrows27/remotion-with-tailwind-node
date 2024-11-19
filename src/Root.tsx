@@ -1,6 +1,6 @@
 import "./styles/tailwind.css";
 import { Composition } from "remotion";
-import { MyComposition } from "./Composition";
+import { MyComposition } from "./components/Composition";
 
 export const RemotionRoot: React.FC = () => {
   return (
