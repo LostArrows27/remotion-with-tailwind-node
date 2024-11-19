@@ -1,4 +1,4 @@
-import './tailwind.css';
+import "./styles/tailwind.css";
 import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
 

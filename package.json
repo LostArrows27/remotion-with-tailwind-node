@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "remotion-with-tailwind-node",
   "version": "1.0.0",
   "description": "My Remotion video",
@@ -6,11 +7,13 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@remotion/bundler": "^4.0.229",
     "@remotion/cli": "4.0.229",
+    "@remotion/renderer": "^4.0.229",
+    "@remotion/tailwind": "4.0.229",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "remotion": "4.0.229",
-    "@remotion/tailwind": "4.0.229"
+    "remotion": "4.0.229"
   },
   "devDependencies": {
     "@remotion/eslint-config": "4.0.229",
@@ -18,11 +21,14 @@
     "@types/web": "0.0.166",
     "eslint": "8.56.0",
     "prettier": "3.3.3",
+    "tsx": "^4.19.2",
     "typescript": "5.5.4"
   },
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
+    "render-cli": "npx remotion render",
+    "render-server": "npx tsx render.ts",
     "upgrade": "remotion upgrade",
     "lint": "eslint src --ext ts,tsx,js,jsx && tsc"
   },

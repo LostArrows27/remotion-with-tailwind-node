@@ -6,8 +6,15 @@
  */
 
 import { Config } from "@remotion/cli/config";
-import { enableTailwind } from '@remotion/tailwind';
+import { enableTailwind } from "@remotion/tailwind";
 
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
 Config.overrideWebpackConfig(enableTailwind);
+
+// NOTE: config perfomance + speeds
+Config.setCodec("h264");
+Config.setAudioCodec("mp3");
+Config.setConcurrency(10); // -> this give fastest render -> max(perfomance) = Math.floor(os.cpus().length / 2)
+Config.setChromiumOpenGlRenderer("angle");
+Config.setChromiumHeadlessMode(true);
