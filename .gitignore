@@ -9,3 +9,7 @@ out
 package-lock.json
 
 build
+
+template
+
+public/music

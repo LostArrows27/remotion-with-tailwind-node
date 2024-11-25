@@ -16,6 +16,7 @@ const compositionID = "MyComp";
 const renderOption: Omit<RenderMediaOptions, "composition" | "serveUrl"> = {
   crf: 18,
   pixelFormat: "yuv420p",
+  imageFormat: "jpeg",
   codec: "h264",
   outputLocation: `out/test.mp4`,
   concurrency: 10,
