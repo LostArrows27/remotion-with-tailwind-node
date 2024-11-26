@@ -13,9 +13,8 @@ const IntroScene = ({ firstScene, secondScene }: IntroProps) => {
       <Sequence durationInFrames={INTRO_FIRST_SCENE_LENGTH}>
         <FirstIntroScene
           title={firstScene.title}
-          timeTitle={firstScene.timeTitle}
+          time={firstScene.time}
           images={firstScene.images}
-          bgImage={firstScene.bgImage}
         />
       </Sequence>
       <Sequence

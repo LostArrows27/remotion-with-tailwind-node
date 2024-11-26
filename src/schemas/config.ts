@@ -21,9 +21,8 @@ import { z } from "zod";
 export const introSceneSchema = z.object({
   firstScene: z.object({
     title: z.string(),
-    timeTitle: z.string(),
-    images: z.array(z.string()),
-    bgImage: z.string(),
+    time: z.date(),
+    images: z.array(z.string()).length(4),
   }),
   secondScene: z.object({
     firstCaption: z.string(),

@@ -1,4 +1,12 @@
-import { Audio, interpolate, Series, useVideoConfig } from "remotion";
+import {
+  Audio,
+  interpolate,
+  Loop,
+  OffthreadVideo,
+  Series,
+  staticFile,
+  useVideoConfig,
+} from "remotion";
 import IntroScene from "./components/Intro";
 import OutroScene from "./components/Outro";
 import {
@@ -6,6 +14,8 @@ import {
   INTRO_SCENE_LENGTH,
   OUTRO_FADE_TIME,
   OUTRO_SCENE_LENGTH,
+  VIDEO_HEIGHT,
+  VIDEO_WIDTH,
 } from "./constants/constants";
 import MainScene from "./components/Content";
 import { MainProps } from "./types/video.type";
@@ -15,6 +25,28 @@ const MainVideo = ({ contentLength, introScene, bgMusic }: MainProps) => {
 
   return (
     <>
+      <Loop durationInFrames={contentLength}>
+        <OffthreadVideo
+          muted
+          style={{
+            height: VIDEO_HEIGHT,
+            width: VIDEO_WIDTH,
+          }}
+          src={staticFile("/videos/grass_background.mp4")}
+        />
+      </Loop>
+      <Audio
+        src={bgMusic}
+        volume={(frame) =>
+          // fade out for last 2 seconds
+          interpolate(
+            frame,
+            [durationInFrames - OUTRO_FADE_TIME, durationInFrames],
+            [AUDIO_VOLUME, 0],
+            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+          )
+        }
+      />
       <Series>
         <Series.Sequence durationInFrames={INTRO_SCENE_LENGTH}>
           <IntroScene
@@ -29,18 +61,6 @@ const MainVideo = ({ contentLength, introScene, bgMusic }: MainProps) => {
           <OutroScene />
         </Series.Sequence>
       </Series>
-      <Audio
-        src={bgMusic}
-        volume={(frame) =>
-          // fade out for last 2 seconds
-          interpolate(
-            frame,
-            [durationInFrames - OUTRO_FADE_TIME, durationInFrames],
-            [AUDIO_VOLUME, 0],
-            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-          )
-        }
-      />
     </>
   );
 };

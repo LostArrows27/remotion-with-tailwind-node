@@ -11,8 +11,10 @@ import MainVideo from "./Main.";
 import { compositionSchema } from "./schemas/config";
 import { MainProps } from "./types/video.type";
 import { chooseIntroMusic } from "./utils/chooseMusic";
+import { chooseIntroTitle } from "./utils/chooseIntroTitle";
 
 // TODO: calculate content length with algorithm later
+// TODO: trim none-music part on mp3 file
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,
 }) => {
@@ -48,10 +50,11 @@ export const RemotionRoot: React.FC = () => {
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
           introScene: {
             firstScene: {
-              title: "Welcome to Remotion",
-              timeTitle: "2021",
-              bgImage: staticFile("/images/intro/bg.jpg"),
-              images: [],
+              title: chooseIntroTitle(new Date(Date.now())),
+              time: new Date(Date.now()),
+              images: Array.from({ length: 4 }, (_, i) => {
+                return `/images/intro/first_scene_${i + 1}.jpg`;
+              }),
             },
             secondScene: {
               firstCaption: "Create videos",
