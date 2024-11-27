@@ -4,7 +4,6 @@ import {
   Loop,
   OffthreadVideo,
   Series,
-  staticFile,
   useVideoConfig,
 } from "remotion";
 import IntroScene from "./components/Intro";
@@ -20,7 +19,12 @@ import {
 import MainScene from "./components/Content";
 import { MainProps } from "./types/video.type";
 
-const MainVideo = ({ contentLength, introScene, bgMusic }: MainProps) => {
+const MainVideo = ({
+  contentLength,
+  introScene,
+  bgMusic,
+  bgVideo,
+}: MainProps) => {
   const { durationInFrames } = useVideoConfig();
 
   return (
@@ -32,7 +36,7 @@ const MainVideo = ({ contentLength, introScene, bgMusic }: MainProps) => {
             height: VIDEO_HEIGHT,
             width: VIDEO_WIDTH,
           }}
-          src={staticFile("/videos/grass_background.mp4")}
+          src={bgVideo}
         />
       </Loop>
       <Audio

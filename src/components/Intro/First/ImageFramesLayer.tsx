@@ -7,7 +7,6 @@ type ImageFrameLayerProps = {
 };
 
 // TODO: add style 2
-// TODO: add background based on 4 season
 // NOTE: Style 1 -> 4 corner images zoom in
 // NOTE: Style 2 -> 2 row images slide in -> slide out
 const ImageFrameLayer = ({ images }: ImageFrameLayerProps) => {

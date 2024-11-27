@@ -1,4 +1,5 @@
 import { random } from "remotion";
+import { getSeasonalAssetsByDate } from "./seasonalHelper";
 
 const introTitles = [
   "Our memorable\nmoments",
@@ -10,23 +11,10 @@ const introTitles = [
 ];
 
 export const chooseIntroTitle = (time?: Date): string => {
-  const seasonTitles = [];
+  let seasonTitles: string[] = [];
 
   if (time) {
-    const month = time.getMonth() + 1;
-    if (month <= 4) {
-      seasonTitles.push("Spring Story");
-      seasonTitles.push("Spring Memories");
-    } else if (month <= 7) {
-      seasonTitles.push("Summer Story");
-      seasonTitles.push("Summer Memories");
-    } else if (month <= 10) {
-      seasonTitles.push("Fall Story");
-      seasonTitles.push("Fall Memories");
-    } else {
-      seasonTitles.push("Winter Story");
-      seasonTitles.push("Winter Memories");
-    }
+    seasonTitles = getSeasonalAssetsByDate(time, "title");
   }
 
   const allTitles = [...introTitles, ...seasonTitles];
@@ -35,7 +23,7 @@ export const chooseIntroTitle = (time?: Date): string => {
 };
 
 export const chooseIntroSubText = (time: Date): string => {
-  const month = time.getMonth() + 1; // getMonth() trả về tháng từ 0 đến 11, vì vậy cộng thêm 1
+  const month = time.getMonth() + 1;
   const year = time.getFullYear();
 
   return `Tháng ${month} - ${year}`;

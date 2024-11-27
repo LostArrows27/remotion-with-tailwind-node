@@ -12,6 +12,7 @@ import { compositionSchema } from "./schemas/config";
 import { MainProps } from "./types/video.type";
 import { chooseIntroMusic } from "./utils/chooseMusic";
 import { chooseIntroTitle } from "./utils/chooseIntroTitle";
+import { getRandomAssetByDate } from "./utils/seasonalHelper";
 
 // TODO: calculate content length with algorithm later
 // TODO: trim none-music part on mp3 file
@@ -24,8 +25,12 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
     INTRO_SCENE_LENGTH + contentLength + OUTRO_SCENE_LENGTH;
 
   const bgMusic = chooseIntroMusic();
+  const bgVideo = getRandomAssetByDate(props.videoDate, "videos");
+  const title = chooseIntroTitle(props.introScene.firstScene.time);
 
   props.bgMusic = bgMusic;
+  props.bgVideo = staticFile(bgVideo);
+  props.introScene.firstScene.title = title;
 
   return {
     durationInFrames: totalDurationInFrames,
@@ -47,10 +52,12 @@ export const RemotionRoot: React.FC = () => {
         calculateMetadata={calculateMetadata}
         defaultProps={{
           contentLength: 5 * VIDEO_FPS,
+          videoDate: new Date(),
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
+          bgVideo: staticFile("/videos/season_bg/spring/spring_6.mov"),
           introScene: {
             firstScene: {
-              title: chooseIntroTitle(new Date(Date.now())),
+              title: "Our Trip Recap",
               time: new Date(Date.now()),
               images: Array.from({ length: 4 }, (_, i) => {
                 return `/images/intro/first_scene_${i + 1}.jpg`;
