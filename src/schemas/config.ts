@@ -27,10 +27,10 @@ export const introSceneSchema = z.object({
   secondScene: z.object({
     firstCaption: z.string(),
     secondCaption: z.string(),
-    images: z.array(z.array(z.string())),
-    direction: z
-      .union([z.literal("vertical"), z.literal("horizontal")])
-      .default("vertical"),
+    images: z.array(z.string()),
+    // direction: z
+    //   .union([z.literal("vertical"), z.literal("horizontal")])
+    //   .default("vertical"),
   }),
 });
 

@@ -1,9 +1,9 @@
-import { Img, staticFile } from "remotion";
+import { Img } from "remotion";
 import {
   IMAGE_FRAME_SCALE_DURATION,
   IMAGE_FRAME_WIDTH,
 } from "../../constants/constants";
-import useImageFrameAnimation from "../../hooks/useImageFrameAnimation";
+import useImageFrameAnimation from "../../hooks/use-image-frame-animation";
 
 type ImageFrameProps = {
   url: string;
@@ -39,12 +39,12 @@ const ImageFrame = ({
       }}
     >
       <Img
-        src={staticFile(url)}
+        src={url}
         style={{
           transform: `scale(${imageScale})`,
         }}
         alt="Image Frame"
-        className="w-full h-full"
+        className="object-cover w-full h-full"
       />
     </div>
   );

@@ -1,9 +1,9 @@
 import { AbsoluteFill, useCurrentFrame } from "remotion";
-import { chooseIntroSubText } from "../../../utils/chooseIntroTitle";
+import { chooseIntroSubText } from "../../../utils/choose-intro-title";
 import { loadFont } from "@remotion/google-fonts/LexendDeca";
 import { loadFont as loadSubFont } from "@remotion/google-fonts/BalsamiqSans";
 import { TypeWriter } from "../TypeWritter";
-import useTitleFrameAnimation from "../../../hooks/useTitleFrameAnimation";
+import useTitleFrameAnimation from "../../../hooks/use-title-frame-animation";
 import {
   SUBTEXT_DELAY_DURATION,
   TITLE_FRAME_DELAY_TIME,

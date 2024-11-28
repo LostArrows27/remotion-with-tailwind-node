@@ -1,5 +1,5 @@
 import { random } from "remotion";
-import { getSeasonalAssetsByDate } from "./seasonalHelper";
+import { getSeasonalAssetsByDate } from "./seasonal-helper";
 
 const introTitles = [
   "Our memorable\nmoments",

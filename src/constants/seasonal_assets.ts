@@ -33,5 +33,3 @@ export const seasonAssets: SeasonalAssets = {
     title: ["Winter Story", "Winter Memories"],
   },
 };
-
-console.log(seasonAssets);

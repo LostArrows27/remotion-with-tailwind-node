@@ -10,12 +10,13 @@ import {
 import MainVideo from "./Main.";
 import { compositionSchema } from "./schemas/config";
 import { MainProps } from "./types/video.type";
-import { chooseIntroMusic } from "./utils/chooseMusic";
-import { chooseIntroTitle } from "./utils/chooseIntroTitle";
-import { getRandomAssetByDate } from "./utils/seasonalHelper";
+import { chooseIntroMusic } from "./utils/choose-music";
+import { chooseIntroTitle } from "./utils/choose-intro-title";
+import { getRandomAssetByDate } from "./utils/seasonal-helper";
 
 // TODO: calculate content length with algorithm later
 // TODO: trim none-music part on mp3 file
+// TODO: read input from nodejs -> parse in
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,
 }) => {
@@ -60,14 +61,16 @@ export const RemotionRoot: React.FC = () => {
               title: "Our Trip Recap",
               time: new Date(Date.now()),
               images: Array.from({ length: 4 }, (_, i) => {
-                return `/images/intro/first_scene_${i + 1}.jpg`;
+                return `/images/intro/first/first_scene_${i + 1}.jpg`;
               }),
             },
             secondScene: {
-              firstCaption: "Create videos",
-              secondCaption: "with React",
-              images: [],
-              direction: "vertical",
+              firstCaption: "Sẵn sàng ôn lại những khoảnh khắc đáng nhớ?",
+              secondCaption: "Bắt đầu hành trình kỉ niệm ngay thôi!",
+              images: Array.from({ length: 16 }, (_, i) => {
+                return `/images/intro/second/test (${i + 1}).jpg`;
+              }),
+              // direction: "vertical",
             },
           },
         }}
