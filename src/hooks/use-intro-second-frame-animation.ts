@@ -1,29 +1,43 @@
 import { useCurrentFrame, interpolate, Easing } from "remotion";
-import { INTRO_SECOND_SCENE_TRANSITION_TIME } from "../constants/constants";
+import {
+  INTRO_SECOND_SCENE_FADE_TIME,
+  INTRO_SECOND_SCENE_LENGTH,
+  INTRO_SECOND_SCENE_TRANSITION_TIME,
+} from "../constants/constants";
 
 export const useIntroSecondFrameAnimation = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(
-    frame,
-    [0, INTRO_SECOND_SCENE_TRANSITION_TIME],
-    [0, 1],
-    {
-      extrapolateRight: "clamp",
-      extrapolateLeft: "clamp",
-    },
-  );
+  const startKeyFrame = [0, INTRO_SECOND_SCENE_TRANSITION_TIME];
 
-  const scale = interpolate(
-    frame,
-    [0, INTRO_SECOND_SCENE_TRANSITION_TIME],
-    [0.6, 1],
-    {
-      extrapolateRight: "clamp",
-      extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.poly(5)),
-    },
-  );
+  const endKeyFrame = [
+    INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME,
+    INTRO_SECOND_SCENE_LENGTH,
+  ];
 
-  return { opacity, scale };
+  const totalKeyFrame = [...startKeyFrame, ...endKeyFrame];
+
+  const opacity = interpolate(frame, totalKeyFrame, [0, 1, 1, 0], {
+    extrapolateRight: "clamp",
+    extrapolateLeft: "clamp",
+  });
+
+  const scaleAtBegin = interpolate(frame, startKeyFrame, [0.6, 1], {
+    extrapolateRight: "clamp",
+    extrapolateLeft: "clamp",
+    easing: Easing.out(Easing.poly(5)),
+  });
+
+  const scaleAtEnd = interpolate(frame, endKeyFrame, [1, 2], {
+    extrapolateRight: "clamp",
+    extrapolateLeft: "clamp",
+  });
+
+  return {
+    opacity,
+    scale:
+      frame < INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
+        ? scaleAtBegin
+        : scaleAtEnd,
+  };
 };

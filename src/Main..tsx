@@ -31,7 +31,7 @@ const MainVideo = ({
 
   return (
     <>
-      <Loop durationInFrames={contentLength}>
+      <Loop durationInFrames={durationInFrames}>
         <OffthreadVideo
           muted
           style={{

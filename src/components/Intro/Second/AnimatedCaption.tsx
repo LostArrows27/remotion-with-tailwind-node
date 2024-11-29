@@ -1,6 +1,8 @@
 import { spring, staticFile, useCurrentFrame } from "remotion";
 import {
   INTRO_SECOND_SCENE_CAPTION_DURATION,
+  INTRO_SECOND_SCENE_FADE_TIME,
+  INTRO_SECOND_SCENE_LENGTH,
   INTRO_SECOND_SCENE_TRANSITION_TIME,
   VIDEO_FPS,
 } from "../../../constants/constants";
@@ -90,9 +92,10 @@ const AnimatedCaption = ({
           style={{
             background: `url(${staticFile("/images/intro/second/paper_bg.jpg")})`,
             display:
-              frame < INTRO_SECOND_SCENE_CAPTION_DURATION - 5
-                ? "none"
-                : "block",
+              frame >= INTRO_SECOND_SCENE_CAPTION_DURATION - 5 &&
+              frame <= INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
+                ? "block"
+                : "none",
           }}
           className="text-[50px] bg-cover bg-center rounded-lg uppercase bg-white w-full p-5 text-center font-bold text-blue-500"
         >

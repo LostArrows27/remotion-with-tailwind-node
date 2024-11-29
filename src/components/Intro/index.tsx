@@ -25,7 +25,7 @@ const IntroScene = ({ firstScene, secondScene }: IntroProps) => {
           firstCaption={secondScene.firstCaption}
           secondCaption={secondScene.secondCaption}
           images={secondScene.images}
-          direction="vertical"
+          // direction="vertical"
         />
       </Sequence>
     </AbsoluteFill>

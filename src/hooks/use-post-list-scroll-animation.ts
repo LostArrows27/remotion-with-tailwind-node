@@ -10,14 +10,21 @@ import { useCurrentFrame } from "remotion";
 import {
   INTRO_POST_SCROLL_DOWN_INIT,
   INTRO_POST_SCROLL_SPEED,
+  INTRO_SCENE_LENGTH,
+  INTRO_SECOND_SCENE_FADE_TIME,
 } from "../constants/constants";
 
 export const usePostListScrollAnimation = (direction: "up" | "down") => {
   const frame = useCurrentFrame();
 
+  const speed =
+    frame < INTRO_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
+      ? INTRO_POST_SCROLL_SPEED
+      : 20;
+
   if (direction === "up") {
-    return `translateY(${INTRO_POST_SCROLL_DOWN_INIT + frame * INTRO_POST_SCROLL_SPEED}px)`;
+    return `translateY(${INTRO_POST_SCROLL_DOWN_INIT + frame * speed}px)`;
   }
 
-  return `translateY(-${frame * INTRO_POST_SCROLL_SPEED}px)`;
+  return `translateY(-${frame * speed}px)`;
 };
