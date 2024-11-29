@@ -65,8 +65,8 @@ export const RemotionRoot: React.FC = () => {
               }),
             },
             secondScene: {
-              firstCaption: "Sẵn sàng ôn lại những khoảnh khắc đáng nhớ?",
-              secondCaption: "Bắt đầu hành trình kỉ niệm ngay thôi!",
+              firstCaption: "Sẵn sàng ôn lại\nkhoảnh khắc đáng nhớ ?",
+              secondCaption: "Bắt đầu ngay thôi !",
               images: Array.from({ length: 16 }, (_, i) => {
                 return `/images/intro/second/test (${i + 1}).jpg`;
               }),

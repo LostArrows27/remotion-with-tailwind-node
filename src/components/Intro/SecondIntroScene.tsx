@@ -11,7 +11,6 @@ import { duplicateImageInView } from "../../utils/duplicate-image-in-view";
 // 2. -> 1.45
 // 3. -> 2.4
 // NOTE: every row have to have 6 image to be in view -> 7 row -> 42 image
-// TODO: add caption animation
 
 const SecondIntroScene = ({
   firstCaption,
