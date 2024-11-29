@@ -14,6 +14,7 @@ import { chooseIntroMusic } from "./utils/choose-music";
 import { chooseIntroTitle } from "./utils/choose-intro-title";
 import { getRandomAssetByDate } from "./utils/seasonal-helper";
 import { chooseRandomCaption } from "./assets/caption_assets";
+import { getVideoMetadata } from "@remotion/media-utils";
 
 // TODO: calculate content length with algorithm later
 // TODO: read input from nodejs -> parse in
@@ -26,12 +27,21 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
     INTRO_SCENE_LENGTH + contentLength + OUTRO_SCENE_LENGTH;
 
   const bgMusic = chooseIntroMusic();
-  const bgVideo = getRandomAssetByDate(props.videoDate, "videos");
-  const title = chooseIntroTitle(props.introScene.firstScene.time);
+  const bgVideoSrc = staticFile(
+    getRandomAssetByDate(props.videoDate, "videos"),
+  );
+  const title = chooseIntroTitle(props.videoDate);
   const captions = chooseRandomCaption();
 
+  const { durationInSeconds } = await getVideoMetadata(bgVideoSrc);
+
+  if (!durationInSeconds) {
+    throw new Error("Cannot get video metadata");
+  }
+
   props.bgMusic = bgMusic;
-  props.bgVideo = staticFile(bgVideo);
+  props.bgVideo.src = bgVideoSrc;
+  props.bgVideo.frameLength = durationInSeconds * VIDEO_FPS;
   props.introScene.firstScene.title = title;
   props.introScene.secondScene.firstCaption = captions.firstCaption;
   props.introScene.secondScene.secondCaption = captions.secondCaption;
@@ -43,6 +53,8 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
 };
 
 export const RemotionRoot: React.FC = () => {
+  const fakeDate = new Date("2024-08-02"); // Fake summer
+
   return (
     <>
       <Composition
@@ -56,13 +68,16 @@ export const RemotionRoot: React.FC = () => {
         calculateMetadata={calculateMetadata}
         defaultProps={{
           contentLength: 5 * VIDEO_FPS,
-          videoDate: new Date(),
+          videoDate: fakeDate,
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
-          bgVideo: staticFile("/videos/season_bg/spring/spring_6.mov"),
+          bgVideo: {
+            src: staticFile("/videos/season_bg/spring/spring_6.mov"),
+            frameLength: 10 * VIDEO_FPS,
+          },
           introScene: {
             firstScene: {
               title: "Our Trip Recap",
-              time: new Date(Date.now()),
+              time: fakeDate,
               images: Array.from({ length: 4 }, (_, i) => {
                 return `/images/intro/first/first_scene_${i + 1}.jpg`;
               }),

@@ -26,19 +26,20 @@ const MainVideo = ({
   introScene,
   bgMusic,
   bgVideo,
+  videoDate,
 }: MainProps) => {
   const { durationInFrames } = useVideoConfig();
 
   return (
     <>
-      <Loop durationInFrames={durationInFrames}>
+      <Loop durationInFrames={bgVideo.frameLength}>
         <OffthreadVideo
           muted
           style={{
             height: VIDEO_HEIGHT,
             width: VIDEO_WIDTH,
           }}
-          src={bgVideo}
+          src={bgVideo.src}
         />
       </Loop>
       <Audio
@@ -62,7 +63,10 @@ const MainVideo = ({
       <Series>
         <Series.Sequence durationInFrames={INTRO_SCENE_LENGTH}>
           <IntroScene
-            firstScene={introScene.firstScene}
+            firstScene={{
+              ...introScene.firstScene,
+              time: videoDate,
+            }}
             secondScene={introScene.secondScene}
           />
         </Series.Sequence>

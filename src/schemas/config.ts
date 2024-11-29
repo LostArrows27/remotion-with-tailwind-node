@@ -39,5 +39,8 @@ export const compositionSchema = z.object({
   videoDate: z.date(),
   introScene: introSceneSchema,
   bgMusic: z.string(),
-  bgVideo: z.string(),
+  bgVideo: z.object({
+    src: z.string(),
+    frameLength: z.number(),
+  }),
 });
