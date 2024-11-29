@@ -1,5 +1,5 @@
 import { random } from "remotion";
-import { seasonAssets } from "../constants/seasonal_assets";
+import { seasonAssets } from "../assets/seasonal_assets";
 import { Season, AssetsType, Asset } from "../types/asset.type";
 
 const getSeasonFromDate = (date: Date): Season => {

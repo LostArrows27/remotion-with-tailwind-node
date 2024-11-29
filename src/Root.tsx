@@ -13,6 +13,7 @@ import { MainProps } from "./types/video.type";
 import { chooseIntroMusic } from "./utils/choose-music";
 import { chooseIntroTitle } from "./utils/choose-intro-title";
 import { getRandomAssetByDate } from "./utils/seasonal-helper";
+import { chooseRandomCaption } from "./assets/caption_assets";
 
 // TODO: calculate content length with algorithm later
 // TODO: trim none-music part on mp3 file
@@ -28,10 +29,13 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   const bgMusic = chooseIntroMusic();
   const bgVideo = getRandomAssetByDate(props.videoDate, "videos");
   const title = chooseIntroTitle(props.introScene.firstScene.time);
+  const captions = chooseRandomCaption();
 
   props.bgMusic = bgMusic;
   props.bgVideo = staticFile(bgVideo);
   props.introScene.firstScene.title = title;
+  props.introScene.secondScene.firstCaption = captions.firstCaption;
+  props.introScene.secondScene.secondCaption = captions.secondCaption;
 
   return {
     durationInFrames: totalDurationInFrames,
