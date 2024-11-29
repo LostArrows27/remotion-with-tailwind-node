@@ -33,7 +33,7 @@ const AnimatedCaption = ({
           display:
             frame > INTRO_SECOND_SCENE_CAPTION_DURATION ? "none" : "block",
         }}
-        className=" absolute"
+        className="absolute w-[80%]"
         delay={INTRO_SECOND_SCENE_TRANSITION_TIME}
         animations={[
           Move({

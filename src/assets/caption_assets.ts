@@ -31,7 +31,7 @@ const captionAssets: CaptionAsset[] = [
     secondCaption: "Cùng ôn lại từng kỉ niệm nhé !",
   },
   {
-    firstCaption: "Những phút giây đáng giá nhất đang chờ bạn !",
+    firstCaption: "Những phút giây\nđáng giá nhất đang chờ bạn !",
     secondCaption: "Cùng bắt đầu chuyến phiêu lưu này !",
   },
   {
