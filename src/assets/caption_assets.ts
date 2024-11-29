@@ -19,7 +19,7 @@ const captionAssets: CaptionAsset[] = [
     secondCaption: "Bắt đầu thôi nào !",
   },
   {
-    firstCaption: "“Có thể bạn đã quên\nnhưng chúng tôi thì không !”",
+    firstCaption: "Có thể bạn đã quên\nnhưng chúng tôi thì không !",
     secondCaption: "Cùng bật mí những khoảnh khắc bất ngờ !",
   },
   {

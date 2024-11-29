@@ -5,6 +5,8 @@ export const VIDEO_FPS = 30;
 export const AUDIO_VOLUME = 0.7;
 
 // intro
+export const INTRO_FADE_IN_TIME = 0.8 * VIDEO_FPS;
+
 export const INTRO_SCENE_LENGTH = 13 * VIDEO_FPS;
 export const INTRO_FIRST_SCENE_LENGTH = 7 * VIDEO_FPS;
 export const INTRO_SECOND_SCENE_LENGTH =
@@ -44,3 +46,4 @@ export const INTRO_SECOND_SCENE_CAPTION_DURATION =
 // outro
 export const OUTRO_SCENE_LENGTH = 5 * VIDEO_FPS;
 export const OUTRO_FADE_TIME = 2 * VIDEO_FPS;
+export const OUTRO_IDLE_TIME = 0.4 * VIDEO_FPS;

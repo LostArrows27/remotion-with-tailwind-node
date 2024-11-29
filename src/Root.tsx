@@ -16,7 +16,6 @@ import { getRandomAssetByDate } from "./utils/seasonal-helper";
 import { chooseRandomCaption } from "./assets/caption_assets";
 
 // TODO: calculate content length with algorithm later
-// TODO: trim none-music part on mp3 file
 // TODO: read input from nodejs -> parse in
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,

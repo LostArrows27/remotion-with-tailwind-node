@@ -10,8 +10,10 @@ import IntroScene from "./components/Intro";
 import OutroScene from "./components/Outro";
 import {
   AUDIO_VOLUME,
+  INTRO_FADE_IN_TIME,
   INTRO_SCENE_LENGTH,
   OUTRO_FADE_TIME,
+  OUTRO_IDLE_TIME,
   OUTRO_SCENE_LENGTH,
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
@@ -45,8 +47,14 @@ const MainVideo = ({
           // fade out for last 2 seconds
           interpolate(
             frame,
-            [durationInFrames - OUTRO_FADE_TIME, durationInFrames],
-            [AUDIO_VOLUME, 0],
+            [
+              0,
+              INTRO_FADE_IN_TIME,
+              durationInFrames - OUTRO_FADE_TIME - OUTRO_IDLE_TIME,
+              durationInFrames - OUTRO_IDLE_TIME,
+              durationInFrames,
+            ],
+            [0, AUDIO_VOLUME, AUDIO_VOLUME, 0, 0],
             { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
           )
         }
