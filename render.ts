@@ -11,7 +11,8 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const compositionID = "MyComp";
+// TODO: fix render error
+const compositionID = "MainVideo";
 
 const renderOption: Omit<RenderMediaOptions, "composition" | "serveUrl"> = {
   crf: 18,
@@ -19,6 +20,7 @@ const renderOption: Omit<RenderMediaOptions, "composition" | "serveUrl"> = {
   imageFormat: "jpeg",
   codec: "h264",
   outputLocation: `out/test.mp4`,
+  scale: 1.5, // NOTE: idk if i should use this -> 720p a bit blur but 1080p is too big
   concurrency: 10,
   chromiumOptions: {
     gl: "angle",
