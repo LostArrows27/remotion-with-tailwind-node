@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // TODO: fix render error
+// NOTE: consider between 720p and 1080p
 const compositionID = "MainVideo";
 
 const renderOption: Omit<RenderMediaOptions, "composition" | "serveUrl"> = {
