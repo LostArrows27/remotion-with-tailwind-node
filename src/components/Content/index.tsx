@@ -1,8 +1,11 @@
 import { AbsoluteFill } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { none } from "@remotion/transitions/none";
+import { ContentProps } from "../../types/video.type";
 
-const MainScene = () => {
+const MainScene = ({ data }: ContentProps) => {
+  console.log(data);
+
   return (
     <TransitionSeries>
       <TransitionSeries.Sequence durationInFrames={40}>

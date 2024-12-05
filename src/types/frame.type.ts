@@ -23,9 +23,8 @@ type TransitionEffect = (typeof transitionEffects)[number];
 export type Transition = {
   in: TransitionEffect["in"];
   out: TransitionEffect["out"];
+  type: TransitionEffect["type"];
 };
-
-// JSON mapping type
 
 export type ImageJSON = {
   [key: string]: ImageMetadata[];

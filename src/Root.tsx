@@ -8,13 +8,15 @@ import {
   VIDEO_WIDTH,
 } from "./constants/constants";
 import MainVideo from "./Main.";
-import { compositionSchema } from "./schemas/config";
+import { compositionSchema } from "./schemas/video.schema";
 import { MainProps } from "./types/video.type";
 import { chooseIntroMusic } from "./utils/choose-music";
 import { chooseIntroTitle } from "./utils/choose-intro-title";
 import { getRandomAssetByDate } from "./utils/seasonal-helper";
 import { chooseRandomCaption } from "./assets/caption_assets";
 import { getVideoMetadata } from "@remotion/media-utils";
+import { generateVideoContent } from "./utils/generate-video-content";
+import { imageJSON } from "./assets/images";
 
 // TODO: calculate content length with algorithm later
 // TODO: read input from nodejs -> parse in
@@ -67,7 +69,7 @@ export const RemotionRoot: React.FC = () => {
         height={VIDEO_HEIGHT}
         calculateMetadata={calculateMetadata}
         defaultProps={{
-          contentLength: 5 * VIDEO_FPS,
+          contentLength: 50 * VIDEO_FPS,
           videoDate: fakeDate,
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
           bgVideo: {
@@ -91,6 +93,7 @@ export const RemotionRoot: React.FC = () => {
               // direction: "vertical",
             },
           },
+          contentScene: generateVideoContent(imageJSON),
         }}
       />
     </>

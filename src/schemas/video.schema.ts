@@ -1,5 +1,6 @@
 // contain schema + props
 import { z } from "zod";
+import { contentSceneSchema } from "./content.schema";
 
 /** 0. Overall
  * background music
@@ -38,6 +39,7 @@ export const compositionSchema = z.object({
   contentLength: z.number(),
   videoDate: z.date(),
   introScene: introSceneSchema,
+  contentScene: contentSceneSchema,
   bgMusic: z.string(),
   bgVideo: z.object({
     src: z.string(),
