@@ -15,19 +15,16 @@ import { chooseIntroTitle } from "./utils/choose-intro-title";
 import { getRandomAssetByDate } from "./utils/seasonal-helper";
 import { chooseRandomCaption } from "./assets/caption_assets";
 import { getVideoMetadata } from "@remotion/media-utils";
-import { generateVideoContent } from "./utils/generate-video-content";
 import { imageJSON } from "./assets/images";
+import {
+  calculateVideoDuration,
+  calculateVideoTimeline,
+} from "./utils/calculate-video-timeline";
 
-// TODO: calculate content length with algorithm later
 // TODO: read input from nodejs -> parse in
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,
 }) => {
-  const { contentLength } = props;
-
-  const totalDurationInFrames =
-    INTRO_SCENE_LENGTH + contentLength + OUTRO_SCENE_LENGTH;
-
   const bgMusic = chooseIntroMusic();
   const bgVideoSrc = staticFile(
     getRandomAssetByDate(props.videoDate, "videos"),
@@ -41,12 +38,18 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
     throw new Error("Cannot get video metadata");
   }
 
+  const videoContentDuration = calculateVideoDuration(props.contentScene); // NOTE: parse images JSON laters using NodeJS
+
+  const totalDurationInFrames =
+    INTRO_SCENE_LENGTH + videoContentDuration + OUTRO_SCENE_LENGTH;
+
   props.bgMusic = bgMusic;
   props.bgVideo.src = bgVideoSrc;
   props.bgVideo.frameLength = durationInSeconds * VIDEO_FPS;
   props.introScene.firstScene.title = title;
   props.introScene.secondScene.firstCaption = captions.firstCaption;
   props.introScene.secondScene.secondCaption = captions.secondCaption;
+  props.contentLength = videoContentDuration;
 
   return {
     durationInFrames: totalDurationInFrames,
@@ -69,7 +72,7 @@ export const RemotionRoot: React.FC = () => {
         height={VIDEO_HEIGHT}
         calculateMetadata={calculateMetadata}
         defaultProps={{
-          contentLength: 50 * VIDEO_FPS,
+          contentLength: 60 * VIDEO_FPS,
           videoDate: fakeDate,
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
           bgVideo: {
@@ -93,7 +96,7 @@ export const RemotionRoot: React.FC = () => {
               // direction: "vertical",
             },
           },
-          contentScene: generateVideoContent(imageJSON),
+          contentScene: calculateVideoTimeline(imageJSON),
         }}
       />
     </>

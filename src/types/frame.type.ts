@@ -7,6 +7,10 @@ export type Chapter = {
   transition: Transition;
 };
 
+export type ChapterWithDuration = Chapter & {
+  durationInFrames: number;
+};
+
 export type Frame = {
   type: FrameType;
   category: FrameCategory;

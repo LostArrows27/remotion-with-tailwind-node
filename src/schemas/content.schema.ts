@@ -45,5 +45,6 @@ export const contentSceneSchema = z.array(
       }),
     ),
     transition: transitionSchema,
+    durationInFrames: z.number(),
   }),
 );

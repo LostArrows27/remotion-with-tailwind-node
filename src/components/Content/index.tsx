@@ -1,23 +1,37 @@
 import { AbsoluteFill } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
-import { none } from "@remotion/transitions/none";
+import { slide } from "@remotion/transitions/slide";
 import { ContentProps } from "../../types/video.type";
+import { CHAPTER_TRANSITION_TIME } from "../../constants/constants";
+import { Fragment } from "react/jsx-runtime";
 
+// TODO: random presentation function
+
+// NOTE: chapter = title + transition + (content = frame + transition)
 const MainScene = ({ data }: ContentProps) => {
-  console.log(data);
-
   return (
     <TransitionSeries>
-      <TransitionSeries.Sequence durationInFrames={40}>
-        <Letter color="#0b84f3">A</Letter>
-      </TransitionSeries.Sequence>
-      <TransitionSeries.Transition
-        presentation={none()}
-        timing={linearTiming({ durationInFrames: 30 })}
-      />
-      <TransitionSeries.Sequence durationInFrames={60}>
-        <Letter color="pink">B</Letter>
-      </TransitionSeries.Sequence>
+      {data.map((chapter, index) => {
+        return (
+          <Fragment key={index}>
+            <TransitionSeries.Sequence
+              durationInFrames={chapter.durationInFrames}
+            >
+              <Letter color="white">
+                {chapter.title + " " + chapter.frame.length}
+              </Letter>
+            </TransitionSeries.Sequence>
+            <TransitionSeries.Transition
+              presentation={slide({
+                direction: "from-right",
+              })}
+              timing={linearTiming({
+                durationInFrames: CHAPTER_TRANSITION_TIME,
+              })}
+            />
+          </Fragment>
+        );
+      })}
     </TransitionSeries>
   );
 };
@@ -29,7 +43,7 @@ const Letter: React.FC<{ color: string; children: React.ReactNode }> = ({
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "transparent ",
+        backgroundColor: "transparent",
         justifyContent: "center",
         alignItems: "center",
       }}
