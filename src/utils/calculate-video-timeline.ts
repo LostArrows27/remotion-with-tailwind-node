@@ -6,12 +6,7 @@ import {
   TITLE_FRAME_DURATION,
   TITLE_TRANSITION_TIME,
 } from "../constants/constants";
-import {
-  Chapter,
-  ChapterWithDuration,
-  Frame,
-  ImageJSON,
-} from "../types/frame.type";
+import { ChapterWithDuration, Frame, ImageJSON } from "../types/frame.type";
 import { generateVideoContent } from "./generate-video-content";
 
 // called transition time = b
@@ -33,13 +28,11 @@ export const calculateVideoTimeline = (
 ): ChapterWithDuration[] => {
   const chapters = generateVideoContent(imageData);
 
-  const newChapters = chapters.map((chapter, chapterIndex) => {
-    const framesTotalDuration = calculateTotalFrameDuration(chapter);
+  // NOTE: slide "chapters" if wanna test with fewer chaps
+  const newChapters = chapters.map((chapter) => {
+    const framesTotalDuration = calculateTotalFrameDuration(chapter.frame);
 
-    const chapterTotalDuration = calculateChapterDuration(
-      framesTotalDuration,
-      chapterIndex,
-    );
+    const chapterTotalDuration = calculateChapterDuration(framesTotalDuration);
 
     return {
       ...chapter,
@@ -62,31 +55,28 @@ export const calculateVideoDuration = (chapters: ChapterWithDuration[]) => {
   return totalDuration;
 };
 
-export const calculateChapterDuration = (
-  framesTotalDuration: number,
-  index: number,
-) => {
-  const chapterAdditionalTime =
-    index === 0 ? CHAPTER_TRANSITION_TIME : CHAPTER_TRANSITION_TIME * 2;
+export const calculateChapterDuration = (framesTotalDuration: number) => {
+  // NOTE: every chap have in + out transition
+  //       -> add chap trans time at begin + end of chap
+
+  const chapterDuration =
+    CHAPTER_TRANSITION_TIME + TITLE_FRAME_DURATION + TITLE_TRANSITION_TIME;
+
+  const contentDuration =
+    TITLE_TRANSITION_TIME + framesTotalDuration + CHAPTER_TRANSITION_TIME;
 
   const totalDuration =
-    TITLE_FRAME_DURATION +
-    TITLE_TRANSITION_TIME +
-    (framesTotalDuration + TITLE_TRANSITION_TIME) -
-    TITLE_TRANSITION_TIME +
-    chapterAdditionalTime;
+    chapterDuration + contentDuration - TITLE_TRANSITION_TIME;
 
   return totalDuration;
 };
 
-export const calculateTotalFrameDuration = (chapter: Chapter) => {
+export const calculateTotalFrameDuration = (frames: Frame[]) => {
   const chapterTotalFrameDuration =
-    chapter.frame.reduce((acc, frame, frameIndex) => {
-      return (
-        acc + calculateFrameDuration(frame, frameIndex, chapter.frame.length)
-      );
+    frames.reduce((acc, frame, frameIndex) => {
+      return acc + calculateFrameDuration(frame, frameIndex, frames.length);
     }, 0) -
-    FRAME_TRANSITION_TIME * (chapter.frame.length - 1);
+    FRAME_TRANSITION_TIME * (frames.length - 1);
 
   return chapterTotalFrameDuration;
 };
@@ -96,6 +86,14 @@ export const calculateFrameDuration = (
   index: number,
   total: number,
 ) => {
+  if (total === 1 && frame.type === "single") {
+    return SINGLE_IMAGE_FRAME_DURATION;
+  }
+
+  if (total === 1 && frame.type === "multi") {
+    return MULTI_IMAGE_FRAME_DURATION;
+  }
+
   const frameDuration =
     frame.type === "single"
       ? SINGLE_IMAGE_FRAME_DURATION

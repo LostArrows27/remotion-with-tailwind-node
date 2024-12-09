@@ -4,6 +4,7 @@ import { slide } from "@remotion/transitions/slide";
 import { ContentProps } from "../../types/video.type";
 import { CHAPTER_TRANSITION_TIME } from "../../constants/constants";
 import { Fragment } from "react/jsx-runtime";
+import VideoChapter from "./chapter";
 
 // TODO: random presentation function
 
@@ -14,13 +15,6 @@ const MainScene = ({ data }: ContentProps) => {
       {data.map((chapter, index) => {
         return (
           <Fragment key={index}>
-            <TransitionSeries.Sequence
-              durationInFrames={chapter.durationInFrames}
-            >
-              <Letter color="white">
-                {chapter.title + " " + chapter.frame.length}
-              </Letter>
-            </TransitionSeries.Sequence>
             <TransitionSeries.Transition
               presentation={slide({
                 direction: "from-right",
@@ -29,6 +23,27 @@ const MainScene = ({ data }: ContentProps) => {
                 durationInFrames: CHAPTER_TRANSITION_TIME,
               })}
             />
+            <TransitionSeries.Sequence
+              durationInFrames={chapter.durationInFrames}
+            >
+              <VideoChapter
+                index={index}
+                title={chapter.title}
+                transition={chapter.transition}
+                durationInFrames={chapter.durationInFrames}
+                frame={chapter.frame}
+              />
+            </TransitionSeries.Sequence>
+            {index === data.length - 1 && (
+              <TransitionSeries.Transition
+                presentation={slide({
+                  direction: "from-right",
+                })}
+                timing={linearTiming({
+                  durationInFrames: CHAPTER_TRANSITION_TIME,
+                })}
+              />
+            )}
           </Fragment>
         );
       })}
@@ -36,7 +51,7 @@ const MainScene = ({ data }: ContentProps) => {
   );
 };
 
-const Letter: React.FC<{ color: string; children: React.ReactNode }> = ({
+export const Letter: React.FC<{ color: string; children: React.ReactNode }> = ({
   color,
   children,
 }) => {
