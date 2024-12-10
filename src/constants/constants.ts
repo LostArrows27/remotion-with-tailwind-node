@@ -49,6 +49,7 @@ export const INTRO_SECOND_SCENE_CAPTION_DURATION =
 export const CHAPTER_TRANSITION_TIME = VIDEO_FPS;
 export const TITLE_TRANSITION_TIME = 0.9 * VIDEO_FPS;
 export const FRAME_TRANSITION_TIME = 0.9 * VIDEO_FPS;
+export const FIRST_CHAPTER_IN_TRANSITION_TIME = 0.8 * VIDEO_FPS;
 
 // NOTE: this duration is not count the transition time
 export const TITLE_FRAME_DURATION = 2 * VIDEO_FPS;

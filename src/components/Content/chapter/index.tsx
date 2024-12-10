@@ -1,5 +1,5 @@
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
-import ChapterTitle from "./ChapterTitle";
+import ChapterTitle from "./title/ChapterTitle";
 import ChapterContent from "./ChapterContent";
 import {
   CHAPTER_TRANSITION_TIME,
@@ -8,6 +8,7 @@ import {
 } from "../../../constants/constants";
 import { slide } from "@remotion/transitions/slide";
 import { VideoChapterProps } from "../../../types/content.type";
+import { chooseChapterTitleImage } from "../../../utils/choose-chapter-title-image";
 
 // TODO: handle animation based on
 // 1. self-built transition
@@ -24,6 +25,8 @@ const VideoChapter = ({
   transition,
   durationInFrames,
   frame,
+  index,
+  titleStyle,
 }: VideoChapterProps) => {
   const chapterTitleDuration =
     CHAPTER_TRANSITION_TIME + TITLE_FRAME_DURATION + TITLE_TRANSITION_TIME;
@@ -34,7 +37,12 @@ const VideoChapter = ({
   return (
     <TransitionSeries>
       <TransitionSeries.Sequence durationInFrames={chapterTitleDuration}>
-        <ChapterTitle />
+        <ChapterTitle
+          index={index}
+          titleStyle={titleStyle}
+          title={title}
+          image={chooseChapterTitleImage(frame)}
+        />
       </TransitionSeries.Sequence>
       <TransitionSeries.Transition
         presentation={slide({
@@ -45,7 +53,7 @@ const VideoChapter = ({
         })}
       />
       <TransitionSeries.Sequence durationInFrames={chapterContentDuration}>
-        <ChapterContent frames={frame} />
+        <ChapterContent transition={transition} frames={frame} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
   );

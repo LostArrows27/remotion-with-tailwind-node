@@ -1,5 +1,4 @@
 import { AbsoluteFill } from "remotion";
-import { Frame } from "../../../types/frame.type";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import {
@@ -10,8 +9,9 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { calculateFrameDuration } from "../../../utils/calculate-video-timeline";
 import { Letter } from "../../Test/Letter";
+import { ChapterContentProps } from "../../../types/content.type";
 
-const ChapterContent = ({ frames }: { frames: Frame[] }) => {
+const ChapterContent = ({ frames, transition }: ChapterContentProps) => {
   return (
     <TransitionSeries>
       {frames.map((frame, index) => {

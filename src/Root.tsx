@@ -58,7 +58,7 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
 };
 
 export const RemotionRoot: React.FC = () => {
-  const fakeDate = new Date("2024-08-02"); // Fake summer
+  const fakeDate = new Date("2024-04-02"); // Fake summer
 
   return (
     <>
