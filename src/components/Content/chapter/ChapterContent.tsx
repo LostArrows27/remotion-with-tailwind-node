@@ -1,5 +1,4 @@
 import { AbsoluteFill } from "remotion";
-import { Letter } from "..";
 import { Frame } from "../../../types/frame.type";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
@@ -10,6 +9,7 @@ import {
 } from "../../../constants/constants";
 import { Fragment } from "react/jsx-runtime";
 import { calculateFrameDuration } from "../../../utils/calculate-video-timeline";
+import { Letter } from "../../Test/Letter";
 
 const ChapterContent = ({ frames }: { frames: Frame[] }) => {
   return (

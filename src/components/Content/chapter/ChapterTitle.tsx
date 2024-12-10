@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { Letter } from "..";
+import { Letter } from "../../Test/Letter";
 
 // NOTE: include (chapter transition + title + title transition)
 const ChapterTitle = () => {

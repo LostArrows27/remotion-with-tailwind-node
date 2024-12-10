@@ -1,4 +1,3 @@
-import { AbsoluteFill } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { ContentProps } from "../../types/video.type";
@@ -48,23 +47,6 @@ const MainScene = ({ data }: ContentProps) => {
         );
       })}
     </TransitionSeries>
-  );
-};
-
-export const Letter: React.FC<{ color: string; children: React.ReactNode }> = ({
-  color,
-  children,
-}) => {
-  return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: "transparent",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1 style={{ color, fontSize: 200 }}>{children}</h1>
-    </AbsoluteFill>
   );
 };
 
