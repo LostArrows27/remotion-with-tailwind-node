@@ -24,7 +24,7 @@ const ChapterContent = ({ frames }: { frames: Frame[] }) => {
           <Fragment key={index}>
             <TransitionSeries.Sequence durationInFrames={frameTotalDuration}>
               <AbsoluteFill key={index}>
-                <Letter color="black">
+                <Letter color="white">
                   {frame.images.length +
                     "-" +
                     frame.category +

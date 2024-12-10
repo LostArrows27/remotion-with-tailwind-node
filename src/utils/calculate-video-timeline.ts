@@ -29,10 +29,13 @@ export const calculateVideoTimeline = (
   const chapters = generateVideoContent(imageData);
 
   // NOTE: slide "chapters" if wanna test with fewer chaps
-  const newChapters = chapters.map((chapter) => {
+  const newChapters = chapters.map((chapter, index) => {
     const framesTotalDuration = calculateTotalFrameDuration(chapter.frame);
 
-    const chapterTotalDuration = calculateChapterDuration(framesTotalDuration);
+    const chapterTotalDuration = calculateChapterDuration(
+      framesTotalDuration,
+      index,
+    );
 
     return {
       ...chapter,
@@ -55,12 +58,17 @@ export const calculateVideoDuration = (chapters: ChapterWithDuration[]) => {
   return totalDuration;
 };
 
-export const calculateChapterDuration = (framesTotalDuration: number) => {
+export const calculateChapterDuration = (
+  framesTotalDuration: number,
+  index: number,
+) => {
   // NOTE: every chap have in + out transition
   //       -> add chap trans time at begin + end of chap
-
+  // except first chapter -> no in transitionc
   const chapterDuration =
-    CHAPTER_TRANSITION_TIME + TITLE_FRAME_DURATION + TITLE_TRANSITION_TIME;
+    (index === 0 ? 0 : CHAPTER_TRANSITION_TIME) +
+    TITLE_FRAME_DURATION +
+    TITLE_TRANSITION_TIME;
 
   const contentDuration =
     TITLE_TRANSITION_TIME + framesTotalDuration + CHAPTER_TRANSITION_TIME;

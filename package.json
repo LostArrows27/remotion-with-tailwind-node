@@ -17,6 +17,7 @@
     "react-dom": "18.3.1",
     "remotion": "4.0.229",
     "remotion-animated": "^2.1.1",
+    "remotion-transition-series": "^0.0.10",
     "zod": "^3.23.8"
   },
   "devDependencies": {

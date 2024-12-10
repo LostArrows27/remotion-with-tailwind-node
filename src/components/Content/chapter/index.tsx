@@ -7,7 +7,7 @@ import {
   TITLE_TRANSITION_TIME,
 } from "../../../constants/constants";
 import { slide } from "@remotion/transitions/slide";
-import { VideoContent } from "../../../types/content.type";
+import { VideoChapterProps } from "../../../types/content.type";
 
 // TODO: handle animation based on
 // 1. self-built transition
@@ -17,13 +17,14 @@ import { VideoContent } from "../../../types/content.type";
 // 1. if no use remotion-transitions -> none() -> self built
 // 2. if use remotion-transitions -> exp: slide()
 
+// NOTE: chapter = title + transition + (content = frame + transition)
+
 const VideoChapter = ({
   title,
   transition,
   durationInFrames,
   frame,
-  index,
-}: VideoContent) => {
+}: VideoChapterProps) => {
   const chapterTitleDuration =
     CHAPTER_TRANSITION_TIME + TITLE_FRAME_DURATION + TITLE_TRANSITION_TIME;
 
