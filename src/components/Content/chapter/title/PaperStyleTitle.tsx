@@ -2,6 +2,7 @@ import {
   AbsoluteFill,
   Img,
   interpolate,
+  random,
   staticFile,
   useCurrentFrame,
 } from "remotion";
@@ -16,10 +17,10 @@ const { fontFamily } = loadFont();
 
 const { fontFamily: titleFontFamily } = loadTitleFont();
 
-const PaperStyleTitle = ({ title, image, index }: ChapterStyleProps) => {
+const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
   const frame = useCurrentFrame();
 
-  console.log("title: " + title);
+  // console.log("title: " + title);
 
   const opacity = interpolate(
     frame,
@@ -30,6 +31,15 @@ const PaperStyleTitle = ({ title, image, index }: ChapterStyleProps) => {
       extrapolateRight: "clamp",
     },
   );
+
+  const newImageURL = images.map((image) =>
+    staticFile(
+      image.replace(
+        "D:/Code Space/AI/image_classification/model/image",
+        "/images",
+      ),
+    ),
+  )[Math.floor(random("title-image") * 2)];
 
   return (
     <AbsoluteFill
@@ -75,7 +85,7 @@ const PaperStyleTitle = ({ title, image, index }: ChapterStyleProps) => {
           />
           <Img
             className="absolute z-0 object-cover object-center w-full h-full"
-            src={staticFile(image)}
+            src={newImageURL}
           />
           <Img
             src={staticFile("/images/content/title/tape.png")}

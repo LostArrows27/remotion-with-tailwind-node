@@ -7,14 +7,14 @@ export type VideoChapterProps = ChapterWithDuration & {
 
 export type ChapterTitleProps = {
   title: string;
-  image: string;
+  images: string[];
   index: number;
   titleStyle: number;
 };
 
 export type ChapterStyleProps = {
   title: string;
-  image: string;
+  images: string[];
   index: number;
 };
 

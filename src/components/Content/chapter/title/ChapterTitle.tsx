@@ -1,24 +1,22 @@
 import { ChapterTitleProps } from "../../../../types/content.type";
+import BeigeStyleTitle from "./BeigeStyleTitle";
 import PaperStyleTitle from "./PaperStyleTitle";
 
 // TODO: do many title styles
 
 const ChapterTitle = ({
   title,
-  image,
+  images,
   index,
   titleStyle,
 }: ChapterTitleProps) => {
-  const imageURL = image.replace(
-    "D:/Code Space/AI/image_classification/model/image",
-    "/images",
-  );
-
   switch (titleStyle) {
     case 0:
-      return <PaperStyleTitle title={title} image={imageURL} index={index} />;
+      return <PaperStyleTitle title={title} images={images} index={index} />;
+    case 1:
+      return <BeigeStyleTitle title={title} images={images} index={index} />;
     default:
-      return <PaperStyleTitle title={title} image={imageURL} index={index} />;
+      return <BeigeStyleTitle title={title} images={images} index={index} />;
   }
 };
 
