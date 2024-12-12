@@ -6,7 +6,7 @@ import { Frame } from "../types/frame.type";
 const getRandomImage = (
   images: { path: string; confidence: number }[],
 ): string => {
-  const randomIndex = Math.floor(random(null) * images.length);
+  const randomIndex = Math.floor(random("random-title-image") * images.length);
   return images[randomIndex].path;
 };
 

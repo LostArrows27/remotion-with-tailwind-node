@@ -2,13 +2,13 @@ import { ContentProps } from "../../types/video.type";
 import { CHAPTER_TRANSITION_TIME } from "../../constants/constants";
 import { Fragment } from "react/jsx-runtime";
 import VideoChapter from "./chapter";
-import { springTiming, TransitionSeries } from "@remotion/transitions";
+import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
-import { random } from "remotion";
+import { Easing, random } from "remotion";
 
 const MainScene = ({ data }: ContentProps) => {
   // NOTE: choose a style for all titles
-  const titleStyle = Math.floor(random(null) * 2);
+  const titleStyle = Math.floor(random("title-style") * 2);
 
   return (
     <TransitionSeries>
@@ -20,12 +20,9 @@ const MainScene = ({ data }: ContentProps) => {
                 presentation={slide({
                   direction: "from-right",
                 })}
-                timing={springTiming({
-                  config: {
-                    damping: 200,
-                  },
+                timing={linearTiming({
                   durationInFrames: CHAPTER_TRANSITION_TIME,
-                  durationRestThreshold: 0.001,
+                  easing: Easing.inOut(Easing.poly(4)),
                 })}
               />
             )}
@@ -46,12 +43,9 @@ const MainScene = ({ data }: ContentProps) => {
                 presentation={slide({
                   direction: "from-right",
                 })}
-                timing={springTiming({
-                  config: {
-                    damping: 200,
-                  },
+                timing={linearTiming({
                   durationInFrames: CHAPTER_TRANSITION_TIME,
-                  durationRestThreshold: 0.001,
+                  easing: Easing.inOut(Easing.poly(4)),
                 })}
               />
             )}

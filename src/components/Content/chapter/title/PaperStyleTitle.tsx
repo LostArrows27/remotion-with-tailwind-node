@@ -2,13 +2,12 @@ import {
   AbsoluteFill,
   Img,
   interpolate,
-  random,
   staticFile,
   useCurrentFrame,
 } from "remotion";
 import { ChapterStyleProps } from "../../../../types/content.type";
 import { loadFont } from "@remotion/google-fonts/AmaticSC";
-import { loadFont as loadTitleFont } from "@remotion/google-fonts/Mansalva";
+import { loadFont as loadTitleFont } from "@remotion/google-fonts/DancingScript";
 import { FIRST_CHAPTER_IN_TRANSITION_TIME } from "../../../../constants/constants";
 
 // TODO: add AI title or based-case title
@@ -20,8 +19,6 @@ const { fontFamily: titleFontFamily } = loadTitleFont();
 const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
   const frame = useCurrentFrame();
 
-  // console.log("title: " + title);
-
   const opacity = interpolate(
     frame,
     [0, FIRST_CHAPTER_IN_TRANSITION_TIME],
@@ -32,6 +29,8 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
     },
   );
 
+  // TODO: remove local file later
+
   const newImageURL = images.map((image) =>
     staticFile(
       image.replace(
@@ -39,13 +38,14 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
         "/images",
       ),
     ),
-  )[Math.floor(random("title-image") * 2)];
+  )[1];
 
   return (
     <AbsoluteFill
       style={{
         opacity: index === 0 ? opacity : 1,
       }}
+      className="overflow-hidden"
     >
       <AbsoluteFill>
         <Img
@@ -60,7 +60,7 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
           style={{
             fontFamily: titleFontFamily,
           }}
-          className="absolute text-7xl text-border-white text-center w-[400px] text-blue-600 top-[40%] left-4 uppercase"
+          className="absolute leading-[1.3] text-7xl text-border-white text-center w-[400px]  text-[rgb(93,69,45)] top-[40%] left-4 uppercase"
         >
           Khu cắm trại
         </h1>
@@ -71,7 +71,7 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
           className="absolute font-bold text-4xl text-center w-[400px]  top-[70%] left-4 uppercase"
         >
           {["outdoor", "campfire"].map((word, index) => (
-            <span key={index} className="ml-7 text-blue-500">
+            <span key={index} className="ml-7 text-[rgb(93,69,45)]">
               #{word}
             </span>
           ))}

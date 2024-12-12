@@ -1,3 +1,5 @@
+// TODO: remove this since i don't use it anymore:)))
+
 export const transitionEffects = [
   {
     in: "slide-from-left",
@@ -9,44 +11,27 @@ export const transitionEffects = [
     out: "slide-out-from-2-side",
     type: "self-built",
   },
-  {
-    in: "zoom-in",
-    out: "zoom-out",
-    type: "self-built",
-  },
 
   // remotion-transitions
   // 1. slide()
   {
-    in: "slide-from-left",
-    out: "slide-to-right",
+    in: "from-left",
+    out: "to-right",
     type: "remotion-transitions",
   },
   {
-    in: "slide-from-right",
-    out: "slide-to-left",
+    in: "from-right",
+    out: "to-left",
     type: "remotion-transitions",
   },
   {
-    in: "slide-from-top",
-    out: "slide-to-bottom",
+    in: "from-top",
+    out: "to-bottom",
     type: "remotion-transitions",
   },
   {
-    in: "slide-from-bottom",
-    out: "slide-to-top",
-    type: "remotion-transitions",
-  },
-  // 2. Fadethroughcolor -> remotion-transition-series
-  {
-    in: "fade-through-color",
-    out: "fade-through-color",
-    type: "remotion-transitions",
-  },
-  // 3. light leak
-  {
-    in: "light-leak",
-    out: "light-leak",
+    in: "from-bottom",
+    out: "to-top",
     type: "remotion-transitions",
   },
 ] as const;

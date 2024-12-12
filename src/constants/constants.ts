@@ -46,15 +46,19 @@ export const INTRO_SECOND_SCENE_CAPTION_DURATION =
 
 // content
 // NOTE: for now 72 images -> 2:12 mins
-export const CHAPTER_TRANSITION_TIME = VIDEO_FPS;
+export const CHAPTER_TRANSITION_TIME = 1.5 * VIDEO_FPS;
 export const TITLE_TRANSITION_TIME = 0.9 * VIDEO_FPS;
 export const FRAME_TRANSITION_TIME = 0.9 * VIDEO_FPS;
 export const FIRST_CHAPTER_IN_TRANSITION_TIME = 0.8 * VIDEO_FPS;
 
 // NOTE: this duration is not count the transition time
 export const TITLE_FRAME_DURATION = 2 * VIDEO_FPS;
-export const SINGLE_IMAGE_FRAME_DURATION = 2 * VIDEO_FPS;
-export const MULTI_IMAGE_FRAME_DURATION = 3 * VIDEO_FPS;
+export const SINGLE_IMAGE_FRAME_DURATION = 4 * VIDEO_FPS;
+export const MULTI_IMAGE_FRAME_DURATION = 5 * VIDEO_FPS;
+
+// self built frame transition
+export const ONE_IMAGE_FRAME_TRANSITION_DURATION = 1.5 * VIDEO_FPS;
+export const ONE_IMAGE_TRANSITION_DELAY = FRAME_TRANSITION_TIME / 2;
 
 // outro
 export const OUTRO_SCENE_LENGTH = 5 * VIDEO_FPS;

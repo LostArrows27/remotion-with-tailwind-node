@@ -24,6 +24,7 @@ const BeigeStyleTitle = ({ images, index }: ChapterStyleProps) => {
     },
   );
 
+  // TODO: remove local file later
   const newImageURL = images.map((image) =>
     staticFile(
       image.replace(

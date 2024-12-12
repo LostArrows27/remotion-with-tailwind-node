@@ -9,6 +9,7 @@ import {
 import { slide } from "@remotion/transitions/slide";
 import { VideoChapterProps } from "../../../types/content.type";
 import { chooseChapterTitleImage } from "../../../utils/choose-chapter-title-image";
+import { Easing } from "remotion";
 
 // TODO: handle animation based on
 // 1. self-built transition
@@ -29,7 +30,9 @@ const VideoChapter = ({
   titleStyle,
 }: VideoChapterProps) => {
   const chapterTitleDuration =
-    CHAPTER_TRANSITION_TIME + TITLE_FRAME_DURATION + TITLE_TRANSITION_TIME;
+    (index === 0 ? 0 : CHAPTER_TRANSITION_TIME) +
+    TITLE_FRAME_DURATION +
+    TITLE_TRANSITION_TIME;
 
   const chapterContentDuration =
     durationInFrames + TITLE_TRANSITION_TIME - chapterTitleDuration;
@@ -50,10 +53,15 @@ const VideoChapter = ({
         })}
         timing={linearTiming({
           durationInFrames: TITLE_TRANSITION_TIME,
+          easing: Easing.inOut(Easing.sin),
         })}
       />
       <TransitionSeries.Sequence durationInFrames={chapterContentDuration}>
-        <ChapterContent transition={transition} frames={frame} />
+        <ChapterContent
+          chapterIndex={index}
+          transition={transition}
+          frames={frame}
+        />
       </TransitionSeries.Sequence>
     </TransitionSeries>
   );

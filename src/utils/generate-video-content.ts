@@ -28,8 +28,13 @@ import { getGroupByLabel } from "./label-helpers";
         4. push all frame to chapter (or location chapter)
 */
 
+// NOTE: slice to auto have self-built type -> remove remotion-type
 export const chooseRandomTransition = () => {
-  return transitionEffects[Math.floor(random(null) * transitionEffects.length)];
+  const transitionEffectsNew = transitionEffects.slice(0, 2);
+
+  return transitionEffectsNew[
+    Math.floor(random("transition-effect") * transitionEffectsNew.length)
+  ];
 };
 
 export const removeLowActivityConfidence = (images: ImageJSON) => {
@@ -96,7 +101,7 @@ export const generateVideoContent = (images: ImageJSON): Chapter[] => {
 
   for (const [eventLabel, group] of sortedEventGroups) {
     const selectedImages = group
-      .sort(() => random(null) - 0.5)
+      .sort(() => random("event-label") - 0.5)
       .slice(0, MAX_IMAGE_PER_FRAME);
 
     const frame: Frame = {
@@ -142,7 +147,7 @@ export const generateVideoContent = (images: ImageJSON): Chapter[] => {
 
       if (group.length >= MAX_IMAGE_PER_FRAME) {
         const selectedImages = group
-          .sort(() => random(null) - 0.5)
+          .sort(() => random("activity-label") - 0.5)
           .slice(0, MAX_IMAGE_PER_FRAME);
 
         frame.images = selectedImages;
