@@ -4,12 +4,9 @@ import { Fragment } from "react/jsx-runtime";
 import VideoChapter from "./chapter";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
-import { Easing, random } from "remotion";
+import { Easing } from "remotion";
 
-const MainScene = ({ data }: ContentProps) => {
-  // NOTE: choose a style for all titles
-  const titleStyle = Math.floor(random("title-style") * 2);
-
+const MainScene = ({ data, titleStyle }: ContentProps) => {
   return (
     <TransitionSeries>
       {data.map((chapter, index) => {

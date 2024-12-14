@@ -10,6 +10,7 @@ const FrameMapping = ({
   chapterIndex,
   timingInFrame,
   durationInFrames,
+  frameIndex,
 }: FrameMappingProps) => {
   switch (type) {
     case "remotion-transitions":
@@ -17,6 +18,7 @@ const FrameMapping = ({
     case "self-built":
       return (
         <SelfBuiltFrameMapping
+          frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -26,6 +28,7 @@ const FrameMapping = ({
     default:
       return (
         <SelfBuiltFrameMapping
+          frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}

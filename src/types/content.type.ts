@@ -32,6 +32,7 @@ export type FrameMappingProps = {
   chapterIndex: number;
   timingInFrame: FrameTransitionTiming;
   durationInFrames: number;
+  frameIndex: number;
 };
 
 export type FrameTransitionTiming = {

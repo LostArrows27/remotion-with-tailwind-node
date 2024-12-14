@@ -44,7 +44,7 @@ const VideoChapter = ({
           index={index}
           titleStyle={titleStyle}
           title={title}
-          images={chooseChapterTitleImage(frame)}
+          images={chooseChapterTitleImage(frame, title, index, titleStyle)}
         />
       </TransitionSeries.Sequence>
       <TransitionSeries.Transition

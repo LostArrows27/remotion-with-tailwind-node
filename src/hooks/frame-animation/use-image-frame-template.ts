@@ -7,16 +7,20 @@ import {
 import { FrameTransitionTiming } from "../../types/content.type";
 
 // NOTE: in + out transition time
-export const useOneImageFrameAnimation = (
+export const useImageMoveAnimation = (
   timingInFrame: FrameTransitionTiming,
   durationInFrames: number,
+  startPos: number,
+  endPos: number,
+  outPos: number = startPos,
+  // eslint-disable-next-line max-params
 ) => {
   const frame = useCurrentFrame();
 
   const fastForwardIndex =
     timingInFrame.out === CHAPTER_TRANSITION_TIME ? 2 : 3;
 
-  const left = interpolate(
+  const position = interpolate(
     frame,
     [
       timingInFrame.in / fastForwardIndex,
@@ -26,13 +30,25 @@ export const useOneImageFrameAnimation = (
         ONE_IMAGE_FRAME_TRANSITION_DURATION,
       durationInFrames - timingInFrame.out / fastForwardIndex,
     ],
-    [-32, 50, 50, 132],
+    [startPos, endPos, endPos, outPos],
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
       easing: Easing.inOut(Easing.poly(4)),
     },
   );
+
+  return { position };
+};
+
+export const useImageScaleAnimation = (
+  timingInFrame: FrameTransitionTiming,
+  durationInFrames: number,
+) => {
+  const frame = useCurrentFrame();
+
+  const fastForwardIndex =
+    timingInFrame.out === CHAPTER_TRANSITION_TIME ? 2 : 3;
 
   const scale = interpolate(
     frame,
@@ -52,5 +68,5 @@ export const useOneImageFrameAnimation = (
     },
   );
 
-  return { left, scale };
+  return { scale };
 };

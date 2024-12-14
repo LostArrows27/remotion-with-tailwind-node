@@ -1,5 +1,10 @@
 import "./styles/tailwind.css";
-import { CalculateMetadataFunction, Composition, staticFile } from "remotion";
+import {
+  CalculateMetadataFunction,
+  Composition,
+  random,
+  staticFile,
+} from "remotion";
 import {
   INTRO_SCENE_LENGTH,
   OUTRO_SCENE_LENGTH,
@@ -43,6 +48,8 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   const totalDurationInFrames =
     INTRO_SCENE_LENGTH + videoContentDuration + OUTRO_SCENE_LENGTH;
 
+  const titleStyle = Math.floor(random(null) * 2);
+
   props.bgMusic = bgMusic;
   props.bgVideo.src = bgVideoSrc;
   props.bgVideo.frameLength = durationInSeconds * VIDEO_FPS;
@@ -50,6 +57,7 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props.introScene.secondScene.firstCaption = captions.firstCaption;
   props.introScene.secondScene.secondCaption = captions.secondCaption;
   props.contentLength = videoContentDuration;
+  props.titleStyle = titleStyle;
 
   return {
     durationInFrames: totalDurationInFrames,
@@ -72,6 +80,7 @@ export const RemotionRoot: React.FC = () => {
         height={VIDEO_HEIGHT}
         calculateMetadata={calculateMetadata}
         defaultProps={{
+          titleStyle: 0,
           contentLength: 60 * VIDEO_FPS,
           videoDate: fakeDate,
           bgMusic: staticFile("/music/intro/accoutic_2.mp3"),

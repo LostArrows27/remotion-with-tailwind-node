@@ -19,7 +19,7 @@ export const chooseIntroTitle = (time?: Date): string => {
 
   const allTitles = [...introTitles, ...seasonTitles];
 
-  return allTitles[Math.floor(random("intro-title") * allTitles.length)];
+  return allTitles[Math.floor(random(null) * allTitles.length)];
 };
 
 export const chooseIntroSubText = (time: Date): string => {

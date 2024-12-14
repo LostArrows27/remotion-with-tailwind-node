@@ -4,9 +4,9 @@ const introCategories = ["accoutic", "folk", "happy", "emotional"];
 
 export const chooseIntroMusic = (): string => {
   const category =
-    introCategories[Math.floor(random("category") * introCategories.length)];
+    introCategories[Math.floor(random(null) * introCategories.length)];
 
-  const number = Math.floor(random("category-index") * 6) + 1;
+  const number = Math.floor(random(null) * 6) + 1;
 
   return staticFile(`/music/intro/${category}_${number}.mp3`);
 };

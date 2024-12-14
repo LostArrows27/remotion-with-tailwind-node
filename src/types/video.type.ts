@@ -8,6 +8,7 @@ export type IntroProps = z.infer<typeof introSceneSchema>;
 
 export type ContentProps = {
   data: ChapterWithDuration[];
+  titleStyle: number;
 };
 
 export type FirstIntroSceneProps = IntroProps["firstScene"];

@@ -35,13 +35,16 @@ const BeigeStyleTitle = ({ images, index }: ChapterStyleProps) => {
   );
 
   return (
-    <AbsoluteFill
-      style={{
-        opacity: index === 0 ? opacity : 1,
-        background: `url(${staticFile("/images/content/title_2/bg.jpg")})`,
-      }}
-      className="bg-center bg-cover"
-    >
+    <AbsoluteFill>
+      <AbsoluteFill>
+        <Img
+          style={{
+            opacity: index === 0 ? opacity : 1,
+          }}
+          src={staticFile("/images/content/title_2/bg.jpg")}
+          className="object-cover object-center w-full h-full"
+        />
+      </AbsoluteFill>
       <AbsoluteFill>
         <AbsoluteFill>
           <div className="top-1/3 left-10 absolute w-[450px] center">

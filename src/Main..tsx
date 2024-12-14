@@ -28,6 +28,7 @@ const MainVideo = ({
   bgVideo,
   videoDate,
   contentScene,
+  titleStyle,
 }: MainProps) => {
   const { durationInFrames } = useVideoConfig();
 
@@ -72,7 +73,7 @@ const MainVideo = ({
           />
         </Series.Sequence>
         <Series.Sequence durationInFrames={contentLength}>
-          <MainScene data={contentScene} />
+          <MainScene titleStyle={titleStyle} data={contentScene} />
         </Series.Sequence>
         <Series.Sequence durationInFrames={OUTRO_SCENE_LENGTH}>
           <OutroScene />

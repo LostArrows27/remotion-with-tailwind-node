@@ -45,8 +45,6 @@ const ChapterContent = ({
           lastChapterAdditionalTime +
           (index === frames.length - 1 ? 0 : FRAME_TRANSITION_TIME);
 
-        // TODO: replace local file later
-
         const imagesNews = frame.images.map((image) => {
           return {
             ...image,
@@ -66,6 +64,7 @@ const ChapterContent = ({
                 durationInFrames={frameTotalDuration}
                 chapterIndex={chapterIndex}
                 frame={frame}
+                frameIndex={index}
                 type={transitionType}
                 timingInFrame={{
                   in: transitionInDuration,

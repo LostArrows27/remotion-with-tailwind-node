@@ -1,5 +1,9 @@
 import { SelfBuiltFrameProps } from "../../../../types/content.type";
-import { OneImageLayout } from "./layout/NormalImageLayout";
+import FourImageStyleMapping from "./layout/four-image/FourImageStyle";
+import { OneImageLayout } from "./layout/OneImageLayout";
+import SixImageLayout from "./layout/SixImageLayout";
+import ThreeImageLayout from "./layout/ThreeImageLayout";
+import TwoImageLayout from "./layout/TwoImageLayout";
 
 // TODO: custom event / activity frames
 // 1. event frame -> instagram
@@ -10,6 +14,7 @@ const SelfBuiltFrameMapping = ({
   chapterIndex,
   timingInFrame,
   durationInFrames,
+  frameIndex,
 }: SelfBuiltFrameProps) => {
   const imageCount = frame.images.length;
 
@@ -17,6 +22,7 @@ const SelfBuiltFrameMapping = ({
     case 1:
       return (
         <OneImageLayout
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -25,7 +31,8 @@ const SelfBuiltFrameMapping = ({
       );
     case 2:
       return (
-        <OneImageLayout
+        <TwoImageLayout
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -34,7 +41,8 @@ const SelfBuiltFrameMapping = ({
       );
     case 3:
       return (
-        <OneImageLayout
+        <ThreeImageLayout
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -43,7 +51,8 @@ const SelfBuiltFrameMapping = ({
       );
     case 4:
       return (
-        <OneImageLayout
+        <FourImageStyleMapping
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -52,7 +61,8 @@ const SelfBuiltFrameMapping = ({
       );
     case 5:
       return (
-        <OneImageLayout
+        <FourImageStyleMapping
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -61,7 +71,8 @@ const SelfBuiltFrameMapping = ({
       );
     case 6:
       return (
-        <OneImageLayout
+        <SixImageLayout
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}
@@ -70,7 +81,8 @@ const SelfBuiltFrameMapping = ({
       );
     default:
       return (
-        <OneImageLayout
+        <SixImageLayout
+          frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}
           frame={frame}

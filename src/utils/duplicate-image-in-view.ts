@@ -6,7 +6,12 @@
 
 import { random } from "remotion";
 
-export const duplicateImageInView = (images: string[]): string[][] => {
+export const duplicateImageInView = (
+  images: string[],
+  firstCaption: string,
+  secondCaption: string,
+  totalLength: number,
+): string[][] => {
   const numColumns = 7;
   const numRows = 6;
   const totalImages = numColumns * numRows;
@@ -30,7 +35,12 @@ export const duplicateImageInView = (images: string[]): string[][] => {
     }
 
     for (let i = extendedImages.length - 1; i > 0; i--) {
-      const j = Math.floor(random("duplicate-image-in-view") * (i + 1));
+      const j = Math.floor(
+        random(
+          `duplicate-image-in-view-firstCaption-${firstCaption}-secondCaption-${secondCaption}-totalLength-${totalLength}`,
+        ) *
+          (i + 1),
+      );
       [extendedImages[i], extendedImages[j]] = [
         extendedImages[j],
         extendedImages[i],

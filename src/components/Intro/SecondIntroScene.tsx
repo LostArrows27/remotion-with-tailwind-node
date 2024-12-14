@@ -21,7 +21,12 @@ const SecondIntroScene = ({
 
   const { scale: postScale } = usePostListFrameAnimation();
 
-  const duplicateImages = duplicateImageInView(images);
+  const duplicateImages = duplicateImageInView(
+    images,
+    firstCaption,
+    secondCaption,
+    images.length,
+  );
 
   return (
     <AbsoluteFill

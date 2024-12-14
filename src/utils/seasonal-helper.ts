@@ -47,5 +47,5 @@ export const getRandomAssetByDate = (
 ): string => {
   const season = getSeasonFromDate(date);
   const assets = getSeasonalAssetsBySeason(season, assetType);
-  return assets[Math.floor(random("seasonal") * assets.length)];
+  return assets[Math.floor(random(null) * assets.length)];
 };

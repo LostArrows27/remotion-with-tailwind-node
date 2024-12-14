@@ -45,4 +45,5 @@ export const compositionSchema = z.object({
     src: z.string(),
     frameLength: z.number(),
   }),
+  titleStyle: z.number(),
 });

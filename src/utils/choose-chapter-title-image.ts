@@ -5,12 +5,24 @@ import { Frame } from "../types/frame.type";
 
 const getRandomImage = (
   images: { path: string; confidence: number }[],
+  title: string,
+  index: number,
+  titleStyle: number,
 ): string => {
-  const randomIndex = Math.floor(random("random-title-image") * images.length);
+  const randomIndex = Math.floor(
+    random(
+      `random-title-image-title-${title}-index-${index}-titleStyle-${titleStyle}`,
+    ) * images.length,
+  );
   return images[randomIndex].path;
 };
 
-export const chooseChapterTitleImage = (frames: Frame[]): string[] => {
+export const chooseChapterTitleImage = (
+  frames: Frame[],
+  title: string,
+  index: number,
+  titleStyle: number,
+): string[] => {
   const imagesWithConfidence: { path: string; confidence: number }[] = [];
 
   frames.forEach((frame) => {
@@ -34,7 +46,7 @@ export const chooseChapterTitleImage = (frames: Frame[]): string[] => {
     (image) => image !== highestConfidenceImage,
   );
 
-  const randomImage = getRandomImage(remainingImages);
+  const randomImage = getRandomImage(remainingImages, title, index, titleStyle);
 
   return [highestConfidenceImage.path, randomImage];
 };

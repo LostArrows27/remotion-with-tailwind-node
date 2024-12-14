@@ -33,7 +33,7 @@ export const chooseRandomTransition = () => {
   const transitionEffectsNew = transitionEffects.slice(0, 2);
 
   return transitionEffectsNew[
-    Math.floor(random("transition-effect") * transitionEffectsNew.length)
+    Math.floor(random(null) * transitionEffectsNew.length)
   ];
 };
 
@@ -101,7 +101,7 @@ export const generateVideoContent = (images: ImageJSON): Chapter[] => {
 
   for (const [eventLabel, group] of sortedEventGroups) {
     const selectedImages = group
-      .sort(() => random("event-label") - 0.5)
+      .sort(() => random(null) - 0.5)
       .slice(0, MAX_IMAGE_PER_FRAME);
 
     const frame: Frame = {
@@ -147,7 +147,7 @@ export const generateVideoContent = (images: ImageJSON): Chapter[] => {
 
       if (group.length >= MAX_IMAGE_PER_FRAME) {
         const selectedImages = group
-          .sort(() => random("activity-label") - 0.5)
+          .sort(() => random(null) - 0.5)
           .slice(0, MAX_IMAGE_PER_FRAME);
 
         frame.images = selectedImages;
