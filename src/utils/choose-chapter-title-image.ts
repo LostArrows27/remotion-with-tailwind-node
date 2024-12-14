@@ -11,7 +11,7 @@ const getRandomImage = (
 ): string => {
   const randomIndex = Math.floor(
     random(
-      `random-title-image-title-${title}-index-${index}-titleStyle-${titleStyle}`,
+      `random-title-image-title-${title}-index-${index}-titleStyle-${titleStyle}-JSON-${JSON.stringify(images)}`,
     ) * images.length,
   );
   return images[randomIndex].path;

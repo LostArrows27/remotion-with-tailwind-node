@@ -1,3 +1,4 @@
+import { random } from "remotion";
 import { VIDEO_WIDTH } from "../../constants/constants";
 import { FrameTransitionTiming } from "../../types/content.type";
 import {
@@ -111,7 +112,10 @@ export const useFourImageFrameAnimationStyle2 = (
 export const useFourImageFrameAnimationStyle3 = (
   timingInFrame: FrameTransitionTiming,
   durationInFrames: number,
+  randomString: string,
 ) => {
+  // right side
+
   const { position: positionFirstRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
@@ -128,20 +132,24 @@ export const useFourImageFrameAnimationStyle3 = (
     VIDEO_WIDTH,
   );
 
+  // left side
+
+  const randomAnimation = Math.floor(random(randomString) * 2);
+
   const { position: positionThirdRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
-    -280,
+    randomAnimation === 0 ? -280 : VIDEO_WIDTH + 280,
     647,
-    VIDEO_WIDTH,
+    randomAnimation === 0 ? VIDEO_WIDTH : -280,
   );
 
   const { position: positionForthRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
-    -280,
+    randomAnimation === 0 ? -280 : VIDEO_WIDTH + 280,
     941,
-    VIDEO_WIDTH,
+    randomAnimation === 0 ? VIDEO_WIDTH : -280,
   );
 
   const { scale } = useImageScaleAnimation(timingInFrame, durationInFrames);
@@ -155,9 +163,10 @@ export const useFourImageFrameAnimationStyle3 = (
   };
 };
 
-export const useSixImageFrameAnimationStyle3 = (
+export const useSixImageFrameAnimationStyle = (
   timingInFrame: FrameTransitionTiming,
   durationInFrames: number,
+  randomString: string,
 ) => {
   const { position: positionFirstRow } = useImageMoveAnimation(
     timingInFrame,
@@ -183,28 +192,32 @@ export const useSixImageFrameAnimationStyle3 = (
     VIDEO_WIDTH,
   );
 
+  // down row
+
+  const randomAnimation = Math.floor(random(randomString) * 2);
+
   const { position: positionForthRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
-    VIDEO_WIDTH + 250,
+    randomAnimation === 0 ? VIDEO_WIDTH + 250 : -250,
     120,
-    -250,
+    randomAnimation === 0 ? -250 : VIDEO_WIDTH,
   );
 
   const { position: positionFifthRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
-    VIDEO_WIDTH + 500,
+    randomAnimation === 0 ? VIDEO_WIDTH + 500 : -500,
     390,
-    -500,
+    randomAnimation === 0 ? -500 : VIDEO_WIDTH,
   );
 
   const { position: positionSixthRow } = useImageMoveAnimation(
     timingInFrame,
     durationInFrames,
-    VIDEO_WIDTH + 250,
+    randomAnimation === 0 ? VIDEO_WIDTH + 250 : -250,
     910,
-    -250,
+    randomAnimation === 0 ? -250 : VIDEO_WIDTH,
   );
 
   const { scale } = useImageScaleAnimation(timingInFrame, durationInFrames);

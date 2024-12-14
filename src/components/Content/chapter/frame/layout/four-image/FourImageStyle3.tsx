@@ -8,6 +8,7 @@ const FourImageStyle3 = ({
   timingInFrame,
   chapterIndex,
   durationInFrames,
+  frameIndex,
 }: NormalImageProps) => {
   const images = videoFrame.images.slice(0, 4);
 
@@ -17,7 +18,11 @@ const FourImageStyle3 = ({
     positionForthRow,
     positionThirdRow,
     scale,
-  } = useFourImageFrameAnimationStyle3(timingInFrame, durationInFrames);
+  } = useFourImageFrameAnimationStyle3(
+    timingInFrame,
+    durationInFrames,
+    `random-animation--JSON-${JSON.stringify(videoFrame)}-chapter-${chapterIndex}-frame-${frameIndex}}`,
+  );
 
   return (
     <Layout chapterIndex={chapterIndex}>

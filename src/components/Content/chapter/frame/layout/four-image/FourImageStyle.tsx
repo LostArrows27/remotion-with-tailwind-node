@@ -12,7 +12,9 @@ const FourImageStyleMapping = ({
   durationInFrames,
 }: NormalImageProps) => {
   const index = Math.floor(
-    random(`four-image-chapter-${chapterIndex}-frame-${frameIndex}`) * 3,
+    random(
+      `four-image-chapter-${chapterIndex}-frame-${frameIndex}-JSON-${JSON.stringify(videoFrame)}`,
+    ) * 3,
   );
 
   switch (index) {

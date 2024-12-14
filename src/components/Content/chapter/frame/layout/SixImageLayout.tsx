@@ -1,13 +1,14 @@
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { NormalImageProps } from "../../../../../types/content.type";
 import { Layout } from "./NormalImageLayout";
-import { useSixImageFrameAnimationStyle3 } from "../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useSixImageFrameAnimationStyle } from "../../../../../hooks/frame-animation/use-image-frame-animation";
 
 const SixImageLayout = ({
   frame: videoFrame,
   timingInFrame,
   chapterIndex,
   durationInFrames,
+  frameIndex,
 }: NormalImageProps) => {
   const images = videoFrame.images.slice(0, 6);
 
@@ -19,7 +20,11 @@ const SixImageLayout = ({
     positionFifthRow,
     positionSixthRow,
     scale,
-  } = useSixImageFrameAnimationStyle3(timingInFrame, durationInFrames);
+  } = useSixImageFrameAnimationStyle(
+    timingInFrame,
+    durationInFrames,
+    `random-animation--JSON-${JSON.stringify(videoFrame)}-chapter-${chapterIndex}-frame-${frameIndex}}`,
+  );
 
   return (
     <Layout chapterIndex={chapterIndex}>
