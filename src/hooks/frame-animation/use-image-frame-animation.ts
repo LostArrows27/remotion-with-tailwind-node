@@ -163,6 +163,97 @@ export const useFourImageFrameAnimationStyle3 = (
   };
 };
 
+export const useFiveImageFrameAnimationStyle1 = (
+  timingInFrame: FrameTransitionTiming,
+  durationInFrames: number,
+) => {
+  const { position: positionFirstCol } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -320,
+    120,
+    VIDEO_WIDTH,
+  );
+
+  const { position: positionSecondCol } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -360,
+    460,
+    VIDEO_WIDTH,
+  );
+
+  const { position: positionThirdCol } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -320,
+    840,
+    VIDEO_WIDTH,
+  );
+
+  const { scale } = useImageScaleAnimation(timingInFrame, durationInFrames);
+
+  return {
+    positionFirstCol,
+    positionSecondCol,
+    positionThirdCol,
+    scale,
+  };
+};
+
+export const useFiveImageFrameAnimationStyle2 = (
+  timingInFrame: FrameTransitionTiming,
+  durationInFrames: number,
+  randomString: string,
+) => {
+  const randomAnimation = Math.floor(random(randomString) * 2);
+
+  // first col - up
+  const { position: positionFirstEle } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -680,
+    120,
+    randomAnimation === 0 ? -680 : VIDEO_WIDTH,
+  );
+
+  // first col - down
+  const { position: positionSecondEle } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -330,
+    120,
+    randomAnimation === 0 ? -330 : VIDEO_WIDTH,
+  );
+
+  const { position: positionThirdEle } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    -330,
+    470,
+    randomAnimation === 0 ? -330 : VIDEO_WIDTH,
+  );
+
+  // second col
+  const { position: positionForthEle } = useImageMoveAnimation(
+    timingInFrame,
+    durationInFrames,
+    randomAnimation === 0 ? VIDEO_WIDTH + 820 : -340,
+    820,
+    VIDEO_WIDTH,
+  );
+
+  const { scale } = useImageScaleAnimation(timingInFrame, durationInFrames);
+
+  return {
+    positionFirstEle,
+    positionSecondEle,
+    positionThirdEle,
+    positionForthEle,
+    scale,
+  };
+};
+
 export const useSixImageFrameAnimationStyle = (
   timingInFrame: FrameTransitionTiming,
   durationInFrames: number,

@@ -45,7 +45,7 @@ const FourImageStyle2 = ({
               style={{
                 transform: `scale(${scale})`,
               }}
-              className="object-cover object-center  rounded-[28px]"
+              className="object-cover object-center w-full h-full rounded-[28px]"
             />
           </div>
           <div className="h-1/2 w-full overflow-hidden rounded-[28px]">
@@ -54,7 +54,7 @@ const FourImageStyle2 = ({
               style={{
                 transform: `scale(${scale})`,
               }}
-              className="object-cover object-center  rounded-[28px]"
+              className="object-cover object-center w-full h-full rounded-[28px]"
             />
           </div>
         </div>

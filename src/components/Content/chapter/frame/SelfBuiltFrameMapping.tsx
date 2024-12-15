@@ -1,4 +1,5 @@
 import { SelfBuiltFrameProps } from "../../../../types/content.type";
+import FiveImageLayoutMapping from "./layout/five-image/FiveImageLayoutMapping";
 import FourImageStyleMapping from "./layout/four-image/FourImageStyle";
 import { OneImageLayout } from "./layout/OneImageLayout";
 import SixImageLayout from "./layout/SixImageLayout";
@@ -8,6 +9,8 @@ import TwoImageLayout from "./layout/TwoImageLayout";
 // TODO: custom event / activity frames
 // 1. event frame -> instagram
 // 2. activity frame -> normal frame
+
+// NOTE: keyword for UI layout -> "n photo collage"
 
 const SelfBuiltFrameMapping = ({
   frame,
@@ -61,7 +64,7 @@ const SelfBuiltFrameMapping = ({
       );
     case 5:
       return (
-        <FourImageStyleMapping
+        <FiveImageLayoutMapping
           frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}

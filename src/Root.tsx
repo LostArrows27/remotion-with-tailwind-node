@@ -27,6 +27,8 @@ import {
 } from "./utils/calculate-video-timeline";
 
 // TODO: read input from nodejs -> parse in
+
+// NOTE: can random by time render -> more random:))
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,
 }) => {
