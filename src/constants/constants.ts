@@ -60,6 +60,14 @@ export const MULTI_IMAGE_FRAME_DURATION = 5 * VIDEO_FPS;
 export const ONE_IMAGE_FRAME_TRANSITION_DURATION = 1.5 * VIDEO_FPS;
 export const ONE_IMAGE_TRANSITION_DELAY = FRAME_TRANSITION_TIME / 2;
 
+export const builtInPath = "/images/content/built_in_frame/";
+
+// built in frame
+export const BUILT_IN_SINGLE_FRAME_DURATION = 2.5 * VIDEO_FPS;
+export const BUILT_IN_MULTI_FRAME_DURATION = 3 * VIDEO_FPS;
+
+export const BUILT_IN_FADE_IN_TIME = 0.8 * VIDEO_FPS;
+
 // outro
 export const OUTRO_SCENE_LENGTH = 5 * VIDEO_FPS;
 export const OUTRO_FADE_TIME = 2 * VIDEO_FPS;

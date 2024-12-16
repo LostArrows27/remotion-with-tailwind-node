@@ -42,8 +42,10 @@ export type FrameTransitionTiming = {
 
 export type SelfBuiltFrameProps = Omit<FrameMappingProps, "type">;
 
-export type RemotionTransitionProps = {
-  frame: Frame; // NOTE: will add timingInFrame if needed:v
+export type BuiltInTransitionProps = Omit<FrameMappingProps, "type">;
+
+export type BuiltInTransitionLayoutProps = {
+  children: React.ReactNode;
 };
 
 export type NormalImageProps = SelfBuiltFrameProps;

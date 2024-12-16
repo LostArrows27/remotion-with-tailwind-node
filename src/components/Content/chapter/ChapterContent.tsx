@@ -1,5 +1,5 @@
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
-import { slide, SlideDirection } from "@remotion/transitions/slide";
+import { slide } from "@remotion/transitions/slide";
 import {
   CHAPTER_TRANSITION_TIME,
   FRAME_TRANSITION_TIME,
@@ -10,6 +10,7 @@ import { calculateFrameDuration } from "../../../utils/calculate-video-timeline"
 import { ChapterContentProps } from "../../../types/content.type";
 import { none } from "@remotion/transitions/none";
 import FrameMapping from "./frame/FrameMapping";
+import { Easing } from "remotion";
 
 const ChapterContent = ({
   frames,
@@ -29,7 +30,7 @@ const ChapterContent = ({
           index === frames.length - 1 ? CHAPTER_TRANSITION_TIME : 0;
 
         const frameTotalDuration =
-          calculateFrameDuration(frame, index, frames.length) +
+          calculateFrameDuration(frame, index, frames.length, transition) +
           firstChapterAdditionalTime +
           lastChapterAdditionalTime;
 
@@ -78,11 +79,15 @@ const ChapterContent = ({
                   transitionType === "self-built"
                     ? none()
                     : slide({
-                        direction: transition.in as SlideDirection,
+                        direction: "from-right",
                       })
                 }
                 timing={linearTiming({
                   durationInFrames: FRAME_TRANSITION_TIME,
+                  easing:
+                    transitionType === "self-built"
+                      ? undefined
+                      : Easing.out(Easing.cubic),
                 })}
               />
             )}

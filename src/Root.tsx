@@ -28,6 +28,8 @@ import {
 
 // TODO: read input from nodejs -> parse in
 
+// TODO: can optimize render time -> adjust minimum passing props to child component
+
 // NOTE: can random by time render -> more random:))
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
   props,

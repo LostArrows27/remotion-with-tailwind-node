@@ -1,5 +1,5 @@
 import { FrameMappingProps } from "../../../../types/content.type";
-import RemotionTransitionFrame from "./RemotionTransitionFrame";
+import RemotionTransitionFrameMapping from "./RemotionTransitionFrameMapping";
 import SelfBuiltFrameMapping from "./SelfBuiltFrameMapping";
 
 // TODO: add location style la
@@ -14,7 +14,15 @@ const FrameMapping = ({
 }: FrameMappingProps) => {
   switch (type) {
     case "remotion-transitions":
-      return <RemotionTransitionFrame frame={frame} />;
+      return (
+        <RemotionTransitionFrameMapping
+          frameIndex={frameIndex}
+          durationInFrames={durationInFrames}
+          timingInFrame={timingInFrame}
+          chapterIndex={chapterIndex}
+          frame={frame}
+        />
+      );
     case "self-built":
       return (
         <SelfBuiltFrameMapping
@@ -27,7 +35,8 @@ const FrameMapping = ({
       );
     default:
       return (
-        <SelfBuiltFrameMapping
+        <RemotionTransitionFrameMapping
+          // TODO: turn to self-built after done building built-in
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}

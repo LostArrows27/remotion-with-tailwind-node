@@ -7,7 +7,7 @@ import {
 } from "remotion";
 import { ChapterStyleProps } from "../../../../types/content.type";
 import { loadFont } from "@remotion/google-fonts/AmaticSC";
-import { loadFont as loadTitleFont } from "@remotion/google-fonts/DancingScript";
+import { loadFont as loadTitleFont } from "@remotion/google-fonts/Itim";
 import { FIRST_CHAPTER_IN_TRANSITION_TIME } from "../../../../constants/constants";
 
 // TODO: add AI title or based-case title

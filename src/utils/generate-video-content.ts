@@ -30,7 +30,8 @@ import { getGroupByLabel } from "./label-helpers";
 
 // NOTE: slice to auto have self-built type -> remove remotion-type
 export const chooseRandomTransition = () => {
-  const transitionEffectsNew = transitionEffects.slice(0, 2);
+  const transitionEffectsNew = transitionEffects.slice(2);
+  // .slice(0, 2);
 
   return transitionEffectsNew[
     Math.floor(random(null) * transitionEffectsNew.length)

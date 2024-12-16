@@ -1,4 +1,6 @@
 import {
+  BUILT_IN_MULTI_FRAME_DURATION,
+  BUILT_IN_SINGLE_FRAME_DURATION,
   CHAPTER_TRANSITION_TIME,
   FRAME_TRANSITION_TIME,
   MULTI_IMAGE_FRAME_DURATION,
@@ -6,7 +8,12 @@ import {
   TITLE_FRAME_DURATION,
   TITLE_TRANSITION_TIME,
 } from "../constants/constants";
-import { ChapterWithDuration, Frame, ImageJSON } from "../types/frame.type";
+import {
+  ChapterWithDuration,
+  Frame,
+  ImageJSON,
+  Transition,
+} from "../types/frame.type";
 import { generateVideoContent } from "./generate-video-content";
 
 // called transition time = b
@@ -30,7 +37,10 @@ export const calculateVideoTimeline = (
 
   // NOTE: slide "chapters" if w  anna test with fewer chaps
   const newChapters = chapters.map((chapter, index) => {
-    const framesTotalDuration = calculateTotalFrameDuration(chapter.frame);
+    const framesTotalDuration = calculateTotalFrameDuration(
+      chapter.frame,
+      chapter.transition,
+    );
 
     const chapterTotalDuration = calculateChapterDuration(
       framesTotalDuration,
@@ -79,10 +89,21 @@ export const calculateChapterDuration = (
   return totalDuration;
 };
 
-export const calculateTotalFrameDuration = (frames: Frame[]) => {
+export const calculateTotalFrameDuration = (
+  frames: Frame[],
+  chapterTransitionType: Transition,
+) => {
   const chapterTotalFrameDuration =
     frames.reduce((acc, frame, frameIndex) => {
-      return acc + calculateFrameDuration(frame, frameIndex, frames.length);
+      return (
+        acc +
+        calculateFrameDuration(
+          frame,
+          frameIndex,
+          frames.length,
+          chapterTransitionType,
+        )
+      );
     }, 0) -
     FRAME_TRANSITION_TIME * (frames.length - 1);
 
@@ -93,19 +114,32 @@ export const calculateFrameDuration = (
   frame: Frame,
   index: number,
   total: number,
+  chapterTransitionType: Transition,
 ) => {
   if (total === 1 && frame.type === "single") {
-    return SINGLE_IMAGE_FRAME_DURATION;
+    if (chapterTransitionType.type === "self-built") {
+      return SINGLE_IMAGE_FRAME_DURATION;
+    }
+
+    return BUILT_IN_SINGLE_FRAME_DURATION;
   }
 
   if (total === 1 && frame.type === "multi") {
-    return MULTI_IMAGE_FRAME_DURATION;
+    if (chapterTransitionType.type === "self-built") {
+      return MULTI_IMAGE_FRAME_DURATION;
+    }
+
+    return BUILT_IN_MULTI_FRAME_DURATION;
   }
 
   const frameDuration =
-    frame.type === "single"
-      ? SINGLE_IMAGE_FRAME_DURATION
-      : MULTI_IMAGE_FRAME_DURATION;
+    chapterTransitionType.type === "self-built"
+      ? frame.type === "single"
+        ? SINGLE_IMAGE_FRAME_DURATION
+        : MULTI_IMAGE_FRAME_DURATION
+      : frame.type === "single"
+        ? BUILT_IN_SINGLE_FRAME_DURATION
+        : BUILT_IN_MULTI_FRAME_DURATION;
 
   const additionalTime =
     index === 0 || index === total - 1
