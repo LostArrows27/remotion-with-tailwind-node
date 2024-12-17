@@ -1,6 +1,7 @@
 import OneImageBuiltInFrame from "./built-in-frame/OneImageBuiltInFrame";
 import { BuiltInTransitionProps } from "../../../../types/content.type";
 import TwoImageBuiltInTransition from "./built-in-frame/TwoImageBuiltInFrame";
+import ThreeImageBuiltInFrame from "./built-in-frame/ThreeImageBuiltInFrame";
 
 /* NOTE:
 - 1 image -> 1 frame H
@@ -45,7 +46,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 3:
       return (
-        <TwoImageBuiltInTransition
+        <ThreeImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -56,7 +57,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 4:
       return (
-        <TwoImageBuiltInTransition
+        <ThreeImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -67,7 +68,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 5:
       return (
-        <TwoImageBuiltInTransition
+        <ThreeImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -78,7 +79,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 6:
       return (
-        <TwoImageBuiltInTransition
+        <ThreeImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -89,7 +90,7 @@ const RemotionTransitionFrameMapping = ({
 
     default:
       return (
-        <TwoImageBuiltInTransition
+        <ThreeImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}

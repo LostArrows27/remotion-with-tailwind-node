@@ -18,7 +18,7 @@ const OneImageBuiltInFrame = ({
     useOneImageBuiltInFrameAnimation(timingInFrame);
 
   return (
-    <BuiltInLayout>
+    <BuiltInLayout bg="light">
       <AbsoluteFill>
         {/* image layer */}
         <AbsoluteFill>
@@ -28,12 +28,12 @@ const OneImageBuiltInFrame = ({
             }}
             className="absolute flex top-[15%]"
           >
-            <div className="w-[620px] relative aspect-[800/523]">
-              <Img
+            <div className="w-[620px] bg-slate-800 relative aspect-[800/523]">
+              {/* <Img
                 className="absolute object-cover object-center w-full h-full"
-                src={staticFile(builtInPath + "note_cut.png")}
-              />
-              <div className="absolute center text-center flex-col w-full h-full py-[70px] px-[90px]">
+                src={staticFile(builtInPath + "bg_dark.png")}
+              /> */}
+              <div className="absolute center text-white text-center flex-col w-full h-full py-[70px] px-[90px]">
                 <h1 style={{ fontFamily }} className="mb-10 text-5xl font-bold">
                   This is our caption. Replace later
                 </h1>

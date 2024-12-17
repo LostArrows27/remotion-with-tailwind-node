@@ -107,3 +107,72 @@ export const useTwoImageBuiltInFrameAnimation = (
     moveUpNote,
   };
 };
+
+export const useThreeImageBuiltInFrameAnimation = (
+  timingInFrame: FrameTransitionTiming,
+) => {
+  const frame = useCurrentFrame();
+
+  const moveUpNote = interpolate(
+    frame,
+    [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 16],
+
+    [-400, -400, 0],
+    {
+      extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+    },
+  );
+
+  const rotateImage = interpolate(
+    frame,
+    [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 16],
+    [-50, -50, 5],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
+
+  const opacity = interpolate(
+    frame,
+    [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 16],
+    [0, 0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
+
+  const goDown = interpolate(
+    frame,
+    [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 16],
+    [-50, -50, 80],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
+
+  const starOpacity = interpolate(
+    frame,
+    [
+      0,
+      timingInFrame.in + BUILT_IN_FADE_IN_TIME - 18,
+      timingInFrame.in + BUILT_IN_FADE_IN_TIME - 18 + 1,
+    ],
+    [0, 0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
+
+  return {
+    moveUpNote,
+    starOpacity,
+    rotateImage,
+    opacity,
+    goDown,
+  };
+};

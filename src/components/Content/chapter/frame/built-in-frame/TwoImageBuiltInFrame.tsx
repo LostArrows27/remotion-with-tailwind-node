@@ -23,7 +23,7 @@ const TwoImageBuiltInFrame = ({
   const { moveUpNote } = useTwoImageBuiltInFrameAnimation(timingInFrame);
 
   return (
-    <BuiltInLayout>
+    <BuiltInLayout bg="dark">
       <AbsoluteFill>
         {/* image layer */}
         <AbsoluteFill>
