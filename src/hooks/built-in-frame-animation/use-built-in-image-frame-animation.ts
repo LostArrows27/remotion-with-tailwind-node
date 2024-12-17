@@ -1,4 +1,4 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 import { BUILT_IN_FADE_IN_TIME } from "../../constants/constants";
 import { FrameTransitionTiming } from "../../types/content.type";
 
@@ -14,6 +14,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
     },
   );
 
@@ -24,6 +25,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
     },
   );
 
@@ -35,6 +37,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
     },
   );
 
@@ -46,6 +49,31 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
+    },
+  );
+
+  const moveInImage = interpolate(
+    frame,
+    [0, timingInFrame.in - 10, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 10],
+    [-1240, -1240, 0],
+    {
+      extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
+    },
+  );
+
+  const yValue = 108.5;
+
+  const moveInImage2 = interpolate(
+    frame,
+    [0, timingInFrame.in - 10, timingInFrame.in + BUILT_IN_FADE_IN_TIME - 10],
+    [yValue, yValue, 0],
+    {
+      extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+      easing: Easing.out(Easing.sin),
     },
   );
 
@@ -54,6 +82,8 @@ export const useOneImageBuiltInFrameAnimation = (
     moveRight,
     moveDown,
     moveUp,
+    moveInImage,
+    moveInImage2,
   };
 };
 

@@ -17,7 +17,7 @@ const TwoImageBuiltInFrame = ({
 }: BuiltInTransitionProps) => {
   const images = videoFrame.images.slice(0, 2);
 
-  const { moveLeft, moveRight, moveDown, moveUp } =
+  const { moveLeft, moveRight, moveDown, moveUp, moveInImage, moveInImage2 } =
     useOneImageBuiltInFrameAnimation(timingInFrame);
 
   const { moveUpNote } = useTwoImageBuiltInFrameAnimation(timingInFrame);
@@ -27,7 +27,12 @@ const TwoImageBuiltInFrame = ({
       <AbsoluteFill>
         {/* image layer */}
         <AbsoluteFill>
-          <div className="absolute flex top-[15%] rotate-[-5deg]">
+          <div
+            style={{
+              transform: `translate(${moveInImage}px, ${moveInImage2}px) rotate(-5deg)`,
+            }}
+            className="absolute flex top-[15%]"
+          >
             <Img
               className="w-[620px] aspect-[800/523] object-center object-cover"
               src={staticFile(images[0].path)}
@@ -78,7 +83,7 @@ const TwoImageBuiltInFrame = ({
             className="-rotate-[5deg] absolute w-[360px] h-auto  left-[35%]"
             src={staticFile(builtInPath + "paper_3.png")}
           />
-          <div className="absolute w-[40px] aspect-square left-[50px]">
+          <div className="absolute w-[40px] aspect-square bottom-[100px] left-[50px]">
             <Gif
               width={50}
               loopBehavior="loop"
