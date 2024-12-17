@@ -2,6 +2,9 @@ import OneImageBuiltInFrame from "./built-in-frame/OneImageBuiltInFrame";
 import { BuiltInTransitionProps } from "../../../../types/content.type";
 import TwoImageBuiltInTransition from "./built-in-frame/TwoImageBuiltInFrame";
 import ThreeImageBuiltInFrame from "./built-in-frame/ThreeImageBuiltInFrame";
+import FourImageBuiltInFrame from "./built-in-frame/FourImageBuiltInFrame";
+import FourImageBuiltInFrameStyle1 from "./built-in-frame/FourImageBuiltInFrameStyle1";
+import SixImageBuiltInFrame from "./built-in-frame/SixImageBuiltInFrame";
 
 /* NOTE:
 - 1 image -> 1 frame H
@@ -11,6 +14,8 @@ import ThreeImageBuiltInFrame from "./built-in-frame/ThreeImageBuiltInFrame";
 - 5 image -> 3 frame H + 2 frame H / 3 frame H + 1 frame H + 1 frame H
 - 6 image -> 3 frame H + 3 frame H  
 */
+
+// TODO: add move layer before slide transition
 
 const RemotionTransitionFrameMapping = ({
   frame,
@@ -57,7 +62,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 4:
       return (
-        <ThreeImageBuiltInFrame
+        <FourImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -68,7 +73,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 5:
       return (
-        <ThreeImageBuiltInFrame
+        <FourImageBuiltInFrameStyle1
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -79,7 +84,7 @@ const RemotionTransitionFrameMapping = ({
 
     case 6:
       return (
-        <ThreeImageBuiltInFrame
+        <SixImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
@@ -90,7 +95,7 @@ const RemotionTransitionFrameMapping = ({
 
     default:
       return (
-        <ThreeImageBuiltInFrame
+        <SixImageBuiltInFrame
           frame={frame}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}

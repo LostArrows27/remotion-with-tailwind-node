@@ -1,8 +1,9 @@
+import { random } from "remotion";
 import { FrameMappingProps } from "../../../../types/content.type";
 import RemotionTransitionFrameMapping from "./RemotionTransitionFrameMapping";
 import SelfBuiltFrameMapping from "./SelfBuiltFrameMapping";
 
-// TODO: add location style la
+// TODO: add location style later
 
 const FrameMapping = ({
   type,
@@ -12,6 +13,12 @@ const FrameMapping = ({
   durationInFrames,
   frameIndex,
 }: FrameMappingProps) => {
+  const randomIndex = Math.floor(
+    random(
+      `random-frame-style-${JSON.stringify(frame)}-chapter-${chapterIndex}-frame-${frameIndex}`,
+    ) * 2,
+  );
+
   switch (type) {
     case "remotion-transitions":
       return (
@@ -34,9 +41,19 @@ const FrameMapping = ({
         />
       );
     default:
+      if (randomIndex === 0) {
+        return (
+          <RemotionTransitionFrameMapping
+            frameIndex={frameIndex}
+            durationInFrames={durationInFrames}
+            timingInFrame={timingInFrame}
+            chapterIndex={chapterIndex}
+            frame={frame}
+          />
+        );
+      }
       return (
-        <RemotionTransitionFrameMapping
-          // TODO: turn to self-built after done building built-in
+        <SelfBuiltFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}

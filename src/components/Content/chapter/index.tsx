@@ -11,10 +11,6 @@ import { VideoChapterProps } from "../../../types/content.type";
 import { chooseChapterTitleImage } from "../../../utils/choose-chapter-title-image";
 import { Easing } from "remotion";
 
-// TODO: handle animation based on
-// 1. self-built transition
-// 2. remotion-transitions
-
 // NOTE: every frame was added a transition time
 // 1. if no use remotion-transitions -> none() -> self built
 // 2. if use remotion-transitions -> exp: slide()

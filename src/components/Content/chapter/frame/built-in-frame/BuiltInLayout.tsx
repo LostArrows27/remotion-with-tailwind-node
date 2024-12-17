@@ -13,12 +13,14 @@ const BuiltInLayout = ({ children, bg }: BuiltInTransitionLayoutProps) => {
           )}
         />
       </AbsoluteFill>
-      <AbsoluteFill>
-        <Img
-          src={staticFile(`${builtInPath + "paper_white.png"}`)}
-          className="object-cover rotate-180 object-center w-[120%] max-w-[120%] min-w-[120%] h-auto -top-10"
-        />
-      </AbsoluteFill>
+      {bg === "light" && (
+        <AbsoluteFill>
+          <Img
+            src={staticFile(`${builtInPath + "paper_white.png"}`)}
+            className="object-cover rotate-180 object-center w-[120%] max-w-[120%] min-w-[120%] h-auto -top-10"
+          />
+        </AbsoluteFill>
+      )}
       <AbsoluteFill>{children}</AbsoluteFill>
     </AbsoluteFill>
   );

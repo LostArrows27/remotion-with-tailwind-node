@@ -11,11 +11,19 @@ const { fontFamily } = loadFont();
 const OneImageBuiltInFrame = ({
   frame: videoFrame,
   timingInFrame,
+  durationInFrames,
 }: BuiltInTransitionProps) => {
   const images = videoFrame.images.slice(0, 1);
 
-  const { moveLeft, moveRight, moveDown, moveUp, moveInImage, moveInImage2 } =
-    useOneImageBuiltInFrameAnimation(timingInFrame);
+  const {
+    moveLeft,
+    moveRight,
+    moveDown,
+    moveUp,
+    moveInImage,
+    moveInImage2,
+    scale,
+  } = useOneImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
 
   return (
     <BuiltInLayout bg="light">
@@ -49,14 +57,18 @@ const OneImageBuiltInFrame = ({
                 </div>
               </div>
             </div>
-            <Img
-              className="w-[620px] aspect-[800/523] object-center object-cover"
-              src={staticFile(images[0].path)}
-            />
+            <div className="w-[620px] overflow-hidden aspect-[800/523]">
+              <Img
+                style={{
+                  transform: `scale(${scale})`,
+                }}
+                className="object-cover object-center w-full h-full"
+                src={staticFile(images[0].path)}
+              />
+            </div>
           </div>
         </AbsoluteFill>
         {/* asset layer */}
-
         <AbsoluteFill>
           <div className="absolute flex top-[15%] rotate-[-5deg]">
             <Img

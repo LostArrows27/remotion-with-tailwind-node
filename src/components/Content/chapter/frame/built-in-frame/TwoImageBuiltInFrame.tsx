@@ -14,13 +14,17 @@ const { fontFamily } = loadFont();
 const TwoImageBuiltInFrame = ({
   frame: videoFrame,
   timingInFrame,
+  durationInFrames,
 }: BuiltInTransitionProps) => {
   const images = videoFrame.images.slice(0, 2);
 
   const { moveLeft, moveRight, moveDown, moveUp, moveInImage, moveInImage2 } =
-    useOneImageBuiltInFrameAnimation(timingInFrame);
+    useOneImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
 
-  const { moveUpNote } = useTwoImageBuiltInFrameAnimation(timingInFrame);
+  const { moveUpNote, scale } = useTwoImageBuiltInFrameAnimation(
+    timingInFrame,
+    durationInFrames,
+  );
 
   return (
     <BuiltInLayout bg="dark">
@@ -33,14 +37,24 @@ const TwoImageBuiltInFrame = ({
             }}
             className="absolute flex top-[15%]"
           >
-            <Img
-              className="w-[620px] aspect-[800/523] object-center object-cover"
-              src={staticFile(images[0].path)}
-            />
-            <Img
-              className="w-[620px] aspect-[800/523] object-center object-cover"
-              src={staticFile(images[1].path)}
-            />
+            <div className="w-[620px] aspect-[800/523] overflow-hidden">
+              <Img
+                style={{
+                  transform: `scale(${scale})`,
+                }}
+                className="object-cover object-center w-full h-full"
+                src={staticFile(images[0].path)}
+              />
+            </div>
+            <div className="w-[620px] aspect-[800/523] overflow-hidden">
+              <Img
+                style={{
+                  transform: `scale(${scale})`,
+                }}
+                className="object-cover object-center w-full h-full"
+                src={staticFile(images[1].path)}
+              />
+            </div>
           </div>
         </AbsoluteFill>
         {/* asset layer */}

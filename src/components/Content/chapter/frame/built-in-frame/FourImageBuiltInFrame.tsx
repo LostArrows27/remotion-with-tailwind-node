@@ -3,23 +3,30 @@ import { BuiltInTransitionProps } from "../../../../../types/content.type";
 import BuiltInLayout from "./BuiltInLayout";
 import { builtInPath } from "../../../../../constants/constants";
 import { Gif } from "@remotion/gif";
-import { useThreeImageBuiltInFrameAnimation } from "../../../../../hooks/built-in-frame-animation/use-built-in-image-frame-animation";
+import {
+  useFourImageBuiltInFrameAnimation,
+  useThreeImageBuiltInFrameAnimation,
+} from "../../../../../hooks/built-in-frame-animation/use-built-in-image-frame-animation";
 import { loadFont } from "@remotion/google-fonts/Itim";
 
 const { fontFamily } = loadFont();
 
-const ThreeImageBuiltInFrame = ({
+// NOTE: re-use 3 image layout:)
+const FourImageBuiltInFrame = ({
   frame: videoFrame,
   timingInFrame,
   durationInFrames,
 }: BuiltInTransitionProps) => {
-  const images = videoFrame.images.slice(0, 3);
+  const images = videoFrame.images.slice(0, 4);
 
   const { moveUpNote, goDown, rotateImage, opacity, starOpacity, scale } =
     useThreeImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
 
+  const { rotate, moveInLeft } =
+    useFourImageBuiltInFrameAnimation(timingInFrame);
+
   return (
-    <BuiltInLayout bg="dark">
+    <BuiltInLayout bg="light">
       {/* image layer */}
       <AbsoluteFill>
         <div
@@ -27,7 +34,7 @@ const ThreeImageBuiltInFrame = ({
             transform: `translateX(-50%) rotate(${rotateImage}deg)`,
             opacity,
           }}
-          className="absolute flex top-[15%] w-[1484px] aspect-[1600/431]  left-1/2"
+          className="absolute flex top-[15%] w-[1484px]  aspect-[1600/431]  left-1/2"
         >
           <div className="w-1/3 h-full overflow-hidden">
             <Img
@@ -65,12 +72,12 @@ const ThreeImageBuiltInFrame = ({
           style={{
             opacity: starOpacity,
           }}
-          className="absolute w-[40px] aspect-square top-[10%] right-[150px]"
+          className="absolute w-[60px] aspect-square top-[30%] right-[380px]"
         >
           <Gif
-            width={50}
+            width={80}
+            height={80}
             loopBehavior="loop"
-            fit="contain"
             src={staticFile(builtInPath + "star_few.gif")}
           />
         </div>
@@ -78,7 +85,7 @@ const ThreeImageBuiltInFrame = ({
           style={{
             opacity: starOpacity,
           }}
-          className="absolute w-[150px] aspect-[639/663] bottom-[160px] left-[220px] "
+          className="absolute w-[150px] aspect-[639/663] bottom-[300px] left-[260px] "
         >
           <Gif
             fit="contain"
@@ -120,7 +127,7 @@ const ThreeImageBuiltInFrame = ({
           style={{
             bottom: `${moveUpNote}px`,
           }}
-          className="absolute w-[350px] right-1/4 aspect-[800/572]"
+          className="absolute w-[350px] right-[20%] aspect-[800/572]"
         >
           <Img
             className="object-cover absolute -top-8 -left-8 object-center z-20 rotate-90 w-[100px] h-auto "
@@ -147,8 +154,41 @@ const ThreeImageBuiltInFrame = ({
           </div>
         </div>
       </AbsoluteFill>
+      {/* forth image layer */}
+      <AbsoluteFill>
+        <div
+          style={{
+            left: `${moveInLeft}px`,
+          }}
+          className="w-[470px] absolute aspect-[800/655] left-5 -bottom-20"
+        >
+          <div className="w-full h-full overflow-hidden">
+            <Img
+              style={{
+                transform: `scale(${scale})`,
+              }}
+              className="object-cover object-center w-full h-full"
+              src={staticFile(images[3].path)}
+            />
+          </div>
+          <Img
+            className="absolute z-[1] object-cover object-center top-0 w-full h-full"
+            src={staticFile(builtInPath + "1 frame white V.png")}
+          />
+        </div>
+      </AbsoluteFill>
+      <AbsoluteFill>
+        <Img
+          style={{
+            rotate: `${rotate}deg`,
+            transformOrigin: "0 0 ",
+          }}
+          className="absolute  z-[1] object-cover object-top -bottom-[95px] -left-[16%] w-[750px] h-auto"
+          src={staticFile(builtInPath + "paper_1.png")}
+        />
+      </AbsoluteFill>
     </BuiltInLayout>
   );
 };
 
-export default ThreeImageBuiltInFrame;
+export default FourImageBuiltInFrame;
