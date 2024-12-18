@@ -70,6 +70,9 @@ export const BUILT_IN_FADE_IN_TIME = 0.8 * VIDEO_FPS;
 
 export const BUILT_IN_ANIMATION_TIME = 0.7 * VIDEO_FPS;
 
+// content -> event title
+export const eventAssetPath = "/images/content/title_event/";
+
 // outro
 export const OUTRO_SCENE_LENGTH = 5 * VIDEO_FPS;
 export const OUTRO_FADE_TIME = 2 * VIDEO_FPS;

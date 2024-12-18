@@ -1,4 +1,9 @@
-import { ChapterWithDuration, Frame, Transition } from "./frame.type";
+import {
+  ChapterWithDuration,
+  Frame,
+  FrameCategory,
+  Transition,
+} from "./frame.type";
 
 // chapter props
 export type VideoChapterProps = ChapterWithDuration & {
@@ -11,12 +16,21 @@ export type ChapterTitleProps = {
   images: string[];
   index: number;
   titleStyle: number;
+  frameCategory: FrameCategory;
+  duration: number;
 };
 
 export type ChapterStyleProps = {
   title: string;
   images: string[];
   index: number;
+};
+
+export type EventTitleProps = {
+  title: string;
+  images: string[];
+  index: number;
+  duration: number;
 };
 
 export type ChapterContentProps = {
