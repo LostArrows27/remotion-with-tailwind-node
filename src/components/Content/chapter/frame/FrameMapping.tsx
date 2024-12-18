@@ -3,8 +3,6 @@ import { FrameMappingProps } from "../../../../types/content.type";
 import RemotionTransitionFrameMapping from "./RemotionTransitionFrameMapping";
 import SelfBuiltFrameMapping from "./SelfBuiltFrameMapping";
 
-// TODO: add location style later
-
 const FrameMapping = ({
   type,
   frame,
