@@ -1,4 +1,4 @@
-import { staticFile } from "remotion";
+import { random, staticFile } from "remotion";
 import InstagramPost from "../InstagramPost";
 import { usePostListScrollAnimation } from "../../../hooks/use-post-list-scroll-animation";
 
@@ -33,7 +33,10 @@ const VerticalPostsList = ({ images, direction }: VerticalPostsListProps) => {
             justifyContent: "center",
           }}
         >
-          <InstagramPost imageUrl={staticFile(image)} />
+          <InstagramPost
+            likes={Math.floor(random(image) * 1000) + 30}
+            imageUrl={staticFile(image)}
+          />
         </div>
       ))}
     </div>

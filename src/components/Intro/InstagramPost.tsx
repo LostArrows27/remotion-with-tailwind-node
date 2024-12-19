@@ -16,7 +16,7 @@ const InstagramPost = ({
   imageUrl,
   width = 160,
   height = (width * 10) / 7,
-  likes = Math.floor(random(imageUrl) * 1000) + 30,
+  likes = 30,
   heart = true,
   scale = 1,
 }: InstagramPostProps) => {
