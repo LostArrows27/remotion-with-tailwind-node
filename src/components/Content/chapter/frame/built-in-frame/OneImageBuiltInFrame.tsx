@@ -108,7 +108,7 @@ const OneImageBuiltInFrame = ({
             className="-rotate-[5deg] absolute w-[360px] h-auto  left-[35%]"
             src={staticFile(builtInPath + "paper_3.png")}
           />
-          <div className="absolute w-[40px] aspect-square bottom-[100px] left-[50px]">
+          <div className="absolute w-[40px] aspect-square bottom-[125px] left-[40px]">
             <Gif
               width={50}
               loopBehavior="loop"
@@ -116,7 +116,7 @@ const OneImageBuiltInFrame = ({
               src={staticFile(builtInPath + "star_few.gif")}
             />
           </div>
-          <div className="absolute w-[200px] aspect-[639/663] top-[10%] right-[300px]">
+          <div className="absolute w-[200px] aspect-[639/663] top-[9%] right-[300px]">
             <Gif
               fit="contain"
               loopBehavior="loop"

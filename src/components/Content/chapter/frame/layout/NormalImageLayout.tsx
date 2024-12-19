@@ -3,6 +3,7 @@ import { NormalImageLayoutProps } from "../../../../../types/content.type";
 import { randomColor } from "../../../../../utils/randomColor";
 import { loadFont } from "@remotion/google-fonts/Frijole";
 import { loadFont as loadTitleFont } from "@remotion/google-fonts/AmaticSC";
+import { Gif } from "@remotion/gif";
 
 // TODO: add animation
 
@@ -13,6 +14,7 @@ const { fontFamily } = loadFont();
 
 const { fontFamily: titleFontFamily } = loadTitleFont();
 
+// TODO: add location later
 export const Layout = ({ children, chapterIndex }: NormalImageLayoutProps) => {
   return (
     <AbsoluteFill>
@@ -29,9 +31,24 @@ export const Layout = ({ children, chapterIndex }: NormalImageLayoutProps) => {
           src={staticFile("/images/content/normal_frame/corner_1.png")}
         />
         <Img
-          className="absolute -bottom-[300px] -left-[200px] w-[650px] h-auto -rotate-[157deg]"
+          className="absolute -bottom-[300px] -left-[190px] w-[650px] h-auto -rotate-[157deg]"
           src={staticFile("/images/content/normal_frame/corner_2.png")}
         />
+        <div className="absolute bottom-[28px] left-3 w-[30px] aspect-[364/581]">
+          <Gif
+            width={30}
+            height={(30 * 581) / 364}
+            src={staticFile("/images/content/normal_frame/location.gif")}
+          />
+        </div>
+        <div
+          style={{
+            fontFamily: titleFontFamily,
+          }}
+          className="absolute text-3xl text-zinc-200 pr-2  w-[150px] h-[60px] bottom-2 left-14 text-left"
+        >
+          144 Ba Vì, Hà Nội
+        </div>
         <ChapterGraphic chapterIndex={chapterIndex} />
       </AbsoluteFill>
       <AbsoluteFill>
