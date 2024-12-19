@@ -2,16 +2,17 @@ import { Img, staticFile, useCurrentFrame } from "remotion";
 import { AbsoluteFill, interpolate } from "remotion";
 import { ChapterStyleProps } from "../../../../types/content.type";
 import { FIRST_CHAPTER_IN_TRANSITION_TIME } from "../../../../constants/constants";
-import { loadFont } from "@remotion/google-fonts/AmaticSC";
 import { loadFont as loadSubFont } from "@remotion/google-fonts/DancingScript";
+import { loadFont as loadTitleFont } from "@remotion/google-fonts/Itim";
+import { chooseLocationTitleNote } from "../../../../utils/choose-random-title-note";
 
 // TODO: add AI title or based-case title
 
-const { fontFamily } = loadFont();
-
 const { fontFamily: subFontFamily } = loadSubFont();
 
-const BeigeStyleTitle = ({ images, index }: ChapterStyleProps) => {
+const { fontFamily: titleFontFamily } = loadTitleFont();
+
+const BeigeStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
   const frame = useCurrentFrame();
 
   const opacity = interpolate(
@@ -47,15 +48,25 @@ const BeigeStyleTitle = ({ images, index }: ChapterStyleProps) => {
       </AbsoluteFill>
       <AbsoluteFill>
         <AbsoluteFill>
-          <div className="top-1/3 left-10 absolute w-[450px] center">
+          <div className="top-1/3 center flex-col left-10 absolute w-[450px] center">
             <h1
               style={{
                 fontFamily: subFontFamily,
               }}
-              className="text-7xl text-center leading-[1.5] uppercase text-[rgb(93,69,45)]"
+              className="text-6xl font-bold text-center leading-[1.5] uppercase text-[rgb(93,69,45)]"
             >
               Khu cắm trại
             </h1>
+            <div
+              style={{
+                fontFamily: titleFontFamily,
+              }}
+              className="text-2xl leading-normal italic mt-4 px-4 text-center text-[rgb(93,69,45)]"
+            >
+              {chooseLocationTitleNote(
+                `index-${index}-title-${title}-image-${JSON.stringify(images)}`,
+              )}
+            </div>
           </div>
         </AbsoluteFill>
         <AbsoluteFill>
@@ -116,14 +127,14 @@ const BeigeStyleTitle = ({ images, index }: ChapterStyleProps) => {
         <AbsoluteFill>
           <div
             style={{
-              fontFamily,
+              fontFamily: titleFontFamily,
             }}
             className="w-[550px] px-5 pl-10 items-center pb-5 flex absolute right-36 top-[64%] h-[130px]"
           >
-            <div className="mr-32 text-4xl text-[rgb(93,69,45)] font-bold">
+            <div className="mr-32 text-3xl text-[rgb(93,69,45)] font-medium">
               #camp_fire
             </div>
-            <div className="text-4xl font-bold text-[rgb(93,69,45)]">
+            <div className="text-3xl font-medium text-[rgb(93,69,45)]">
               #our_holiday
             </div>
           </div>

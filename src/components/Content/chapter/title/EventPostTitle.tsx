@@ -3,6 +3,7 @@ import { EventTitleProps } from "../../../../types/content.type";
 import { eventAssetPath } from "../../../../constants/constants";
 import { loadFont } from "@remotion/google-fonts/Itim";
 import { useImageScaleAnimation } from "../../../../hooks/use-image-scale-animation";
+import { chooseEventTitleNote } from "../../../../utils/choose-random-title-note";
 
 const { fontFamily } = loadFont();
 
@@ -45,11 +46,16 @@ const EventPostTitle = ({ images, index, duration }: EventTitleProps) => {
             </h1>
 
             <div className="mt-7 flex justify-between w-full">
-              {["event", "holiday", "special_chapter"].map((word, index2) => (
+              {["event", "holiday", "rewind", "chapter"].map((word, index2) => (
                 <span key={index2} className="text-xl">
                   #{word}
                 </span>
               ))}
+            </div>
+            <div className="mt-7 text-rose-500 underline-offset-4 w-full text-lg font-bold text-center underline">
+              {chooseEventTitleNote(
+                `event-${index}-duration-${duration}-image-${JSON.stringify(images)}`,
+              )}
             </div>
           </div>
         </div>

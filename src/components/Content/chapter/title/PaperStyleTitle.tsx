@@ -8,7 +8,11 @@ import {
 import { ChapterStyleProps } from "../../../../types/content.type";
 import { loadFont } from "@remotion/google-fonts/AmaticSC";
 import { loadFont as loadTitleFont } from "@remotion/google-fonts/Itim";
-import { FIRST_CHAPTER_IN_TRANSITION_TIME } from "../../../../constants/constants";
+import {
+  eventAssetPath,
+  FIRST_CHAPTER_IN_TRANSITION_TIME,
+} from "../../../../constants/constants";
+import { chooseLocationTitleNote } from "../../../../utils/choose-random-title-note";
 
 // TODO: add AI title or based-case title
 
@@ -16,7 +20,7 @@ const { fontFamily } = loadFont();
 
 const { fontFamily: titleFontFamily } = loadTitleFont();
 
-const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
+const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
   const frame = useCurrentFrame();
 
   const opacity = interpolate(
@@ -60,15 +64,15 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
           style={{
             fontFamily: titleFontFamily,
           }}
-          className="absolute leading-[1.3] text-7xl text-border-white text-center w-[400px]  text-[rgb(93,69,45)] top-[40%] left-4 uppercase"
+          className="absolute leading-[1.3] text-7xl text-border-white text-center w-[400px]  text-[rgb(93,69,45)] top-[29%] left-4 uppercase"
         >
           Khu cắm trại
         </h1>
         <h1
           style={{
-            fontFamily,
+            fontFamily: titleFontFamily,
           }}
-          className="absolute font-bold text-4xl text-center w-[400px]  top-[70%] left-4 uppercase"
+          className="absolute text-3xl text-center w-[400px]  top-[59%] left-4 uppercase"
         >
           {["outdoor", "campfire"].map((word, index) => (
             <span key={index} className="ml-7 text-[rgb(93,69,45)]">
@@ -76,6 +80,23 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
             </span>
           ))}
         </h1>
+        <div className="absolute z-[200] bottom-2 aspect-[7533/8000] w-[200px] left-20">
+          <Img
+            src={staticFile(eventAssetPath + "note_yellow.png")}
+            className="image-fit-full"
+          />
+          <h1
+            style={{
+              fontFamily: titleFontFamily,
+            }}
+            className="top-14 left-0 right-0 px-4 absolute w-[200px] text-center text-rose-500 text-xl font-medium"
+          >
+            P/S:{" "}
+            {chooseLocationTitleNote(
+              `title-${title}-index-${index}-image-${JSON.stringify(images)}`,
+            )}
+          </h1>
+        </div>
       </AbsoluteFill>
       <AbsoluteFill>
         <div className="absolute top-[15%] left-[35%] aspect-[800/655] w-[650px]">
@@ -108,7 +129,7 @@ const PaperStyleTitle = ({ images, index }: ChapterStyleProps) => {
               style={{
                 fontFamily,
               }}
-              className="-top-2 relative text-5xl text-center text-black"
+              className="-top-2 relative text-5xl font-bold text-center text-[rgb(93,69,45)]"
             >
               {`Chương ${index + 1}`}
             </h1>
