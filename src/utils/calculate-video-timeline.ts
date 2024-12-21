@@ -4,6 +4,7 @@ import {
   CHAPTER_TRANSITION_TIME,
   FRAME_TRANSITION_TIME,
   MULTI_IMAGE_FRAME_DURATION,
+  OUTRO_FADE_TIME,
   SINGLE_IMAGE_FRAME_DURATION,
   TITLE_FRAME_DURATION,
   TITLE_TRANSITION_TIME,
@@ -45,6 +46,7 @@ export const calculateVideoTimeline = (
     const chapterTotalDuration = calculateChapterDuration(
       framesTotalDuration,
       index,
+      chapters.length,
     );
 
     return {
@@ -71,6 +73,7 @@ export const calculateVideoDuration = (chapters: ChapterWithDuration[]) => {
 export const calculateChapterDuration = (
   framesTotalDuration: number,
   index: number,
+  total: number,
 ) => {
   // NOTE: every chap have in + out transition
   //       -> add chap trans time at begin + end of chap
@@ -81,7 +84,9 @@ export const calculateChapterDuration = (
     TITLE_TRANSITION_TIME;
 
   const contentDuration =
-    TITLE_TRANSITION_TIME + framesTotalDuration + CHAPTER_TRANSITION_TIME;
+    TITLE_TRANSITION_TIME +
+    framesTotalDuration +
+    (index === total - 1 ? OUTRO_FADE_TIME : CHAPTER_TRANSITION_TIME); // NOTE :last chapter faster fade out for outro appear
 
   const totalDuration =
     chapterDuration + contentDuration - TITLE_TRANSITION_TIME;

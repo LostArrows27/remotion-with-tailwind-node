@@ -40,6 +40,10 @@ export const compositionSchema = z.object({
   videoDate: z.date(),
   introScene: introSceneSchema,
   contentScene: contentSceneSchema,
+  outroScene: z.object({
+    image: z.array(z.string()),
+    caption: z.array(z.string()),
+  }),
   bgMusic: z.string(),
   bgVideo: z.object({
     src: z.string(),

@@ -74,6 +74,25 @@ export const BUILT_IN_ANIMATION_TIME = 0.7 * VIDEO_FPS;
 export const eventAssetPath = "/images/content/title_event/";
 
 // outro
-export const OUTRO_SCENE_LENGTH = 5 * VIDEO_FPS;
-export const OUTRO_FADE_TIME = 2 * VIDEO_FPS;
+export const OUTRO_FADE_TIME = VIDEO_FPS;
+export const OUTRO_PREV_PART_CONTENT_LENGTH = 0.5 * VIDEO_FPS;
+export const OUTRO_PREV_PART_TOTAL_LENGTH =
+  OUTRO_FADE_TIME + OUTRO_PREV_PART_CONTENT_LENGTH;
+
+export const OUTRO_SCENE_LENGTH = 8 * VIDEO_FPS;
 export const OUTRO_IDLE_TIME = 0.4 * VIDEO_FPS;
+export const OUTRO_MAIN_FADE_TIME = 0.5 * VIDEO_FPS;
+
+export const OUTRO_IMAGE_FRAME_FADE_TIME = 0.6 * VIDEO_FPS;
+export const OUTRO_IMAGE_FRAME_WAIT_TIME = 0.4 * VIDEO_FPS;
+
+export const OUTRO_CAPTION_APPEAR_TIME =
+  OUTRO_MAIN_FADE_TIME + OUTRO_IMAGE_FRAME_WAIT_TIME * 2;
+
+export const OUTRO_CAPTION_FADE_TIME = VIDEO_FPS;
+
+// outro -> animated caption
+export const OUTRO_FIRST_CAPTION_DELAY = VIDEO_FPS;
+export const OUTRO_SECOND_CAPTION_DELAY = 0.7 * VIDEO_FPS;
+
+export const outroAssetPath = "/images/outro/";

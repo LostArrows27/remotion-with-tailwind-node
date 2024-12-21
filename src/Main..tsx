@@ -1,15 +1,21 @@
+import { useVideoConfig } from "remotion";
+import { interpolate } from "remotion";
+import { Audio } from "remotion";
 import { Loop, OffthreadVideo, Series } from "remotion";
 import IntroScene from "./components/Intro";
 import OutroScene from "./components/Outro";
 import {
+  AUDIO_VOLUME,
+  INTRO_FADE_IN_TIME,
   INTRO_SCENE_LENGTH,
+  OUTRO_FADE_TIME,
+  OUTRO_IDLE_TIME,
   OUTRO_SCENE_LENGTH,
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
 } from "./constants/constants";
 import MainScene from "./components/Content";
 import { MainProps } from "./types/video.type";
-import AudioLoop from "./components/Main/AudioLoop";
 
 const MainVideo = ({
   contentLength,
@@ -19,8 +25,9 @@ const MainVideo = ({
   videoDate,
   contentScene,
   titleStyle,
+  outroScene,
 }: MainProps) => {
-  // const { durationInFrames } = useVideoConfig();
+  const { durationInFrames } = useVideoConfig();
 
   return (
     <>
@@ -35,12 +42,11 @@ const MainVideo = ({
         />
       </Loop>
       {/* NOTE: use this if perfomance down well (2:51 -> 2:41 :v) */}
-      {/* <Audio
+      <Audio
         loop
         loopVolumeCurveBehavior="extend"
-        src={bgMusic.src}
+        src={bgMusic}
         volume={(frame) =>
-          // fade out for last 2 seconds
           interpolate(
             frame,
             [
@@ -54,8 +60,8 @@ const MainVideo = ({
             { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
           )
         }
-      /> */}
-      <AudioLoop src={bgMusic} />
+      />
+      {/* <AudioLoop src={bgMusic} /> */}
       <Series>
         <Series.Sequence durationInFrames={INTRO_SCENE_LENGTH}>
           <IntroScene
@@ -70,7 +76,7 @@ const MainVideo = ({
           <MainScene titleStyle={titleStyle} data={contentScene} />
         </Series.Sequence>
         <Series.Sequence durationInFrames={OUTRO_SCENE_LENGTH}>
-          <OutroScene />
+          <OutroScene data={outroScene} />
         </Series.Sequence>
       </Series>
     </>

@@ -25,9 +25,7 @@ const AudioLoop = ({ src }: { src: string }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
-  return (
-    <Audio loop loopVolumeCurveBehavior="extend" src={src} volume={volume} />
-  );
+  return <Audio loop src={src} volume={volume} />;
 };
 
 export default AudioLoop;

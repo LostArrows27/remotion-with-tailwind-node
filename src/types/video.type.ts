@@ -14,3 +14,7 @@ export type ContentProps = {
 export type FirstIntroSceneProps = IntroProps["firstScene"];
 
 export type SecondIntroSceneProps = IntroProps["secondScene"];
+
+export type OutroProps = {
+  data: MainProps["outroScene"];
+};
