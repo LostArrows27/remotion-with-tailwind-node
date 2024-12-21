@@ -16,6 +16,7 @@ import { Gif } from "@remotion/gif";
 import { OutroProps } from "../../types/video.type";
 import OutroImageFrame from "./OutroImageFrame";
 import OutroAnimatedCaption from "./OutroAnimatedCaption";
+import { memo, useMemo } from "react";
 
 const OutroScene = ({ data }: OutroProps) => {
   const frame = useCurrentFrame();
@@ -35,6 +36,18 @@ const OutroScene = ({ data }: OutroProps) => {
     },
   );
 
+  const fadeGifPath = useMemo(
+    () => staticFile(outroAssetPath + "fade.gif"),
+    [],
+  );
+
+  const filmGifPath = useMemo(
+    () => staticFile(outroAssetPath + "film.gif"),
+    [],
+  );
+
+  const bgPath = useMemo(() => staticFile(outroAssetPath + "bg.jpg"), []);
+
   return (
     <>
       {frame >= OUTRO_SCENE_LENGTH - OUTRO_FADE_TIME && (
@@ -45,10 +58,7 @@ const OutroScene = ({ data }: OutroProps) => {
       <AbsoluteFill style={{ opacity: fade }}>
         {/* BG layer */}
         <AbsoluteFill>
-          <Img
-            className="image-fit-full"
-            src={staticFile(outroAssetPath + "bg.jpg")}
-          />
+          <Img className="image-fit-full" src={bgPath} />
         </AbsoluteFill>
         {/* Image layer */}
         <AbsoluteFill>
@@ -87,47 +97,47 @@ const OutroScene = ({ data }: OutroProps) => {
         <OutroAnimatedCaption captions={data.caption} />
         {/* fade layer */}
         <AbsoluteFill>
-          <div className="absolute w-[430px] aspect-[1080/1920] -top-4 left-0">
+          <div className="absolute w-[430px] h-[764.44px] -top-4 left-0">
             <Gif
               loopBehavior="loop"
               width={430}
-              height={(430 / 1080) * 1920}
-              src={staticFile(outroAssetPath + "fade.gif")}
+              height={(430 / 540) * 960}
+              src={fadeGifPath}
             />
           </div>
-          <div className="absolute rotate-180 w-[400px] aspect-[1080/1920] -top-4 left-[40%]">
+          <div className="absolute rotate-180 w-[400px] h-[711.11px] -top-4 left-[40%]">
             <Gif
               loopBehavior="loop"
               width={400}
-              height={(400 / 1080) * 1920}
-              src={staticFile(outroAssetPath + "fade.gif")}
+              height={(400 / 540) * 960}
+              src={fadeGifPath}
             />
           </div>
-          <div className="absolute rotate-180 w-[500px] aspect-[1080/1920] -top-4 -right-[20%]">
+          <div className="absolute rotate-180 w-[500px] h-[711.11px] -top-4 -right-[20%]">
             <Gif
               loopBehavior="loop"
               width={500}
-              height={(500 / 1080) * 1920}
-              src={staticFile(outroAssetPath + "fade.gif")}
+              height={(500 / 540) * 960}
+              src={fadeGifPath}
             />
           </div>
         </AbsoluteFill>
         {/* film */}
         <AbsoluteFill>
-          <div className="absolute w-[85px] aspect-[155/1885] top-1/2 -translate-y-[56.5%] left-0 -translate-x-1/2">
+          <div className="absolute w-[85px] aspect-[78/943] top-1/2 -translate-y-[56.5%] left-0 -translate-x-1/2">
             <Gif
               loopBehavior="loop"
               width={85}
-              height={(85 / 155) * 1885}
-              src={staticFile(outroAssetPath + "film.gif")}
+              height={(85 / 78) * 943}
+              src={filmGifPath}
             />
           </div>
-          <div className="absolute w-[85px] aspect-[155/1885] top-1/2 -translate-y-[56.5%] right-0 translate-x-1/2">
+          <div className="absolute w-[85px] aspect-[78/943] top-1/2 -translate-y-[56.5%] right-0 translate-x-1/2">
             <Gif
               loopBehavior="loop"
               width={85}
-              height={(85 / 155) * 1885}
-              src={staticFile(outroAssetPath + "film.gif")}
+              height={(85 / 78) * 943}
+              src={filmGifPath}
             />
           </div>
         </AbsoluteFill>
@@ -136,4 +146,4 @@ const OutroScene = ({ data }: OutroProps) => {
   );
 };
 
-export default OutroScene;
+export default memo(OutroScene);

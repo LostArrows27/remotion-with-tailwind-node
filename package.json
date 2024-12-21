@@ -7,16 +7,17 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@remotion/bundler": "^4.0.240",
+    "@remotion/bundler": "4.0.240",
     "@remotion/cli": "4.0.240",
     "@remotion/fonts": "4.0.240",
+    "@remotion/gif": "4.0.240",
     "@remotion/google-fonts": "4.0.240",
-    "@remotion/renderer": "^4.0.240",
+    "@remotion/renderer": "4.0.240",
     "@remotion/tailwind": "4.0.240",
     "@remotion/transitions": "4.0.240",
-    "@remotion/gif": "4.0.240",
     "lucide-react": "^0.461.0",
     "react-dom": "18.3.1",
+    "react-window": "^1.8.11",
     "remotion": "4.0.240",
     "remotion-animated": "^2.1.1",
     "zod": "^3.23.8"
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@remotion/eslint-config": "4.0.240",
     "@types/react": "18.3.1",
+    "@types/react-window": "^1.8.8",
     "@types/web": "0.0.166",
     "eslint": "8.56.0",
     "prettier": "3.3.3",

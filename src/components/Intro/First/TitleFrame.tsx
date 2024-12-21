@@ -2,7 +2,6 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { chooseIntroSubText } from "../../../utils/choose-intro-title";
 import { loadFont } from "@remotion/google-fonts/LexendDeca";
 import { loadFont as loadSubFont } from "@remotion/google-fonts/BalsamiqSans";
-import { TypeWriter } from "../TypeWritter";
 import useTitleFrameAnimation from "../../../hooks/use-title-frame-animation";
 import {
   SUBTEXT_DELAY_DURATION,
@@ -10,6 +9,8 @@ import {
   TITLE_FRAME_SCALE_DURATION,
   TYPE_WRITER_SPEED,
 } from "../../../constants/constants";
+import TypeWriter from "../TypeWriter";
+import { memo } from "react";
 
 const { fontFamily } = loadFont();
 const { fontFamily: subFontFamily } = loadSubFont();
@@ -73,4 +74,4 @@ const TitleFrame = ({ title, time }: TitleFrameProps) => {
   );
 };
 
-export default TitleFrame;
+export default memo(TitleFrame);

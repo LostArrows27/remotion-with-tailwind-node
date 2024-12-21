@@ -1,21 +1,10 @@
-import { useVideoConfig } from "remotion";
-import { interpolate } from "remotion";
-import { Audio } from "remotion";
-import { Loop, OffthreadVideo, Series } from "remotion";
+import { Series } from "remotion";
 import IntroScene from "./components/Intro";
 import OutroScene from "./components/Outro";
-import {
-  AUDIO_VOLUME,
-  INTRO_FADE_IN_TIME,
-  INTRO_SCENE_LENGTH,
-  OUTRO_FADE_TIME,
-  OUTRO_IDLE_TIME,
-  OUTRO_SCENE_LENGTH,
-  VIDEO_HEIGHT,
-  VIDEO_WIDTH,
-} from "./constants/constants";
+import { INTRO_SCENE_LENGTH, OUTRO_SCENE_LENGTH } from "./constants/constants";
 import MainScene from "./components/Content";
 import { MainProps } from "./types/video.type";
+import BackgroundMedia from "./components/Main/BackgroundMedia";
 
 const MainVideo = ({
   contentLength,
@@ -27,41 +16,9 @@ const MainVideo = ({
   titleStyle,
   outroScene,
 }: MainProps) => {
-  const { durationInFrames } = useVideoConfig();
-
   return (
     <>
-      <Loop durationInFrames={bgVideo.frameLength}>
-        <OffthreadVideo
-          muted
-          style={{
-            height: VIDEO_HEIGHT,
-            width: VIDEO_WIDTH,
-          }}
-          src={bgVideo.src}
-        />
-      </Loop>
-      {/* NOTE: use this if perfomance down well (2:51 -> 2:41 :v) */}
-      <Audio
-        loop
-        loopVolumeCurveBehavior="extend"
-        src={bgMusic}
-        volume={(frame) =>
-          interpolate(
-            frame,
-            [
-              0,
-              INTRO_FADE_IN_TIME,
-              durationInFrames - OUTRO_FADE_TIME - OUTRO_IDLE_TIME,
-              durationInFrames - OUTRO_IDLE_TIME,
-              durationInFrames,
-            ],
-            [0, AUDIO_VOLUME, AUDIO_VOLUME, 0, 0],
-            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-          )
-        }
-      />
-      {/* <AudioLoop src={bgMusic} /> */}
+      <BackgroundMedia bgMusic={bgMusic} bgVideo={bgVideo} />
       <Series>
         <Series.Sequence durationInFrames={INTRO_SCENE_LENGTH}>
           <IntroScene

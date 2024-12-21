@@ -1,5 +1,6 @@
 import { Heart } from "lucide-react";
-import { Img, random } from "remotion";
+import { memo } from "react";
+import { Img } from "remotion";
 
 type InstagramPostProps = {
   imageUrl: string;
@@ -82,4 +83,4 @@ const InstagramPost = ({
   );
 };
 
-export default InstagramPost;
+export default memo(InstagramPost);

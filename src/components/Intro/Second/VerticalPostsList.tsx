@@ -1,46 +1,80 @@
 import { random, staticFile } from "remotion";
 import InstagramPost from "../InstagramPost";
-import { usePostListScrollAnimation } from "../../../hooks/use-post-list-scroll-animation";
+import { memo, useMemo } from "react";
+import { FixedSizeList as List, ListChildComponentProps } from "react-window";
 
 type VerticalPostsListProps = {
   images: string[];
-  direction: "up" | "down";
+  translateY: string;
 };
 
-const VerticalPostsList = ({ images, direction }: VerticalPostsListProps) => {
-  const translateY = usePostListScrollAnimation(direction);
+const VerticalPostsList = ({ images, translateY }: VerticalPostsListProps) => {
+  const precomputedPosts = useMemo(
+    () =>
+      images.map((image) => ({
+        likes: Math.floor(random(image) * 1000) + 30,
+        imageUrl: staticFile(image),
+      })),
+    [images],
+  );
+
+  const renderItem = useMemo(
+    () =>
+      ({ index }: ListChildComponentProps) => {
+        const post = precomputedPosts[index];
+        return (
+          <div
+            key={post.imageUrl}
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              scrollbarWidth: "none",
+            }}
+            className="my-[10px]"
+          >
+            <InstagramPost likes={post.likes} imageUrl={post.imageUrl} />
+          </div>
+        );
+      },
+    [precomputedPosts],
+  );
 
   return (
-    <div
-      data-direction={direction}
+    // <div data-direction={direction}>
+    //   {/* {precomputedPosts.map((post, index) => (
+    //     <div
+    //       key={`${post.imageUrl}-${index}`}
+    //       style={{
+    //         width: "100%",
+    //         display: "flex",
+    //         justifyContent: "center",
+    //       }}
+    //     >
+    //       <InstagramPost likes={post.likes} imageUrl={post.imageUrl} />
+    //     </div>
+    //   ))} */}
+    // </div>
+    <List
+      height={window.innerHeight}
+      itemCount={precomputedPosts.length}
+      itemSize={200}
+      width="100%"
       style={{
         height: "100vh",
         overflowY: "visible",
+        overflow: "visible",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "10px",
         scrollbarWidth: "none",
         transform: translateY,
+        willChange: "transform",
       }}
     >
-      {images.map((image, index) => (
-        <div
-          key={index}
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <InstagramPost
-            likes={Math.floor(random(image) * 1000) + 30}
-            imageUrl={staticFile(image)}
-          />
-        </div>
-      ))}
-    </div>
+      {renderItem}
+    </List>
   );
 };
 
-export default VerticalPostsList;
+export default memo(VerticalPostsList);

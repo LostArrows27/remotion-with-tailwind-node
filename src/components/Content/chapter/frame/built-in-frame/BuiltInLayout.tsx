@@ -7,7 +7,11 @@ import { loadFont as loadTitleFont } from "@remotion/google-fonts/AmaticSC";
 const { fontFamily } = loadTitleFont();
 
 // TODO: add location if have later
-const BuiltInLayout = ({ children, bg }: BuiltInTransitionLayoutProps) => {
+const BuiltInLayout = ({
+  children,
+  bg,
+  imageNumber,
+}: BuiltInTransitionLayoutProps) => {
   return (
     <AbsoluteFill className="overflow-hidden">
       <AbsoluteFill>
@@ -47,7 +51,12 @@ const BuiltInLayout = ({ children, bg }: BuiltInTransitionLayoutProps) => {
             />
           </div>
         ) : (
-          <div className="-bottom-[250px] aspect-[800/582] w-[500px] -left-[230px] absolute">
+          <div
+            style={{
+              display: imageNumber === 4 ? "none" : "block", // NOTE: frame 4 images ugly -> remove:)
+            }}
+            className="-bottom-[250px] aspect-[800/582] w-[500px] -left-[230px] absolute"
+          >
             <div className="right-0 absolute h-full w-[270px] mt-10  gap-2 px-2 py-4 flex">
               <MapPin color="rgb(212,212,216)" size={30} />
               <p

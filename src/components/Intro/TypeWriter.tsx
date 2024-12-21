@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useCurrentFrame } from "remotion";
 import { TYPE_WRITER_SPEED } from "../../constants/constants";
 
@@ -7,7 +8,7 @@ type TypeWriterProps = {
   speed?: number;
 };
 
-export const TypeWriter = ({
+const TypeWriter = ({
   text,
   speed = TYPE_WRITER_SPEED,
   delayInframe = 0,
@@ -34,3 +35,5 @@ export const TypeWriter = ({
     </>
   );
 };
+
+export default memo(TypeWriter);

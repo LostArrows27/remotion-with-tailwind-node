@@ -27,7 +27,7 @@ const ThreeImageBuiltInFrame = ({
             transform: `translateX(-50%) rotate(${rotateImage}deg)`,
             opacity,
           }}
-          className="absolute flex top-[15%] w-[1484px] aspect-[1600/431]  left-1/2"
+          className="absolute flex top-[15%] w-[1484px] h-[399.7525]  left-1/2"
         >
           <div className="w-1/3 h-full overflow-hidden">
             <Img

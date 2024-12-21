@@ -61,6 +61,7 @@ export type BuiltInTransitionProps = Omit<FrameMappingProps, "type">;
 export type BuiltInTransitionLayoutProps = {
   children: React.ReactNode;
   bg: "light" | "dark";
+  imageNumber?: number;
 };
 
 export type NormalImageProps = SelfBuiltFrameProps;

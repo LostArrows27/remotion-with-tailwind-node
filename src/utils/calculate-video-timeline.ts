@@ -36,7 +36,7 @@ export const calculateVideoTimeline = (
 ): ChapterWithDuration[] => {
   const chapters = generateVideoContent(imageData);
 
-  // NOTE: slide "chapters" if w  anna test with fewer chaps
+  // NOTE: slide "chapters" if wanna test with fewer chaps
   const newChapters = chapters.map((chapter, index) => {
     const framesTotalDuration = calculateTotalFrameDuration(
       chapter.frame,

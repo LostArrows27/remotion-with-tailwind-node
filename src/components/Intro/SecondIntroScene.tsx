@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { AbsoluteFill } from "remotion";
 import { SecondIntroSceneProps } from "../../types/video.type";
 import VerticalPostsList from "./Second/VerticalPostsList";
@@ -5,6 +6,7 @@ import AnimatedCaption from "./Second/AnimatedCaption";
 import { usePostListFrameAnimation } from "../../hooks/use-post-list-frame-animation";
 import { useIntroSecondFrameAnimation } from "../../hooks/use-intro-second-frame-animation";
 import { duplicateImageInView } from "../../utils/duplicate-image-in-view";
+import { usePostListScrollAnimation } from "../../hooks/use-post-list-scroll-animation";
 
 // NOTE: 3 level scale
 // 1. -> 1.03
@@ -21,29 +23,40 @@ const SecondIntroScene = ({
 
   const { scale: postScale } = usePostListFrameAnimation();
 
-  const duplicateImages = duplicateImageInView(
-    images,
-    firstCaption,
-    secondCaption,
-    images.length,
+  const duplicateImages = useMemo(
+    () =>
+      duplicateImageInView(images, firstCaption, secondCaption, images.length),
+    [images, firstCaption, secondCaption],
   );
+
+  const containerStyle = useMemo(
+    () => ({
+      opacity,
+      transform: `scale(${scale})`,
+      willChange: "transform, opacity",
+    }),
+    [opacity, scale],
+  );
+
+  const { up, down } = usePostListScrollAnimation();
 
   return (
     <AbsoluteFill
-      style={{ opacity, transform: `scale(${scale})` }}
+      style={containerStyle}
       className="!justify-center !items-center"
     >
       <AbsoluteFill
         className="!flex-row !w-[100%] !absolute center px-8 gap-4"
         style={{
           transform: `scale(${postScale})`,
+          willChange: "transform",
         }}
       >
         {duplicateImages.map((image, i) => (
           <VerticalPostsList
             key={i}
             images={image}
-            direction={i % 2 === 0 ? "up" : "down"}
+            translateY={i % 2 === 0 ? up : down}
           />
         ))}
       </AbsoluteFill>
@@ -62,4 +75,4 @@ const SecondIntroScene = ({
   );
 };
 
-export default SecondIntroScene;
+export default memo(SecondIntroScene);

@@ -4,6 +4,7 @@ import {
   IMAGE_FRAME_WIDTH,
 } from "../../constants/constants";
 import useImageFrameAnimation from "../../hooks/use-image-frame-animation";
+import { memo } from "react";
 
 type ImageFrameProps = {
   url: string;
@@ -50,4 +51,4 @@ const ImageFrame = ({
   );
 };
 
-export default ImageFrame;
+export default memo(ImageFrame);

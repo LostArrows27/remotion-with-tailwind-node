@@ -7,6 +7,7 @@ import { chooseEventTitleNote } from "../../../../utils/choose-random-title-note
 
 const { fontFamily } = loadFont();
 
+// TODO: add opacity for first chapter
 const EventPostTitle = ({ images, index, duration }: EventTitleProps) => {
   const newImageURL = images.map((image) =>
     staticFile(

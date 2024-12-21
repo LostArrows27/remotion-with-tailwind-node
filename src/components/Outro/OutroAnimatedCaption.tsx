@@ -10,6 +10,7 @@ import {
 
 import { loadFont } from "@remotion/google-fonts/Inter";
 import { Animated, Fade, Move } from "remotion-animated";
+import { memo } from "react";
 
 const { fontFamily } = loadFont();
 
@@ -34,13 +35,15 @@ const OutroAnimatedCaption = ({ captions }: OutroAnimatedCaptionProps) => {
     },
   );
 
+  const paperPath = staticFile(outroAssetPath + "paper.png");
+
   return (
     <AbsoluteFill>
       <div
         style={{
           opacity,
         }}
-        className="absolute overflow-hidden w-[570px] aspect-[1100/640] -left-[60px] top-1/2 -translate-y-1/2"
+        className="absolute overflow-hidden w-[570px] h-[331.636px] -left-[60px] top-1/2 -translate-y-1/2"
       >
         <div
           style={{
@@ -88,13 +91,10 @@ const OutroAnimatedCaption = ({ captions }: OutroAnimatedCaptionProps) => {
             </Animated>
           )}
         </div>
-        <Img
-          src={staticFile(outroAssetPath + "paper.png")}
-          className="image-fit-full"
-        />
+        <Img src={paperPath} className="image-fit-full" />
       </div>
     </AbsoluteFill>
   );
 };
 
-export default OutroAnimatedCaption;
+export default memo(OutroAnimatedCaption);

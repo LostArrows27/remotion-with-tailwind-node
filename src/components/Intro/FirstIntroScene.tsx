@@ -2,6 +2,7 @@ import { AbsoluteFill } from "remotion";
 import { FirstIntroSceneProps } from "../../types/video.type";
 import TitleFrame from "./First/TitleFrame";
 import ImageFrameLayer from "./First/ImageFramesLayer";
+import { memo } from "react";
 
 const FirstIntroScene = ({ title, time, images }: FirstIntroSceneProps) => {
   return (
@@ -12,4 +13,4 @@ const FirstIntroScene = ({ title, time, images }: FirstIntroSceneProps) => {
   );
 };
 
-export default FirstIntroScene;
+export default memo(FirstIntroScene);

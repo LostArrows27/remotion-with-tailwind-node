@@ -1,17 +1,7 @@
-import {
-  AbsoluteFill,
-  Img,
-  interpolate,
-  staticFile,
-  useCurrentFrame,
-} from "remotion";
+import { AbsoluteFill, Img, staticFile } from "remotion";
 import { ChapterStyleProps } from "../../../../types/content.type";
 import { loadFont } from "@remotion/google-fonts/AmaticSC";
 import { loadFont as loadTitleFont } from "@remotion/google-fonts/Itim";
-import {
-  eventAssetPath,
-  FIRST_CHAPTER_IN_TRANSITION_TIME,
-} from "../../../../constants/constants";
 import { chooseLocationTitleNote } from "../../../../utils/choose-random-title-note";
 
 // TODO: add AI title or based-case title
@@ -21,18 +11,6 @@ const { fontFamily } = loadFont();
 const { fontFamily: titleFontFamily } = loadTitleFont();
 
 const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
-  const frame = useCurrentFrame();
-
-  const opacity = interpolate(
-    frame,
-    [0, FIRST_CHAPTER_IN_TRANSITION_TIME],
-    [0, 1],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    },
-  );
-
   // TODO: remove local file later
 
   const newImageURL = images.map((image) =>
@@ -45,12 +23,7 @@ const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
   )[1];
 
   return (
-    <AbsoluteFill
-      style={{
-        opacity: index === 0 ? opacity : 1,
-      }}
-      className="overflow-hidden"
-    >
+    <AbsoluteFill className="overflow-hidden">
       <AbsoluteFill>
         <Img
           className="-left-20 absolute h-full"
@@ -58,13 +31,13 @@ const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
         />
         <Img
           className="left-[210px] top-4 absolute w-[200px] h-auto -rotate-45"
-          src={staticFile("/images/content/title/arrows-2.svg")}
+          src={staticFile("/images/content/title/arrows-2.png")}
         />
         <h1
           style={{
             fontFamily: titleFontFamily,
           }}
-          className="absolute leading-[1.3] text-7xl text-border-white text-center w-[400px]  text-[rgb(93,69,45)] top-[29%] left-4 uppercase"
+          className="absolute leading-[1.3] text-7xl text-center w-[400px]  text-[rgb(93,69,45)] top-[29%] left-4 uppercase"
         >
           Khu cắm trại
         </h1>
@@ -80,9 +53,9 @@ const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
             </span>
           ))}
         </h1>
-        <div className="absolute z-[200] bottom-2 aspect-[7533/8000] w-[200px] left-20">
+        <div className="absolute bottom-2 aspect-[236/250] w-[200px] left-20">
           <Img
-            src={staticFile(eventAssetPath + "note_yellow.png")}
+            src={staticFile("/images/content/title/note_yellow.png")}
             className="image-fit-full"
           />
           <h1
@@ -111,7 +84,7 @@ const PaperStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
           <Img
             src={staticFile("/images/content/title/tape.png")}
             className="z-[2] absolute -right-24 -top-12 rotate-[30deg]  object-cover w-[220px] h-auto"
-          />{" "}
+          />
           <Img
             src={staticFile("/images/content/title/tape.png")}
             className="z-[2] absolute -left-24 rotate-[30deg] -bottom-12 object-cover w-[220px] h-auto"

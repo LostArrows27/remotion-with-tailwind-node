@@ -14,7 +14,7 @@ import {
   INTRO_SECOND_SCENE_FADE_TIME,
 } from "../constants/constants";
 
-export const usePostListScrollAnimation = (direction: "up" | "down") => {
+export const usePostListScrollAnimation = () => {
   const frame = useCurrentFrame();
 
   const speed =
@@ -22,9 +22,8 @@ export const usePostListScrollAnimation = (direction: "up" | "down") => {
       ? INTRO_POST_SCROLL_SPEED
       : 20;
 
-  if (direction === "up") {
-    return `translateY(${INTRO_POST_SCROLL_DOWN_INIT + frame * speed}px)`;
-  }
-
-  return `translateY(-${frame * speed}px)`;
+  return {
+    up: `translateY(${INTRO_POST_SCROLL_DOWN_INIT + frame * speed}px)`,
+    down: `translateY(-${frame * speed}px)`,
+  };
 };

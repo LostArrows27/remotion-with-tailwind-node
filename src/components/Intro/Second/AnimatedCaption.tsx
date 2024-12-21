@@ -1,13 +1,14 @@
-import { spring, staticFile, useCurrentFrame } from "remotion";
+import { Img, staticFile, useCurrentFrame } from "remotion";
 import {
   INTRO_SECOND_SCENE_CAPTION_DURATION,
   INTRO_SECOND_SCENE_FADE_TIME,
   INTRO_SECOND_SCENE_LENGTH,
   INTRO_SECOND_SCENE_TRANSITION_TIME,
-  VIDEO_FPS,
 } from "../../../constants/constants";
 import { Animated, Fade, Move, Scale } from "remotion-animated";
 import { loadFont } from "@remotion/google-fonts/Inter";
+import SpringAnimationcaption from "./SpringAnimation";
+import { memo, useMemo } from "react";
 
 const { fontFamily } = loadFont();
 
@@ -25,13 +26,25 @@ const AnimatedCaption = ({
   const firstCaptionParts = firstCaption.split("\n");
   const secondCaptionParts = secondCaption.split("\n");
 
+  const bgImage = useMemo(
+    () => staticFile("/images/intro/second/paper_bg.jpg"),
+    [],
+  );
+
+  const memoizedFirstCaptionParts = useMemo(
+    () =>
+      firstCaptionParts.map((part, index) => (
+        <SpringAnimationcaption key={index} index={index} part={part} />
+      )),
+    [firstCaptionParts],
+  );
+
   return (
     <>
       <Animated
         style={{
           fontFamily,
-          display:
-            frame > INTRO_SECOND_SCENE_CAPTION_DURATION ? "none" : "block",
+          opacity: frame > INTRO_SECOND_SCENE_CAPTION_DURATION ? 0 : 1,
         }}
         className="absolute w-[80%]"
         delay={INTRO_SECOND_SCENE_TRANSITION_TIME}
@@ -48,34 +61,12 @@ const AnimatedCaption = ({
           }),
         ]}
       >
-        <h1
-          style={{
-            background: `url(${staticFile("/images/intro/second/paper_bg.jpg")})`,
-          }}
-          className="text-[50px] bg-cover bg-center rounded-lg uppercase bg-white w-full p-5 text-center font-bold text-blue-500"
-        >
-          {firstCaptionParts.map((part, index) => {
-            const delay = index * 5;
-
-            const scale = spring({
-              fps: VIDEO_FPS,
-              frame: frame - delay * 7,
-              config: {
-                damping: 150,
-              },
-            });
-
-            return (
-              <div
-                key={index}
-                style={{
-                  transform: `scale(${scale})`,
-                }}
-              >
-                {part}
-              </div>
-            );
-          })}
+        <h1 className="text-[50px] relative bg-cover bg-center rounded-lg uppercase bg-white w-full p-5 text-center font-bold text-blue-500">
+          <Img
+            src={bgImage}
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
+          />
+          {memoizedFirstCaptionParts}
         </h1>
       </Animated>
       <Animated
@@ -90,22 +81,27 @@ const AnimatedCaption = ({
       >
         <h1
           style={{
-            background: `url(${staticFile("/images/intro/second/paper_bg.jpg")})`,
-            display:
+            opacity:
               frame >= INTRO_SECOND_SCENE_CAPTION_DURATION - 5 &&
               frame <= INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
-                ? "block"
-                : "none",
+                ? 1
+                : 0,
           }}
-          className="text-[50px] bg-cover bg-center rounded-lg uppercase bg-white w-full p-5 text-center font-bold text-blue-500"
+          className="text-[50px] relative bg-cover bg-center rounded-lg uppercase bg-white w-full p-5 text-center font-bold text-blue-500"
         >
-          {secondCaptionParts.map((part, index) => {
-            return <div key={index}>{part}</div>;
-          })}
+          <Img
+            src={bgImage}
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
+          />
+          {secondCaptionParts.map((part, index) => (
+            <div key={index} className="scale-100">
+              {part}
+            </div>
+          ))}
         </h1>
       </Animated>
     </>
   );
 };
 
-export default AnimatedCaption;
+export default memo(AnimatedCaption);

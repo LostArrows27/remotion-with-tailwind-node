@@ -1,7 +1,6 @@
-import { Img, staticFile, useCurrentFrame } from "remotion";
-import { AbsoluteFill, interpolate } from "remotion";
+import { Img, staticFile } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { ChapterStyleProps } from "../../../../types/content.type";
-import { FIRST_CHAPTER_IN_TRANSITION_TIME } from "../../../../constants/constants";
 import { loadFont as loadSubFont } from "@remotion/google-fonts/DancingScript";
 import { loadFont as loadTitleFont } from "@remotion/google-fonts/Itim";
 import { chooseLocationTitleNote } from "../../../../utils/choose-random-title-note";
@@ -13,18 +12,6 @@ const { fontFamily: subFontFamily } = loadSubFont();
 const { fontFamily: titleFontFamily } = loadTitleFont();
 
 const BeigeStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
-  const frame = useCurrentFrame();
-
-  const opacity = interpolate(
-    frame,
-    [0, FIRST_CHAPTER_IN_TRANSITION_TIME],
-    [0, 1],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    },
-  );
-
   // TODO: remove local file later
   const newImageURL = images.map((image) =>
     staticFile(
@@ -39,9 +26,6 @@ const BeigeStyleTitle = ({ images, index, title }: ChapterStyleProps) => {
     <AbsoluteFill>
       <AbsoluteFill>
         <Img
-          style={{
-            opacity: index === 0 ? opacity : 1,
-          }}
           src={staticFile("/images/content/title_2/bg.jpg")}
           className="object-cover object-center w-full h-full"
         />
