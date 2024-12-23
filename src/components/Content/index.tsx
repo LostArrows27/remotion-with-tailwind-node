@@ -10,8 +10,13 @@ import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { Easing } from "remotion";
 import OutroPrevPast from "../Outro/OutroPrevPart";
+import { memo, useCallback } from "react";
 
 const MainScene = ({ data, titleStyle }: ContentProps) => {
+  const easingFunction = useCallback((t: number) => {
+    return Easing.inOut(Easing.poly(4))(t);
+  }, []);
+
   return (
     <TransitionSeries>
       {data.map((chapter, index) => {
@@ -24,7 +29,7 @@ const MainScene = ({ data, titleStyle }: ContentProps) => {
                 })}
                 timing={linearTiming({
                   durationInFrames: CHAPTER_TRANSITION_TIME,
-                  easing: Easing.inOut(Easing.poly(4)),
+                  easing: easingFunction,
                 })}
               />
             )}
@@ -48,7 +53,7 @@ const MainScene = ({ data, titleStyle }: ContentProps) => {
                   })}
                   timing={linearTiming({
                     durationInFrames: OUTRO_FADE_TIME,
-                    easing: Easing.inOut(Easing.poly(4)),
+                    easing: easingFunction,
                   })}
                 />
                 <TransitionSeries.Sequence
@@ -65,4 +70,4 @@ const MainScene = ({ data, titleStyle }: ContentProps) => {
   );
 };
 
-export default MainScene;
+export default memo(MainScene);

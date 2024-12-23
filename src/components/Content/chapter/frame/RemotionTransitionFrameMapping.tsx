@@ -5,6 +5,7 @@ import ThreeImageBuiltInFrame from "./built-in-frame/ThreeImageBuiltInFrame";
 import FourImageBuiltInFrame from "./built-in-frame/FourImageBuiltInFrame";
 import FourImageBuiltInFrameStyle1 from "./built-in-frame/FourImageBuiltInFrameStyle1";
 import SixImageBuiltInFrame from "./built-in-frame/SixImageBuiltInFrame";
+import { memo } from "react";
 
 /* NOTE:
 - 1 image -> 1 frame H
@@ -106,4 +107,4 @@ const RemotionTransitionFrameMapping = ({
   }
 };
 
-export default RemotionTransitionFrameMapping;
+export default memo(RemotionTransitionFrameMapping);

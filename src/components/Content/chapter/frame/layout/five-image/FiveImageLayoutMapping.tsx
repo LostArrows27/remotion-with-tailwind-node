@@ -19,7 +19,7 @@ const FiveImageLayoutMapping = ({
   switch (index) {
     case 1:
       return (
-        <FiveImageStyle2
+        <FiveImageStyle1
           frameIndex={frameIndex}
           timingInFrame={timingInFrame}
           durationInFrames={durationInFrames}

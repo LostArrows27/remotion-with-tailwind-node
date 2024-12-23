@@ -1,8 +1,10 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { BuiltInTransitionLayoutProps } from "../../../../../types/content.type";
 import { builtInPath } from "../../../../../constants/constants";
 import { MapPin } from "lucide-react";
 import { loadFont as loadTitleFont } from "@remotion/google-fonts/AmaticSC";
+import { useMemoAssetArray } from "../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const { fontFamily } = loadTitleFont();
 
@@ -12,20 +14,28 @@ const BuiltInLayout = ({
   bg,
   imageNumber,
 }: BuiltInTransitionLayoutProps) => {
+  const [bgPath, paperPath, yellowNotePath, blackNotePath] = useMemoAssetArray(
+    [
+      `bg${bg === "dark" ? "_dark" : ""}.png`,
+      "paper_white.png",
+      "yellow_note.png",
+      "black_note.png",
+    ],
+    builtInPath,
+  );
+
   return (
     <AbsoluteFill className="overflow-hidden">
       <AbsoluteFill>
         <Img
           className="object-cover object-center w-full h-full"
-          src={staticFile(
-            `${builtInPath}bg${bg === "dark" ? "_dark" : ""}.png`,
-          )}
+          src={bgPath}
         />
       </AbsoluteFill>
       {bg === "light" && (
         <AbsoluteFill>
           <Img
-            src={staticFile(`${builtInPath + "paper_white.png"}`)}
+            src={paperPath}
             className="object-cover rotate-180 object-center w-[120%] max-w-[120%] min-w-[120%] h-auto -top-10"
           />
         </AbsoluteFill>
@@ -33,7 +43,7 @@ const BuiltInLayout = ({
       <AbsoluteFill>{children}</AbsoluteFill>
       <AbsoluteFill>
         {bg === "dark" ? (
-          <div className="aspect-[800/130] absolute h-auto w-[500px] -left-[320px] -bottom-2">
+          <div className="h-[81.25px] absolute w-[500px] -left-[320px] -bottom-2">
             <div className="right-0 absolute h-full w-[180px] p-2 gap-1 flex items-center">
               <MapPin size={30} />
               <p
@@ -45,17 +55,14 @@ const BuiltInLayout = ({
                 144 Ba Vì, Hà Nội
               </p>
             </div>
-            <Img
-              className="image-fit-full"
-              src={staticFile(`${builtInPath}yellow_note.png`)}
-            />
+            <Img className="image-fit-full" src={yellowNotePath} />
           </div>
         ) : (
           <div
             style={{
               display: imageNumber === 4 ? "none" : "block", // NOTE: frame 4 images ugly -> remove:)
             }}
-            className="-bottom-[250px] aspect-[800/582] w-[500px] -left-[230px] absolute"
+            className="-bottom-[250px] h-[363.75px] w-[500px] -left-[230px] absolute"
           >
             <div className="right-0 absolute h-full w-[270px] mt-10  gap-2 px-2 py-4 flex">
               <MapPin color="rgb(212,212,216)" size={30} />
@@ -68,10 +75,7 @@ const BuiltInLayout = ({
                 144 Ba Vì, Hà Nội
               </p>
             </div>
-            <Img
-              className="image-fit-full"
-              src={staticFile(`${builtInPath}black_note.png`)}
-            />
+            <Img className="image-fit-full" src={blackNotePath} />
           </div>
         )}
       </AbsoluteFill>
@@ -79,4 +83,4 @@ const BuiltInLayout = ({
   );
 };
 
-export default BuiltInLayout;
+export default memo(BuiltInLayout);

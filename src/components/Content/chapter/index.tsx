@@ -10,6 +10,7 @@ import { slide } from "@remotion/transitions/slide";
 import { VideoChapterProps } from "../../../types/content.type";
 import { chooseChapterTitleImage } from "../../../utils/choose-chapter-title-image";
 import { Easing } from "remotion";
+import { memo, useCallback, useMemo } from "react";
 
 // NOTE: every frame was added a transition time
 // 1. if no use remotion-transitions -> none() -> self built
@@ -25,6 +26,18 @@ const VideoChapter = ({
   index,
   titleStyle,
 }: VideoChapterProps) => {
+  // NOTE: add dev if render error:)
+  const chapterTitleImages = useMemo(
+    () => chooseChapterTitleImage(frame, title, index, titleStyle),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const easingFunction = useCallback(
+    (t: number) => Easing.inOut(Easing.sin)(t),
+    [],
+  );
+
   const chapterTitleDuration =
     (index === 0 ? 0 : CHAPTER_TRANSITION_TIME) +
     TITLE_FRAME_DURATION +
@@ -41,7 +54,7 @@ const VideoChapter = ({
           titleStyle={titleStyle}
           title={title}
           frameCategory={frame[0].category}
-          images={chooseChapterTitleImage(frame, title, index, titleStyle)}
+          images={chapterTitleImages}
           duration={chapterTitleDuration}
         />
       </TransitionSeries.Sequence>
@@ -51,7 +64,7 @@ const VideoChapter = ({
         })}
         timing={linearTiming({
           durationInFrames: TITLE_TRANSITION_TIME,
-          easing: Easing.inOut(Easing.sin),
+          easing: easingFunction,
         })}
       />
       <TransitionSeries.Sequence durationInFrames={chapterContentDuration}>
@@ -65,4 +78,4 @@ const VideoChapter = ({
   );
 };
 
-export default VideoChapter;
+export default memo(VideoChapter);

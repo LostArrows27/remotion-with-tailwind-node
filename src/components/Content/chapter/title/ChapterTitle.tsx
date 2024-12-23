@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { ChapterTitleProps } from "../../../../types/content.type";
 import BeigeStyleTitle from "./BeigeStyleTitle";
 import EventPostTitle from "./EventPostTitle";
@@ -34,4 +35,4 @@ const ChapterTitle = ({
   }
 };
 
-export default ChapterTitle;
+export default memo(ChapterTitle);

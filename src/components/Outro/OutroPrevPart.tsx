@@ -1,14 +1,10 @@
-import {
-  AbsoluteFill,
-  Img,
-  interpolate,
-  staticFile,
-  useCurrentFrame,
-} from "remotion";
+import { AbsoluteFill, Img, interpolate, useCurrentFrame } from "remotion";
 import {
   OUTRO_PREV_PART_TOTAL_LENGTH,
   outroAssetPath,
 } from "../../constants/constants";
+import { memo } from "react";
+import { useMemoAssetPath } from "../../hooks/use-memo-asset-path";
 
 const OutroPrevPast = () => {
   const frame = useCurrentFrame();
@@ -17,16 +13,15 @@ const OutroPrevPast = () => {
     extrapolateLeft: "clamp",
   });
 
+  const bg = useMemoAssetPath(outroAssetPath + "bg.jpg");
+
   return (
     <AbsoluteFill style={{ opacity: fade }}>
       <AbsoluteFill>
-        <Img
-          className="image-fit-full"
-          src={staticFile(outroAssetPath + "bg.jpg")}
-        />
+        <Img className="image-fit-full" src={bg} />
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
 
-export default OutroPrevPast;
+export default memo(OutroPrevPast);

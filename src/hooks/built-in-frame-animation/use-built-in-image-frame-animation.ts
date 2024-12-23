@@ -1,12 +1,18 @@
 import { Easing, interpolate, useCurrentFrame } from "remotion";
 import { BUILT_IN_ANIMATION_TIME } from "../../constants/constants";
 import { FrameTransitionTiming } from "../../types/content.type";
+import { useCallback } from "react";
 
 export const useOneImageBuiltInFrameAnimation = (
   timingInFrame: FrameTransitionTiming,
   durationInFrames: number,
 ) => {
   const frame = useCurrentFrame();
+
+  const easingSinFunction = useCallback(
+    (t: number) => Easing.out(Easing.sin)(t),
+    [],
+  );
 
   const moveLeft = interpolate(
     frame,
@@ -15,7 +21,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -26,7 +32,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -38,7 +44,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -50,7 +56,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -61,7 +67,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -74,7 +80,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -85,7 +91,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -96,7 +102,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -107,7 +113,7 @@ export const useOneImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -130,6 +136,11 @@ export const useTwoImageBuiltInFrameAnimation = (
 ) => {
   const frame = useCurrentFrame();
 
+  const easingSinFunction = useCallback(
+    (t: number) => Easing.out(Easing.sin)(t),
+    [],
+  );
+
   const moveUpNote = interpolate(
     frame,
     [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_ANIMATION_TIME - 16],
@@ -148,7 +159,7 @@ export const useTwoImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -163,6 +174,11 @@ export const useThreeImageBuiltInFrameAnimation = (
   durationInFrames: number,
 ) => {
   const frame = useCurrentFrame();
+
+  const easingSinFunction = useCallback(
+    (t: number) => Easing.out(Easing.sin)(t),
+    [],
+  );
 
   const moveUpNote = interpolate(
     frame,
@@ -226,7 +242,7 @@ export const useThreeImageBuiltInFrameAnimation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -279,6 +295,11 @@ export const useFourImageBuiltInFrameStyle1Animation = (
 ) => {
   const frame = useCurrentFrame();
 
+  const easingSinFunction = useCallback(
+    (t: number) => Easing.out(Easing.sin)(t),
+    [],
+  );
+
   const moveUp = interpolate(
     frame,
     [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_ANIMATION_TIME - 16],
@@ -287,7 +308,7 @@ export const useFourImageBuiltInFrameStyle1Animation = (
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -299,7 +320,7 @@ export const useFourImageBuiltInFrameStyle1Animation = (
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -311,7 +332,7 @@ export const useFourImageBuiltInFrameStyle1Animation = (
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -337,7 +358,7 @@ export const useFourImageBuiltInFrameStyle1Animation = (
     {
       extrapolateRight: "clamp",
       extrapolateLeft: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -363,6 +384,11 @@ export const useSixImageBuiltInFrameAnimation = (
 ) => {
   const frame = useCurrentFrame();
 
+  const easingSinFunction = useCallback(
+    (t: number) => Easing.out(Easing.sin)(t),
+    [],
+  );
+
   const moveInLeft1 = interpolate(
     frame,
     [0, timingInFrame.in - 16, timingInFrame.in + BUILT_IN_ANIMATION_TIME - 16],
@@ -371,7 +397,7 @@ export const useSixImageBuiltInFrameAnimation = (
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 
@@ -387,7 +413,7 @@ export const useSixImageBuiltInFrameAnimation = (
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.out(Easing.sin),
+      easing: easingSinFunction,
     },
   );
 

@@ -1,7 +1,7 @@
-import { random } from "remotion";
 import { FrameMappingProps } from "../../../../types/content.type";
 import RemotionTransitionFrameMapping from "./RemotionTransitionFrameMapping";
 import SelfBuiltFrameMapping from "./SelfBuiltFrameMapping";
+import { useMemo } from "react";
 
 const FrameMapping = ({
   type,
@@ -11,11 +11,18 @@ const FrameMapping = ({
   durationInFrames,
   frameIndex,
 }: FrameMappingProps) => {
-  const randomIndex = Math.floor(
-    random(
-      `random-frame-style-${JSON.stringify(frame)}-chapter-${chapterIndex}-frame-${frameIndex}`,
-    ) * 2,
-  );
+  // NOTE: add dev dep if error:))
+  const processedFrame = useMemo(() => {
+    const processedImages = frame.images.map((image) => ({
+      ...image,
+      path: image.path.replace(
+        "D:/Code Space/AI/image_classification/model/image",
+        "/images",
+      ),
+    }));
+    return { ...frame, images: processedImages };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   switch (type) {
     case "remotion-transitions":
@@ -25,38 +32,27 @@ const FrameMapping = ({
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
-          frame={frame}
+          frame={processedFrame}
         />
       );
     case "self-built":
       return (
-        <SelfBuiltFrameMapping
+        <RemotionTransitionFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
-          frame={frame}
+          frame={processedFrame}
         />
       );
     default:
-      if (randomIndex === 0) {
-        return (
-          <RemotionTransitionFrameMapping
-            frameIndex={frameIndex}
-            durationInFrames={durationInFrames}
-            timingInFrame={timingInFrame}
-            chapterIndex={chapterIndex}
-            frame={frame}
-          />
-        );
-      }
       return (
         <SelfBuiltFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
           timingInFrame={timingInFrame}
           chapterIndex={chapterIndex}
-          frame={frame}
+          frame={processedFrame}
         />
       );
   }

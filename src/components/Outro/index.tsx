@@ -17,6 +17,7 @@ import { OutroProps } from "../../types/video.type";
 import OutroImageFrame from "./OutroImageFrame";
 import OutroAnimatedCaption from "./OutroAnimatedCaption";
 import { memo, useMemo } from "react";
+import { useMemoAssetPath } from "../../hooks/use-memo-asset-path";
 
 const OutroScene = ({ data }: OutroProps) => {
   const frame = useCurrentFrame();
@@ -46,7 +47,7 @@ const OutroScene = ({ data }: OutroProps) => {
     [],
   );
 
-  const bgPath = useMemo(() => staticFile(outroAssetPath + "bg.jpg"), []);
+  const bgPath = useMemoAssetPath(outroAssetPath + "bg.jpg");
 
   return (
     <>

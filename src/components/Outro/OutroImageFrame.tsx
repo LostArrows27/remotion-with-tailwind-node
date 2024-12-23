@@ -4,6 +4,7 @@ import {
   outroAssetPath,
 } from "../../constants/constants";
 import { memo, useMemo } from "react";
+import { useMemoAssetPath } from "../../hooks/use-memo-asset-path";
 
 type OutroImageFrameProps = {
   path: string;
@@ -11,6 +12,19 @@ type OutroImageFrameProps = {
 };
 
 const OutroImageFrame = ({ path, startFrame }: OutroImageFrameProps) => {
+  const imagePath = useMemo(
+    () =>
+      staticFile(
+        path.replace(
+          "D:/Code Space/AI/image_classification/model/image",
+          "/images",
+        ),
+      ),
+    [path],
+  );
+
+  const framePath = useMemoAssetPath(outroAssetPath + "frame.png");
+
   const frame = useCurrentFrame();
 
   const opacity = interpolate(
@@ -23,19 +37,6 @@ const OutroImageFrame = ({ path, startFrame }: OutroImageFrameProps) => {
       extrapolateRight: "clamp",
     },
   );
-
-  const imagePath = useMemo(
-    () =>
-      staticFile(
-        path.replace(
-          "D:/Code Space/AI/image_classification/model/image",
-          "/images",
-        ),
-      ),
-    [path],
-  );
-
-  const framePath = useMemo(() => staticFile(outroAssetPath + "frame.png"), []);
 
   return (
     <div

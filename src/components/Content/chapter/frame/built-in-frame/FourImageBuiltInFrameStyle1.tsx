@@ -1,10 +1,12 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { BuiltInTransitionProps } from "../../../../../types/content.type";
 import BuiltInLayout from "./BuiltInLayout";
 import { builtInPath } from "../../../../../constants/constants";
 import { loadFont } from "@remotion/google-fonts/Itim";
 import { useFourImageBuiltInFrameStyle1Animation } from "../../../../../hooks/built-in-frame-animation/use-built-in-image-frame-animation";
 import { Gif } from "@remotion/gif";
+import { memo } from "react";
+import { useMemoAssetArray } from "../../../../../hooks/use-memo-asset-path";
 
 const { fontFamily } = loadFont();
 
@@ -14,14 +16,48 @@ const FourImageBuiltInFrameStyle1 = ({
   timingInFrame,
   durationInFrames,
 }: BuiltInTransitionProps) => {
-  const images = videoFrame.images.slice(0, 4);
-
   const { moveUp, moveDown, opacity, appearFromLeft, scale, starOpacity } =
     useFourImageBuiltInFrameStyle1Animation(timingInFrame, durationInFrames);
+
+  const imagesPath = useMemoAssetArray(
+    videoFrame.images.slice(0, 4).map((image) => image.path),
+  );
 
   return (
     <BuiltInLayout bg="dark">
       {/* image layer */}
+      <ImageLayerFourStyle1
+        moveDown={moveDown}
+        moveUp={moveUp}
+        opacity={opacity}
+        scale={scale}
+        images={imagesPath}
+      />
+      {/* asset layer */}
+      <AssetLayerFourStyle1
+        appearFromLeft={appearFromLeft}
+        starOpacity={starOpacity}
+      />
+    </BuiltInLayout>
+  );
+};
+
+type ImageLayerFourStyle1Props = {
+  images: string[];
+  moveUp: number;
+  moveDown: number;
+  opacity: number;
+  scale: number;
+};
+
+const ImageLayerFourStyle1 = memo(
+  ({ images, moveUp, moveDown, opacity, scale }: ImageLayerFourStyle1Props) => {
+    const [markPath, twoFramePath] = useMemoAssetArray(
+      ["mark.png", "2 frame V.png"],
+      builtInPath,
+    );
+
+    return (
       <AbsoluteFill>
         <div className="rotate-[5deg] absolute w-[600px] h-[117%] top-1/2 right-20 -translate-y-1/2">
           <div
@@ -34,7 +70,7 @@ const FourImageBuiltInFrameStyle1 = ({
               style={{
                 opacity,
               }}
-              src={staticFile(builtInPath + "mark.png")}
+              src={markPath}
               className="w-[120px] scale-x-[-1] h-auto absolute -rotate-180 -top-16 -left-12"
             />
             <div className="h-1/2 w-full overflow-hidden">
@@ -42,7 +78,7 @@ const FourImageBuiltInFrameStyle1 = ({
                 style={{
                   transform: `scale(${scale})`,
                 }}
-                src={staticFile(images[0].path)}
+                src={images[0]}
                 className="object-cover object-center w-full h-full"
               />
             </div>
@@ -51,12 +87,12 @@ const FourImageBuiltInFrameStyle1 = ({
                 style={{
                   transform: `scale(${scale})`,
                 }}
-                src={staticFile(images[1].path)}
+                src={images[1]}
                 className="object-cover object-center w-full h-full"
               />
             </div>
             <Img
-              src={staticFile(builtInPath + "2 frame V.png")}
+              src={twoFramePath}
               className="absolute top-0 object-cover object-center w-full h-full"
             />
           </div>
@@ -70,7 +106,7 @@ const FourImageBuiltInFrameStyle1 = ({
               style={{
                 opacity,
               }}
-              src={staticFile(builtInPath + "mark.png")}
+              src={markPath}
               className="w-[120px] h-auto absolute scale-x-[-1] -bottom-16 -right-12"
             />
             <div className="h-1/2 w-full overflow-hidden">
@@ -78,7 +114,7 @@ const FourImageBuiltInFrameStyle1 = ({
                 style={{
                   transform: `scale(${scale})`,
                 }}
-                src={staticFile(images[2].path)}
+                src={images[2]}
                 className="object-cover object-center w-full h-full"
               />
             </div>
@@ -87,82 +123,96 @@ const FourImageBuiltInFrameStyle1 = ({
                 style={{
                   transform: `scale(${scale})`,
                 }}
-                src={staticFile(images[3].path)}
+                src={images[3]}
                 className="object-cover object-center w-full h-full"
               />
             </div>
             <Img
-              src={staticFile(builtInPath + "2 frame V.png")}
+              src={twoFramePath}
               className="absolute top-0 object-cover object-center w-full h-full"
             />
           </div>
         </div>
       </AbsoluteFill>
-      {/* asset layer */}
-      <AbsoluteFill>
-        <div
-          style={{
-            bottom: `${200}px`,
-            left: `${appearFromLeft}px`,
-          }}
-          className="absolute w-[350px] left-32 aspect-[800/572]"
-        >
-          <Img
-            className="object-cover absolute -top-8 -left-8 object-center z-20 rotate-90 w-[100px] h-auto "
-            src={staticFile(builtInPath + "tape.png")}
-          />
-          <Img
-            className="absolute object-cover object-center w-full h-full rotate-180"
-            src={staticFile(builtInPath + "note.png")}
-          />
-          <div
-            className="absolute flex-col center text-4xl text-center z-[10] w-full h-[80%] p-5"
-            style={{
-              fontFamily,
-            }}
-          >
-            <h1 className="mb-5">This is our caption. Replace later</h1>
-            <div style={{ fontFamily }} className="flex gap-4">
-              {["fire_camp", "holiday"].map((text, index) => (
-                <span key={index} className="text-2xl">
-                  #{text}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </AbsoluteFill>
-      <AbsoluteFill>
-        <div
-          style={{
-            opacity: starOpacity,
-          }}
-          className="absolute w-[40px] aspect-square top-[10%] right-[350px]"
-        >
-          <Gif
-            width={50}
-            loopBehavior="loop"
-            fit="contain"
-            src={staticFile(builtInPath + "star_few.gif")}
-          />
-        </div>
-      </AbsoluteFill>
-      <AbsoluteFill>
-        <div
-          style={{
-            opacity: starOpacity,
-          }}
-          className="absolute w-[150px] aspect-[639/663] bottom-[220px] left-[450px] "
-        >
-          <Gif
-            fit="contain"
-            loopBehavior="loop"
-            src={staticFile(builtInPath + "star_many.gif")}
-          />
-        </div>
-      </AbsoluteFill>
-    </BuiltInLayout>
-  );
+    );
+  },
+);
+
+type AssetLayerFourStyle1Props = {
+  appearFromLeft: number;
+  starOpacity: number;
 };
 
-export default FourImageBuiltInFrameStyle1;
+const AssetLayerFourStyle1 = memo(
+  ({ appearFromLeft, starOpacity }: AssetLayerFourStyle1Props) => {
+    const [tapePath, notePath, starFewPath, starManyPath] = useMemoAssetArray(
+      ["tape.png", "note.png", "star_few.gif", "star_many.gif"],
+      builtInPath,
+    );
+
+    return (
+      <>
+        <AbsoluteFill>
+          <div
+            style={{
+              bottom: `${200}px`,
+              left: `${appearFromLeft}px`,
+            }}
+            className="absolute w-[350px] left-32 h-[250.25px]"
+          >
+            <Img
+              className="object-cover absolute -top-8 -left-8 object-center z-20 rotate-90 w-[100px] h-auto "
+              src={tapePath}
+            />
+            <Img
+              className="absolute object-cover object-center w-full h-full rotate-180"
+              src={notePath}
+            />
+            <div
+              className="absolute flex-col center text-4xl text-center z-[10] w-full h-[80%] p-5"
+              style={{
+                fontFamily,
+              }}
+            >
+              <h1 className="mb-5">This is our caption. Replace later</h1>
+              <div style={{ fontFamily }} className="flex gap-4">
+                {["fire_camp", "holiday"].map((text, index) => (
+                  <span key={index} className="text-2xl">
+                    #{text}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <div
+            style={{
+              opacity: starOpacity,
+            }}
+            className="absolute w-[40px] h-[40px] top-[10%] right-[350px]"
+          >
+            <Gif
+              width={50}
+              loopBehavior="loop"
+              fit="contain"
+              src={starFewPath}
+            />
+          </div>
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <div
+            style={{
+              opacity: starOpacity,
+            }}
+            className="absolute w-[150px] h-[155.6338px] bottom-[220px] left-[450px] "
+          >
+            <Gif fit="contain" loopBehavior="loop" src={starManyPath} />
+          </div>
+        </AbsoluteFill>
+      </>
+    );
+  },
+);
+
+export default memo(FourImageBuiltInFrameStyle1);
