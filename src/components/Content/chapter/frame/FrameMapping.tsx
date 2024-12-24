@@ -1,7 +1,7 @@
 import { FrameMappingProps } from "../../../../types/content.type";
 import RemotionTransitionFrameMapping from "./RemotionTransitionFrameMapping";
 import SelfBuiltFrameMapping from "./SelfBuiltFrameMapping";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 const FrameMapping = ({
   type,
@@ -20,7 +20,7 @@ const FrameMapping = ({
         "/images",
       ),
     }));
-    return { ...frame, images: processedImages };
+    return processedImages.map((image) => image.path);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,17 +30,19 @@ const FrameMapping = ({
         <RemotionTransitionFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
-          timingInFrame={timingInFrame}
+          inTiming={timingInFrame.in}
+          outTiming={timingInFrame.out}
           chapterIndex={chapterIndex}
           frame={processedFrame}
         />
       );
     case "self-built":
       return (
-        <RemotionTransitionFrameMapping
+        <SelfBuiltFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
-          timingInFrame={timingInFrame}
+          inTiming={timingInFrame.in}
+          outTiming={timingInFrame.out}
           chapterIndex={chapterIndex}
           frame={processedFrame}
         />
@@ -50,7 +52,8 @@ const FrameMapping = ({
         <SelfBuiltFrameMapping
           frameIndex={frameIndex}
           durationInFrames={durationInFrames}
-          timingInFrame={timingInFrame}
+          inTiming={timingInFrame.in}
+          outTiming={timingInFrame.out}
           chapterIndex={chapterIndex}
           frame={processedFrame}
         />
@@ -58,4 +61,4 @@ const FrameMapping = ({
   }
 };
 
-export default FrameMapping;
+export default memo(FrameMapping);

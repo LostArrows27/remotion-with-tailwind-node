@@ -1,19 +1,25 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { NormalImageProps } from "../../../../../types/content.type";
 import { Layout } from "./NormalImageLayout";
 import { useTwoImageFrameAnimation } from "../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useMemoAssetArray } from "../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const TwoImageLayout = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
 }: NormalImageProps) => {
   // NOTE: similation 2 images
-  const images = videoFrame.images.slice(0, 2);
+  const [image1, image2] = useMemoAssetArray([videoFrame[0], videoFrame[1]]);
 
   const { position, scale } = useTwoImageFrameAnimation(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
   );
 
@@ -31,7 +37,7 @@ const TwoImageLayout = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover shadow-2xl object-center w-full h-full rounded-[36px]"
-            src={staticFile(images[0].path)}
+            src={image1}
           />
         </div>
         <div
@@ -45,7 +51,7 @@ const TwoImageLayout = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover shadow-2xl object-center w-full h-full rounded-[36px]"
-            src={staticFile(images[1].path)}
+            src={image2}
           />
         </div>
       </AbsoluteFill>
@@ -53,4 +59,4 @@ const TwoImageLayout = ({
   );
 };
 
-export default TwoImageLayout;
+export default memo(TwoImageLayout);

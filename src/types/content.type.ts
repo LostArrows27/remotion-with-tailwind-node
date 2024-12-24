@@ -54,9 +54,23 @@ export type FrameTransitionTiming = {
   out: number;
 };
 
-export type SelfBuiltFrameProps = Omit<FrameMappingProps, "type">;
+export type SelfBuiltFrameProps = Omit<
+  FrameMappingProps,
+  "type" | "frame" | "timingInFrame"
+> & {
+  frame: string[];
+  inTiming: number;
+  outTiming: number;
+};
 
-export type BuiltInTransitionProps = Omit<FrameMappingProps, "type">;
+export type BuiltInTransitionProps = Omit<
+  FrameMappingProps,
+  "type" | "frame" | "timingInFrame"
+> & {
+  frame: string[];
+  inTiming: number;
+  outTiming: number;
+};
 
 export type BuiltInTransitionLayoutProps = {
   children: React.ReactNode;

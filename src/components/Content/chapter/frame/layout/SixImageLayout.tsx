@@ -1,16 +1,20 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { NormalImageProps } from "../../../../../types/content.type";
 import { Layout } from "./NormalImageLayout";
 import { useSixImageFrameAnimationStyle } from "../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useMemoAssetArray } from "../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const SixImageLayout = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
+
   chapterIndex,
   durationInFrames,
   frameIndex,
 }: NormalImageProps) => {
-  const images = videoFrame.images.slice(0, 6);
+  const imagePath = useMemoAssetArray(videoFrame.slice(0, 6));
 
   const {
     positionFirstRow,
@@ -21,7 +25,10 @@ const SixImageLayout = ({
     positionSixthRow,
     scale,
   } = useSixImageFrameAnimationStyle(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
     `random-animation--JSON-${JSON.stringify(videoFrame)}-chapter-${chapterIndex}-frame-${frameIndex}}`,
   );
@@ -39,7 +46,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[0].path)}
+            src={imagePath[0]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -53,7 +60,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -67,7 +74,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[2].path)}
+            src={imagePath[2]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -82,7 +89,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[3].path)}
+            src={imagePath[3]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -96,7 +103,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[4].path)}
+            src={imagePath[4]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -110,7 +117,7 @@ const SixImageLayout = ({
             style={{
               transform: `scale(${scale})`,
             }}
-            src={staticFile(images[5].path)}
+            src={imagePath[5]}
             className="object-cover object-center w-full h-full rounded-[20px]"
           />
         </div>
@@ -119,4 +126,4 @@ const SixImageLayout = ({
   );
 };
 
-export default SixImageLayout;
+export default memo(SixImageLayout);

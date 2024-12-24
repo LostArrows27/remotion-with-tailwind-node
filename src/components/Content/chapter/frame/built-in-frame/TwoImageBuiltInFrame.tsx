@@ -12,20 +12,30 @@ import { memo } from "react";
 
 const TwoImageBuiltInFrame = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   durationInFrames,
 }: BuiltInTransitionProps) => {
-  const images = videoFrame.images.slice(0, 2);
+  const images = videoFrame.slice(0, 2);
 
   const { moveLeft, moveRight, moveDown, moveUp, moveInImage, moveInImage2 } =
-    useOneImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
+    useOneImageBuiltInFrameAnimation(
+      {
+        in: inTiming,
+        out: outTiming,
+      },
+      durationInFrames,
+    );
 
   const { moveUpNote, scale } = useTwoImageBuiltInFrameAnimation(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
   );
 
-  const [image1, image2] = useMemoAssetArray([images[0].path, images[1].path]);
+  const [image1, image2] = useMemoAssetArray([images[0], images[1]]);
 
   return (
     <BuiltInLayout bg="dark">

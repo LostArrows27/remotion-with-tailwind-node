@@ -16,18 +16,26 @@ const { fontFamily } = loadFont();
 // NOTE: re-use 3 image layout:)
 const SixImageBuiltInFrame = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   durationInFrames,
 }: BuiltInTransitionProps) => {
   const { moveUp, moveDown, opacity, scale } =
-    useFourImageBuiltInFrameStyle1Animation(timingInFrame, durationInFrames);
+    useFourImageBuiltInFrameStyle1Animation(
+      {
+        in: inTiming,
+        out: outTiming,
+      },
+      durationInFrames,
+    );
 
   const { moveInLeft1, moveInLeft2, starOpacity } =
-    useSixImageBuiltInFrameAnimation(timingInFrame);
+    useSixImageBuiltInFrameAnimation({
+      in: inTiming,
+      out: outTiming,
+    });
 
-  const imagesPath = useMemoAssetArray(
-    videoFrame.images.slice(0, 6).map((image) => image.path),
-  );
+  const imagesPath = useMemoAssetArray(videoFrame.slice(0, 6));
 
   return (
     <BuiltInLayout bg="dark">

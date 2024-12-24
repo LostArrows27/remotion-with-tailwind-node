@@ -62,6 +62,8 @@ export const ONE_IMAGE_TRANSITION_DELAY = FRAME_TRANSITION_TIME / 2;
 
 export const builtInPath = "/images/content/built_in_frame/";
 
+export const normalFramePath = "/images/content/normal_frame/";
+
 // built in frame
 export const BUILT_IN_SINGLE_FRAME_DURATION = 2.5 * VIDEO_FPS;
 export const BUILT_IN_MULTI_FRAME_DURATION = 3 * VIDEO_FPS;

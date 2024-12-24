@@ -2,18 +2,25 @@ import { random } from "remotion";
 import { NormalImageProps } from "../../../../../../types/content.type";
 import FiveImageStyle1 from "./FiveImageStyle1";
 import FiveImageStyle2 from "./FiveImageStyle2";
+import { memo, useMemo } from "react";
 
 const FiveImageLayoutMapping = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
   frameIndex,
 }: NormalImageProps) => {
-  const index = Math.floor(
-    random(
-      `four-image-chapter-${chapterIndex}-frame-${frameIndex}-JSON-${JSON.stringify(videoFrame)}`,
-    ) * 2,
+  const index = useMemo(
+    () =>
+      Math.floor(
+        random(
+          `four-image-chapter-${chapterIndex}-frame-${frameIndex}-JSON-${JSON.stringify(videoFrame)}`,
+        ) * 2,
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
 
   switch (index) {
@@ -21,7 +28,8 @@ const FiveImageLayoutMapping = ({
       return (
         <FiveImageStyle1
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -32,7 +40,8 @@ const FiveImageLayoutMapping = ({
       return (
         <FiveImageStyle2
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -42,7 +51,8 @@ const FiveImageLayoutMapping = ({
       return (
         <FiveImageStyle2
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -51,4 +61,4 @@ const FiveImageLayoutMapping = ({
   }
 };
 
-export default FiveImageLayoutMapping;
+export default memo(FiveImageLayoutMapping);

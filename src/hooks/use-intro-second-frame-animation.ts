@@ -22,22 +22,20 @@ export const useIntroSecondFrameAnimation = () => {
     extrapolateLeft: "clamp",
   });
 
-  const scaleAtBegin = interpolate(frame, startKeyFrame, [0.6, 1], {
-    extrapolateRight: "clamp",
-    extrapolateLeft: "clamp",
-    easing: Easing.out(Easing.poly(5)),
-  });
-
-  const scaleAtEnd = interpolate(frame, endKeyFrame, [1, 2], {
-    extrapolateRight: "clamp",
-    extrapolateLeft: "clamp",
-  });
+  const scale =
+    frame < INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
+      ? interpolate(frame, startKeyFrame, [0.6, 1], {
+          extrapolateRight: "clamp",
+          extrapolateLeft: "clamp",
+          easing: Easing.out(Easing.poly(5)),
+        })
+      : interpolate(frame, endKeyFrame, [1, 2], {
+          extrapolateRight: "clamp",
+          extrapolateLeft: "clamp",
+        });
 
   return {
     opacity,
-    scale:
-      frame < INTRO_SECOND_SCENE_LENGTH - INTRO_SECOND_SCENE_FADE_TIME
-        ? scaleAtBegin
-        : scaleAtEnd,
+    scale,
   };
 };

@@ -1,10 +1,4 @@
-import {
-  AbsoluteFill,
-  Img,
-  interpolate,
-  staticFile,
-  useCurrentFrame,
-} from "remotion";
+import { AbsoluteFill, Img, interpolate, useCurrentFrame } from "remotion";
 import {
   OUTRO_FADE_TIME,
   OUTRO_IMAGE_FRAME_WAIT_TIME,
@@ -16,8 +10,8 @@ import { Gif } from "@remotion/gif";
 import { OutroProps } from "../../types/video.type";
 import OutroImageFrame from "./OutroImageFrame";
 import OutroAnimatedCaption from "./OutroAnimatedCaption";
-import { memo, useMemo } from "react";
-import { useMemoAssetPath } from "../../hooks/use-memo-asset-path";
+import { memo } from "react";
+import { useMemoAssetArray } from "../../hooks/use-memo-asset-path";
 
 const OutroScene = ({ data }: OutroProps) => {
   const frame = useCurrentFrame();
@@ -37,17 +31,10 @@ const OutroScene = ({ data }: OutroProps) => {
     },
   );
 
-  const fadeGifPath = useMemo(
-    () => staticFile(outroAssetPath + "fade.gif"),
-    [],
+  const [fadeGifPath, filmGifPath, bgPath] = useMemoAssetArray(
+    ["fade.gif", "film.gif", "bg.jpg"],
+    outroAssetPath,
   );
-
-  const filmGifPath = useMemo(
-    () => staticFile(outroAssetPath + "film.gif"),
-    [],
-  );
-
-  const bgPath = useMemoAssetPath(outroAssetPath + "bg.jpg");
 
   return (
     <>

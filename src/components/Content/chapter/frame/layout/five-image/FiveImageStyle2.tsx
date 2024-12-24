@@ -1,16 +1,19 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { NormalImageProps } from "../../../../../../types/content.type";
 import { Layout } from "../NormalImageLayout";
 import { useFiveImageFrameAnimationStyle2 } from "../../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useMemoAssetArray } from "../../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const FiveImageStyle2 = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
   frameIndex,
 }: NormalImageProps) => {
-  const images = videoFrame.images.slice(0, 5);
+  const imagePath = useMemoAssetArray(videoFrame.slice(0, 5));
 
   const {
     positionFirstEle,
@@ -19,7 +22,10 @@ const FiveImageStyle2 = ({
     positionForthEle,
     scale,
   } = useFiveImageFrameAnimationStyle2(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
     `random-animation--JSON-${JSON.stringify(videoFrame)}-chapter-${chapterIndex}-frame-${frameIndex}}`,
   );
@@ -35,7 +41,7 @@ const FiveImageStyle2 = ({
           className="h-[210px] top-[23%] w-[680px] overflow-hidden rounded-[20px] absolute"
         >
           <Img
-            src={staticFile(images[0].path)}
+            src={imagePath[0]}
             style={{
               transform: `scale(${scale})`,
             }}
@@ -50,7 +56,7 @@ const FiveImageStyle2 = ({
           className="top-[calc(23%+226px)] absolute overflow-hidden rounded-[20px] w-[330px] h-[274px]"
         >
           <Img
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
             style={{
               transform: `scale(${scale})`,
             }}
@@ -64,7 +70,7 @@ const FiveImageStyle2 = ({
           className="top-[calc(23%+226px)] absolute overflow-hidden rounded-[20px] w-[330px] h-[274px]"
         >
           <Img
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
             style={{
               transform: `scale(${scale})`,
             }}
@@ -80,7 +86,7 @@ const FiveImageStyle2 = ({
         >
           <div className="h-[56%] w-full overflow-hidden rounded-[20px]">
             <Img
-              src={staticFile(images[3].path)}
+              src={imagePath[3]}
               style={{
                 transform: `scale(${scale})`,
               }}
@@ -90,7 +96,7 @@ const FiveImageStyle2 = ({
 
           <div className="h-[44%] w-full overflow-hidden rounded-[20px]">
             <Img
-              src={staticFile(images[4].path)}
+              src={imagePath[4]}
               style={{
                 transform: `scale(${scale})`,
               }}
@@ -103,4 +109,4 @@ const FiveImageStyle2 = ({
   );
 };
 
-export default FiveImageStyle2;
+export default memo(FiveImageStyle2);

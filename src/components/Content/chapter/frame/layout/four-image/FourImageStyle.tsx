@@ -3,18 +3,25 @@ import { NormalImageProps } from "../../../../../../types/content.type";
 import FourImageStyle1 from "./FourImageStyle1";
 import FourImageStyle2 from "./FourImageStyle2";
 import FourImageStyle3 from "./FourImageStyle3";
+import { memo, useMemo } from "react";
 
 const FourImageStyleMapping = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   frameIndex,
   durationInFrames,
 }: NormalImageProps) => {
-  const index = Math.floor(
-    random(
-      `four-image-chapter-${chapterIndex}-frame-${frameIndex}-JSON-${JSON.stringify(videoFrame)}`,
-    ) * 3,
+  const index = useMemo(
+    () =>
+      Math.floor(
+        random(
+          `four-image-chapter-${chapterIndex}-frame-${frameIndex}-JSON-${JSON.stringify(videoFrame)}`,
+        ) * 3,
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
 
   switch (index) {
@@ -22,7 +29,8 @@ const FourImageStyleMapping = ({
       return (
         <FourImageStyle1
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -33,7 +41,8 @@ const FourImageStyleMapping = ({
       return (
         <FourImageStyle2
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -43,7 +52,8 @@ const FourImageStyleMapping = ({
       return (
         <FourImageStyle3
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -54,7 +64,8 @@ const FourImageStyleMapping = ({
       return (
         <FourImageStyle3
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={videoFrame}
           chapterIndex={chapterIndex}
@@ -63,4 +74,4 @@ const FourImageStyleMapping = ({
   }
 };
 
-export default FourImageStyleMapping;
+export default memo(FourImageStyleMapping);

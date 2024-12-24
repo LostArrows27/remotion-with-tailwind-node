@@ -1,16 +1,19 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { NormalImageProps } from "../../../../../../types/content.type";
 import { Layout } from "../NormalImageLayout";
 import { useFourImageFrameAnimationStyle3 } from "../../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useMemoAssetArray } from "../../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const FourImageStyle3 = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
   frameIndex,
 }: NormalImageProps) => {
-  const images = videoFrame.images.slice(0, 4);
+  const imagePath = useMemoAssetArray(videoFrame.slice(0, 4));
 
   const {
     positionFirstRow,
@@ -19,7 +22,10 @@ const FourImageStyle3 = ({
     positionThirdRow,
     scale,
   } = useFourImageFrameAnimationStyle3(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
     `random-animation--JSON-${JSON.stringify(videoFrame)}-chapter-${chapterIndex}-frame-${frameIndex}}`,
   );
@@ -38,7 +44,7 @@ const FourImageStyle3 = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover object-center w-full h-full rounded-[28px]"
-            src={staticFile(images[0].path)}
+            src={imagePath[0]}
           />
         </div>
         <div
@@ -52,7 +58,7 @@ const FourImageStyle3 = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover object-center w-full h-full rounded-[28px]"
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
           />
         </div>
         <div
@@ -66,7 +72,7 @@ const FourImageStyle3 = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover object-center w-full h-full rounded-[28px]"
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
           />
         </div>
         <div
@@ -80,7 +86,7 @@ const FourImageStyle3 = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover object-center w-full h-full rounded-[28px]"
-            src={staticFile(images[1].path)}
+            src={imagePath[1]}
           />
         </div>
       </AbsoluteFill>
@@ -88,4 +94,4 @@ const FourImageStyle3 = ({
   );
 };
 
-export default FourImageStyle3;
+export default memo(FourImageStyle3);

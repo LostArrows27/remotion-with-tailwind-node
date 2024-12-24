@@ -8,10 +8,11 @@ import AssetLayerOne from "./one-image/AssetLayerOne";
 
 const OneImageBuiltInFrame = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   durationInFrames,
 }: BuiltInTransitionProps) => {
-  const images = videoFrame.images.slice(0, 1);
+  const images = videoFrame.slice(0, 1);
 
   const {
     moveLeft,
@@ -21,7 +22,13 @@ const OneImageBuiltInFrame = ({
     moveInImage,
     moveInImage2,
     scale,
-  } = useOneImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
+  } = useOneImageBuiltInFrameAnimation(
+    {
+      in: inTiming,
+      out: outTiming,
+    },
+    durationInFrames,
+  );
 
   return (
     <BuiltInLayout bg="light">

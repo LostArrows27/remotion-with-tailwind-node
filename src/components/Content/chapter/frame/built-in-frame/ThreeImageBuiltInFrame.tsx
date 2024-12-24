@@ -8,15 +8,20 @@ import { memo } from "react";
 
 const ThreeImageBuiltInFrame = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   durationInFrames,
 }: BuiltInTransitionProps) => {
   const { moveUpNote, goDown, rotateImage, opacity, starOpacity, scale } =
-    useThreeImageBuiltInFrameAnimation(timingInFrame, durationInFrames);
+    useThreeImageBuiltInFrameAnimation(
+      {
+        in: inTiming,
+        out: outTiming,
+      },
+      durationInFrames,
+    );
 
-  const imagePath = useMemoAssetArray(
-    videoFrame.images.slice(0, 3).map((image) => image.path),
-  );
+  const imagePath = useMemoAssetArray(videoFrame.slice(0, 3));
 
   return (
     <BuiltInLayout bg="dark">

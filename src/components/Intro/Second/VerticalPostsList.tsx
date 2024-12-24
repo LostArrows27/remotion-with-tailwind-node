@@ -1,4 +1,4 @@
-import { random, staticFile } from "remotion";
+import { random } from "remotion";
 import InstagramPost from "../InstagramPost";
 import { memo, useMemo } from "react";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
@@ -13,7 +13,7 @@ const VerticalPostsList = ({ images, translateY }: VerticalPostsListProps) => {
     () =>
       images.map((image) => ({
         likes: Math.floor(random(image) * 1000) + 30,
-        imageUrl: staticFile(image),
+        imageUrl: image,
       })),
     [images],
   );

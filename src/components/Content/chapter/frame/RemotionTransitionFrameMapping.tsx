@@ -20,19 +20,21 @@ import { memo } from "react";
 
 const RemotionTransitionFrameMapping = ({
   frame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
   frameIndex,
 }: BuiltInTransitionProps) => {
-  const imageCount = frame.images.length;
+  const imageCount = frame.length;
 
   switch (imageCount) {
     case 1:
       return (
         <OneImageBuiltInFrame
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -43,7 +45,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <TwoImageBuiltInTransition
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -54,7 +57,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <ThreeImageBuiltInFrame
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -65,7 +69,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <FourImageBuiltInFrame
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -76,7 +81,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <FourImageBuiltInFrameStyle1
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -87,7 +93,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <SixImageBuiltInFrame
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}
@@ -98,7 +105,8 @@ const RemotionTransitionFrameMapping = ({
       return (
         <SixImageBuiltInFrame
           frame={frame}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           chapterIndex={chapterIndex}
           durationInFrames={durationInFrames}
           frameIndex={frameIndex}

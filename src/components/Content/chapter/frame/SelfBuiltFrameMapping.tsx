@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { SelfBuiltFrameProps } from "../../../../types/content.type";
 import FiveImageLayoutMapping from "./layout/five-image/FiveImageLayoutMapping";
 import FourImageStyleMapping from "./layout/four-image/FourImageStyle";
@@ -15,18 +16,20 @@ import TwoImageLayout from "./layout/TwoImageLayout";
 const SelfBuiltFrameMapping = ({
   frame,
   chapterIndex,
-  timingInFrame,
+  inTiming,
+  outTiming,
   durationInFrames,
   frameIndex,
 }: SelfBuiltFrameProps) => {
-  const imageCount = frame.images.length;
+  const imageCount = frame.length;
 
   switch (imageCount) {
     case 1:
       return (
         <OneImageLayout
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -36,7 +39,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <TwoImageLayout
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -46,7 +50,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <ThreeImageLayout
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -56,7 +61,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <FourImageStyleMapping
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -66,7 +72,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <FiveImageLayoutMapping
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -76,7 +83,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <SixImageLayout
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -86,7 +94,8 @@ const SelfBuiltFrameMapping = ({
       return (
         <SixImageLayout
           frameIndex={frameIndex}
-          timingInFrame={timingInFrame}
+          inTiming={inTiming}
+          outTiming={outTiming}
           durationInFrames={durationInFrames}
           frame={frame}
           chapterIndex={chapterIndex}
@@ -95,4 +104,4 @@ const SelfBuiltFrameMapping = ({
   }
 };
 
-export default SelfBuiltFrameMapping;
+export default memo(SelfBuiltFrameMapping);

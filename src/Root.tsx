@@ -27,10 +27,14 @@ import {
 } from "./utils/calculate-video-timeline";
 import { chooseRandomOutroImage } from "./utils/choose-random-outro-image";
 import { chooseRandomOutroCaption } from "./utils/choose-random-outro-caption";
+// import { uploadAndResizeImages } from "./utils/transform-image-size";
+import { cloudinaryImage } from "./constants/image";
 
 // TODO: read input from nodejs -> parse in
 
 // TODO: can optimize render time -> adjust minimum passing props to child component
+
+// TODO: upload image to cloudinary -> resize -> finish delete
 
 // NOTE: can random by time render -> more random:))
 const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
@@ -59,6 +63,12 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
     INTRO_SCENE_LENGTH + videoContentDuration + OUTRO_SCENE_LENGTH;
 
   const titleStyle = Math.floor(random(null) * 2);
+
+  // const imageURL = await uploadAndResizeImages(
+  //   props.introScene.secondScene.images,
+  // );
+
+  // props.introScene.secondScene.images = imageURL;
 
   props.bgMusic = bgMusic;
   props.bgVideo.src = bgVideoSrc;
@@ -115,9 +125,10 @@ export const RemotionRoot: React.FC = () => {
             secondScene: {
               firstCaption: "Sẵn sàng ôn lại\nkhoảnh khắc đáng nhớ ?",
               secondCaption: "Bắt đầu ngay thôi !",
-              images: Array.from({ length: 16 }, (_, i) => {
-                return `/images/intro/second/test (${i + 1}).jpg`;
-              }),
+              images: cloudinaryImage,
+              // images: Array.from({ length: 16 }, (_, i) => {
+              //   return `https://inybkzznasdhmswsixhd.supabase.co/storage/v1/object/public/test/test%20(${i + 1}).jpg`;
+              // }),
               // direction: "vertical",
             },
           },

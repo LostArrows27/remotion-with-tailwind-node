@@ -1,19 +1,25 @@
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 import { NormalImageProps } from "../../../../../types/content.type";
 import { Layout } from "./NormalImageLayout";
 import { useTwoImageFrameAnimation } from "../../../../../hooks/frame-animation/use-image-frame-animation";
+import { useMemoAssetArray } from "../../../../../hooks/use-memo-asset-path";
+import { memo } from "react";
 
 const ThreeImageLayout = ({
   frame: videoFrame,
-  timingInFrame,
+  inTiming,
+  outTiming,
   chapterIndex,
   durationInFrames,
 }: NormalImageProps) => {
   // NOTE: similation 2 images
-  const images = videoFrame.images.slice(0, 3);
+  const [image1, image2, image3] = useMemoAssetArray(videoFrame.slice(0, 3));
 
   const { position, scale } = useTwoImageFrameAnimation(
-    timingInFrame,
+    {
+      in: inTiming,
+      out: outTiming,
+    },
     durationInFrames,
   );
 
@@ -31,7 +37,7 @@ const ThreeImageLayout = ({
               transform: `scale(${scale})`,
             }}
             className="object-cover object-center w-full h-full rounded-[24px]"
-            src={staticFile(images[0].path)}
+            src={image1}
           />
         </div>
 
@@ -47,7 +53,7 @@ const ThreeImageLayout = ({
                 transform: `scale(${scale})`,
               }}
               className="object-cover object-center w-full h-full rounded-[24px]"
-              src={staticFile(images[1].path)}
+              src={image2}
             />
           </div>
           <div className="overflow-hidden w-full h-1/2 rounded-[28px]">
@@ -56,7 +62,7 @@ const ThreeImageLayout = ({
                 transform: `scale(${scale})`,
               }}
               className="object-cover object-center w-full h-full rounded-[24px]"
-              src={staticFile(images[2].path)}
+              src={image3}
             />
           </div>
         </div>
@@ -65,4 +71,4 @@ const ThreeImageLayout = ({
   );
 };
 
-export default ThreeImageLayout;
+export default memo(ThreeImageLayout);
