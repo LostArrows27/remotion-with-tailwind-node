@@ -20,19 +20,13 @@ import { chooseIntroTitle } from "./utils/choose-intro-title";
 import { getRandomAssetByDate } from "./utils/seasonal-helper";
 import { chooseRandomCaption } from "./assets/caption_assets";
 import { getVideoMetadata } from "@remotion/media-utils";
-import { imageJSON } from "./assets/images";
-import {
-  calculateVideoDuration,
-  calculateVideoTimeline,
-} from "./utils/calculate-video-timeline";
+import { calculateVideoDuration } from "./utils/calculate-video-timeline";
 import { chooseRandomOutroImage } from "./utils/choose-random-outro-image";
 import { chooseRandomOutroCaption } from "./utils/choose-random-outro-caption";
 // import { uploadAndResizeImages } from "./utils/transform-image-size";
-import { cloudinaryImage } from "./constants/image";
+import { videoProps } from "./constants/video-props";
 
 // TODO: read input from nodejs -> parse in
-
-// TODO: can optimize render time -> adjust minimum passing props to child component
 
 // TODO: upload image to cloudinary -> resize -> finish delete
 
@@ -88,8 +82,6 @@ const calculateMetadata: CalculateMetadataFunction<MainProps> = async ({
 };
 
 export const RemotionRoot: React.FC = () => {
-  const fakeDate = new Date("2024-04-02"); // Fake summer
-
   return (
     <>
       <Composition
@@ -101,39 +93,7 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
         calculateMetadata={calculateMetadata}
-        defaultProps={{
-          titleStyle: 0,
-          contentLength: 60 * VIDEO_FPS,
-          videoDate: fakeDate,
-          bgMusic: staticFile("/music/intro/accoutic_2.mp3"),
-          bgVideo: {
-            src: staticFile("/videos/season_bg/spring/spring_6.mov"),
-            frameLength: 10 * VIDEO_FPS,
-          },
-          outroScene: {
-            image: [],
-            caption: [],
-          },
-          introScene: {
-            firstScene: {
-              title: "Our Trip Recap",
-              time: fakeDate,
-              images: Array.from({ length: 4 }, (_, i) => {
-                return `/images/intro/first/first_scene_${i + 1}.jpg`;
-              }),
-            },
-            secondScene: {
-              firstCaption: "Sẵn sàng ôn lại\nkhoảnh khắc đáng nhớ ?",
-              secondCaption: "Bắt đầu ngay thôi !",
-              images: cloudinaryImage,
-              // images: Array.from({ length: 16 }, (_, i) => {
-              //   return `https://inybkzznasdhmswsixhd.supabase.co/storage/v1/object/public/test/test%20(${i + 1}).jpg`;
-              // }),
-              // direction: "vertical",
-            },
-          },
-          contentScene: calculateVideoTimeline(imageJSON),
-        }}
+        defaultProps={videoProps(new Date("2024-04-02"))}
       />
     </>
   );

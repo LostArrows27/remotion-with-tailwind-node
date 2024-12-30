@@ -38,8 +38,8 @@
   "scripts": {
     "start": "remotion studio",
     "build": "remotion bundle",
-    "render-cli": "npx remotion render",
-    "render-cli-optimize": "npx remotion render --image-format=jpeg --audio-codec=mp3 --gl=angle ",
+    "render-cli": "npx remotion render --output=out/render-cli.mp4",
+    "render-cli-optimize": "npx remotion render --image-format=jpeg --audio-codec=mp3 --gl=angle --output=out/render-cli.mp4",
     "render-server": "npx tsx render.ts",
     "upgrade": "remotion upgrade",
     "lint": "eslint src --ext ts,tsx,js,jsx && tsc"
